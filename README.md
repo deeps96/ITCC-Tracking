@@ -1,4 +1,20 @@
-# ITCC-Tracking
-This project was created based on the requirement of the IT-Talents Code Competition 02/2018. The goal was to develop a tracking web service.
+# How to use vagrant
 
-For more details check out this link: https://www.it-talents.de/foerderung/code-competition/code-competition-hermes
+To setup, install:
+- VirtualBox https://www.virtualbox.org/wiki/Downloads
+- Vagrant https://www.vagrantup.com/downloads.html
+
+To start vagrant, direct the terminal to the directory, where the vagrant-file is located and type
+
+´vagrant up´
+
+To ssh to the virtual machine type 
+
+´vagrant ssh´.
+
+To stop the virtual machine type
+
+´vagrant halt´
+
+## Ports
+MongoDB is running on port 27017 in the virtual machine and gets forwared to the same port on the host.
