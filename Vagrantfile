@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 27017, host: 27017
   config.vm.provision :shell, path: "install-mongo-db.sh"
   config.vm.provision :shell, path: "install-node.sh"
+  config.vm.provision :shell, path: "install-java.sh"
 
 
 
