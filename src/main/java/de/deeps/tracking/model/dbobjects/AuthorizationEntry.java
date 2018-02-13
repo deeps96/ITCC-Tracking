@@ -1,14 +1,14 @@
-package de.deeps.tracking.model;
+package de.deeps.tracking.model.dbobjects;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "authorization-data")
+@Document(collection = "authorization-entries")
 @Getter
 @Setter
 public class AuthorizationEntry {
 
-    private String foreName, lastName, emailAddress, hashedPassword;
+    private String email, hashedPassword;
 
 }
