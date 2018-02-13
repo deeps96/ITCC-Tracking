@@ -28,3 +28,7 @@
 #loginButton {
   margin-top: 50px;
 }
+
+#wrongCredentials {
+  display: none;
+}
