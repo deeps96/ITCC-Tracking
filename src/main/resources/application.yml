@@ -5,4 +5,4 @@ spring:
       port: 27017
       database: tracking-db
 server:
-  port: 1918
+  port: 2018
