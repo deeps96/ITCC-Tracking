@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
-import {AuthorizationResponse} from "./authentication";
 import {AuthenticationService} from "./authentication.service";
 
 
@@ -18,12 +17,12 @@ export class AppComponent {
     router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => {
-        this.showLoginButton = !this.isLoginPage(event) && !this.isLoggedIn();
+        this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
       });
   }
 
   //actions
-  private isLoginPage(event: NavigationStart): boolean {
+  private static isLoginPage(event: NavigationStart): boolean {
     return event.url == '/login';
   }
 
