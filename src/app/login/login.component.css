@@ -3,4 +3,28 @@
   background: url('../../assets/images/background-1.png') no-repeat center center;
   width: 100vw;
   height: 100vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#trackingImage {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+#container {
+  width: 350px;
+}
+
+.card-panel {
+  padding: 50px 30px;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+#loginButton {
+  margin-top: 50px;
 }
