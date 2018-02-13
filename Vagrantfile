@@ -18,6 +18,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "install-mongo-db.sh"
   config.vm.provision :shell, path: "install-node.sh"
   config.vm.provision :shell, path: "install-java.sh"
+  config.vm.provision :shell, path: "load-seed-into-mongo-db.sh"
 
 
 
