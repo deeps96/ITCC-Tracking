@@ -8,6 +8,6 @@ $secondary-color: color("blue-grey", "lighten-3");
 
 $success-color: color("green", "darken-1") !default;
 $error-color: color("red", "darken-3") !default;
-$link-color: color("light-blue", "lighten-4") !default;
+$link-color: color("light-blue", "lighten-3") !default;
 
 @import "~materialize-css/sass/materialize.scss";
