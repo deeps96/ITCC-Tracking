@@ -3,14 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {MaterializeModule} from "angular2-materialize";
+import {RouterModule} from "@angular/router";
+import {AppRoutesModule} from "./app.routes";
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    MaterializeModule
+    MaterializeModule,
+    AppRoutesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
