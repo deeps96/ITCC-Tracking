@@ -1,8 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../authentication.service";
-import * as shajs from 'sha.js';
 import {Router} from "@angular/router";
-import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'app-login',
@@ -16,39 +14,29 @@ export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private cookieService: CookieService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    let isAuthorized = this.authenticationService.isAuthorized();
+    if (isAuthorized) {
+      this.routeToIndex();
+    }
   }
 
   public onSubmit(): void {
-    let hashedPassword: string = LoginComponent.hashPassword(this.password);
     this.authenticationService
-      .login(this.email, hashedPassword)
+      .login(this.email, this.password)
       .subscribe(response => {
-        if (!response.authorized) {
-          this.showWrongCredentialsAlert();
-        } else {
+        if (response) {
           this.hideWrongCredentialsAlert();
-          this.storeTokenIntoCookies(response.authorizationToken);
           this.routeToIndex();
+        } else {
+          this.showWrongCredentialsAlert();
         }
       });
   }
 
-  private static hashPassword(rawPassword: string): string {
-    return shajs('sha256').update(rawPassword).digest('hex');
-  }
 
-  private storeTokenIntoCookies(token: string): void {
-    this.cookieService.put("authorizationToken", token, {expires: LoginComponent.generateExpireDate()});
-  }
-
-  private static generateExpireDate(): Date {
-    let current = new Date();
-    current.setMinutes(current.getMinutes() + 10);
-    return current;
-  }
 
   private routeToIndex(): void {
     this.router.navigate(['']);
