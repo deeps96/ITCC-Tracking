@@ -3,7 +3,6 @@ import {Http, Response} from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { Observable } from 'rxjs/Rx';
-import {AuthorizationResponse} from "./authentication";
 import * as shajs from 'sha.js';
 
 

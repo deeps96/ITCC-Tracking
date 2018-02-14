@@ -3,6 +3,7 @@ import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {AuthenticationService} from "./authentication.service";
 
+declare var Materialize: any;
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,7 @@ export class AppComponent {
     this.showLoginButton = true;
     this.showLogoutButton = false;
     this.routeToIndex();
+    Materialize.toast("Successfully logged out.", 3000, "");
   }
 
   private routeToIndex(): void {
