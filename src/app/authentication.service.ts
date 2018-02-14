@@ -39,6 +39,9 @@ export class AuthenticationService {
     return this.cookieService.get(this.AUTHORIZATION_TOKEN_COOKIE) != null;
   }
 
+  public logout(): void {
+    this.cookieService.remove(this.AUTHORIZATION_TOKEN_COOKIE);
+  }
 
   //actions
   private static extractData(res: Response) {

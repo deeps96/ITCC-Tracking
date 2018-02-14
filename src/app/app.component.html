@@ -2,6 +2,7 @@
   <div class="nav-wrapper">
     <ul class="right">
       <li *ngIf="showLoginButton"><a [routerLink]="['/login']" class="light-blue-text text-lighten-3">Login</a></li>
+      <li *ngIf="showLogoutButton"><a (click)="logout();" class="light-blue-text text-lighten-3">Logout</a></li>
     </ul>
   </div>
 </nav>

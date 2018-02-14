@@ -11,13 +11,15 @@ import {AuthenticationService} from "./authentication.service";
 })
 export class AppComponent {
 
-  public showLoginButton ;
+  public showLoginButton: boolean;
+  public showLogoutButton: boolean;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => {
         this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
+        this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
       });
   }
 
@@ -29,4 +31,16 @@ export class AppComponent {
   private isLoggedIn(): boolean {
     return this.authenticationService.isAuthorized();
   }
+
+  public logout(): void {
+    this.authenticationService.logout();
+    this.showLoginButton = true;
+    this.showLogoutButton = false;
+    this.routeToIndex();
+  }
+
+  private routeToIndex(): void {
+    this.router.navigate(['']);
+  }
+
 }
