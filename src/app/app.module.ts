@@ -10,12 +10,14 @@ import {CookieModule} from "ngx-cookie";
 import {AuthenticationService} from "./authentication.service";
 import {HttpModule} from "@angular/http";
 import { HomeComponent } from './home/home.component';
+import { CreateParcelComponent } from './create-parcel/create-parcel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CreateParcelComponent
   ],
   imports: [
     BrowserModule,

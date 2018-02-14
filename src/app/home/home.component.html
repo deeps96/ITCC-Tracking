@@ -1,3 +1,32 @@
-<div id="background">
-
-</div>
+<section id="headerSection"></section>
+<section id="bodySection" class="blue-grey lighten-5">
+  <section id="searchSection">
+    <div id="searchContainer" class="container">
+      <form action="/search" method="get" class="white" #searchForm>
+        <div class="input-field">
+          <input id="search" type="search" placeholder="Enter your tracking number" (focus)="hideCreateNewSection();" required>
+          <label id="searchIcon" class="label-icon" for="search">
+            <i class="material-icons">search</i>
+          </label>
+        </div>
+      </form>
+    </div>
+  </section>
+  <div class="container">
+    <div class="divider"></div>
+  </div>
+  <section id="chooseNewSection">
+    <div class="container center">
+      <div class="row">
+        <div class="col s12">
+          <a class="btn btn-floating btn-large blue-grey pulse" (click)="showCreateNewSection();">
+            <i class="material-icons blue-grey-text text-lighten-5">fiber_new</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<section id="createNewSection" class="blue-grey" #createNewSection>
+  <app-create-parcel></app-create-parcel>
+</section>
