@@ -1,0 +1,97 @@
+<div id="createNewParcelWrapper">
+  <div class="row" id="container">
+    <div class="col s12 card-panel z-depth-2 blue-grey lighten-5 center">
+      <form (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col s12">
+            <h2 class="center-align blue-grey-text">Create a new parcel</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <img id="parcelImage" src="../../assets/images/new-parcel.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s8 offset-s2">
+            <select id="parcelTypeSelect" materialize="material_select" [materializeSelectOptions]="parcelTypeNames" (change)="parcelTypeChanged($event)">
+              <option value="" disabled selected>Choose the type of your parcel</option>
+              <option *ngFor="let parcelTypeName of parcelTypeNames" [value]="parcelTypeName">{{parcelTypeName}}</option>
+            </select>
+            <label for="parcelTypeSelect">Parcel type</label>
+          </div>
+        </div>
+        <div class="row valign-wrapper">
+          <div class="col s5">
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <p class="center-align">Departure</p>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="departureRoad" type="text" name="departureRoad" [(ngModel)]="departure.road" required>
+                <label for="departureRoad">Road</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s9">
+                <input id="departureCityName" type="text" name="departureCityName" [(ngModel)]="departure.city.name" required>
+                <label for="departureCityName">City</label>
+              </div>
+              <div class="input-field col s3">
+                <input id="departureZipCode" type="text" name="departureZipCode" [(ngModel)]="departure.city.zipCode" required>
+                <label for="departureZipCode">ZIP</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="departureCountry" type="text" name="departureCountry" [(ngModel)]="departure.country" required>
+                <label for="departureCountry">Country</label>
+              </div>
+            </div>
+          </div>
+          <div class="col s2">
+            <i class="material-icons large center-align blue-grey-text">keyboard_arrow_right</i>
+          </div>
+          <div class="col s5">
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <p class="center-align">Destination</p>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="destinationRoad" type="text" name="destinationRoad" [(ngModel)]="destination.road" required>
+                <label for="destinationRoad">Road</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s9">
+                <input id="destinationCityName" type="text" name="destinationCityName" [(ngModel)]="destination.city.name" required>
+                <label for="destinationCityName">City</label>
+              </div>
+              <div class="input-field col s3">
+                <input id="destinationZipCode" type="text" name="destinationZipCode" [(ngModel)]="destination.city.zipCode" required>
+                <label for="destinationZipCode">ZIP</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="destinationCountry" type="text" name="destinationCountry" [(ngModel)]="destination.country" required>
+                <label for="destinationCountry">Country</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin: 40px 0;">
+          <div class="col s12 center">
+            <button id="submitButton" class="btn waves-effect waves-light" type="submit" name="action">
+              <i class="material-icons left">add</i> Generate tracking number
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
-import {AuthenticationService} from "./authentication.service";
+import {AuthenticationService} from "./authorization.service";
 
 declare var Materialize: any;
 

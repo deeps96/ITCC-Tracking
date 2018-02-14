@@ -1,0 +1,28 @@
+#createNewParcelWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#container {
+  width: 1000px;
+}
+
+.card-panel {
+  padding: 10px 30px;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+#parcelImage {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+#submitButton {
+  background-color: #6699CC;
+}

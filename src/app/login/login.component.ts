@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService} from "../authentication.service";
+import {AuthenticationService} from "../authorization.service";
 import {Router} from "@angular/router";
 
 @Component({
