@@ -2,7 +2,7 @@ package de.deeps.tracking.controller;
 
 import de.deeps.tracking.dto.CreateParcelParameter;
 import de.deeps.tracking.dto.CreateParcelResponse;
-import de.deeps.tracking.service.ParcelService;
+import de.deeps.tracking.service.ParcelManagementService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
-public class ParcelController {
+public class ParcelManagementController {
 
-    private ParcelService service;
+    private ParcelManagementService service;
 
     @Autowired
-    public ParcelController(ParcelService service){
+    public ParcelManagementController(ParcelManagementService service){
         setService(service);
     }
 
