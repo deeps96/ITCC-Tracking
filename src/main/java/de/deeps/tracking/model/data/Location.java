@@ -8,6 +8,5 @@ import lombok.Setter;
 public class Location {
 
     private City city;
-    private int roadNumber;
     private String country, road;
 }

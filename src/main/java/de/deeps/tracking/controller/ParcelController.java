@@ -23,6 +23,8 @@ public class ParcelController {
 
     @RequestMapping(value = "/createParcel", method = RequestMethod.POST,  produces = "application/json")
     public CreateParcelResponse createParcel(@RequestBody CreateParcelParameter parameter){
-        return null;
+        String trackingNumber = getService().createParcel(parameter.getParcelTypeName(), parameter.getDeparture(),
+                parameter.getDestination(), parameter.getHandOverTimestamp());
+        return new CreateParcelResponse(trackingNumber);
     }
 }
