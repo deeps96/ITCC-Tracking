@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public class Authorization {
 
+    private Authorization() {}
+
     //convenience
     public static String generateNewToken() {
         return UUID.randomUUID().toString();

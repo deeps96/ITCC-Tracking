@@ -17,7 +17,7 @@ public class ParcelType {
     private String id, key, name;
 
     public void setKey(String key) {
-        if (validateKey(key)) {
+        if (!validateKey(key)) {
             throw new IllegalArgumentException("The key needs to have exactly " + getKEY_LENGTH() + " digits!");
         }
         setBasicKey(key);
