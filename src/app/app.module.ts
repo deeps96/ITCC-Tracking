@@ -9,11 +9,13 @@ import {FormsModule} from "@angular/forms";
 import {CookieModule} from "ngx-cookie";
 import {AuthenticationService} from "./authentication.service";
 import {HttpModule} from "@angular/http";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
