@@ -11,6 +11,7 @@ import {AuthenticationService} from "./authorization.service";
 import {HttpModule} from "@angular/http";
 import { HomeComponent } from './home/home.component';
 import { CreateParcelComponent } from './create-parcel/create-parcel.component';
+import {ParcelManagementService} from "./parcel-management.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { CreateParcelComponent } from './create-parcel/create-parcel.component';
     MaterializeModule,
     AppRoutesModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, ParcelManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

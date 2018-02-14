@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from "../parcel-management";
+import {ParcelManagementService} from "../parcel-management.service";
 
 @Component({
   selector: 'app-create-parcel',
@@ -13,9 +14,11 @@ export class CreateParcelComponent implements OnInit {
   public parcelTypeNames: string[];
   private selectedParcelType: string;
 
-  constructor() {
+  constructor(private parcelManagementService: ParcelManagementService) {
     this.departure = new Location();
     this.destination = new Location();
+    this.parcelTypeNames = ['Basic parcel'];
+
   }
 
   ngOnInit() {
@@ -26,7 +29,11 @@ export class CreateParcelComponent implements OnInit {
   }
 
   public onSubmit(): void {
-
+    this.parcelManagementService
+      .createParcel(this.departure, this.destination, this.selectedParcelType)
+      .subscribe(response => {
+        alert(response);
+      });
   }
 
 }
