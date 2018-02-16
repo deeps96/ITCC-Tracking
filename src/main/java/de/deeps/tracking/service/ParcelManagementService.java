@@ -85,6 +85,11 @@ public class ParcelManagementService {
                 .toList());
     }
 
+    public List<String> getActionDescriptions() {
+        return getActionDescriptionRepository().findAll().stream().map(ActionDescription::getAction).collect(Collectors
+                .toList());
+    }
+
     //actions
     private synchronized void completeParcelInformation(ParcelEntry parcelEntry, String parcelTypeName) {
         ParcelType parcelType = getParcelTypeRepository().findByName(parcelTypeName);
