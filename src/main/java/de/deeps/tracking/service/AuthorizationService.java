@@ -68,7 +68,7 @@ public class AuthorizationService {
     }
 
     public void removeStaffMember(String staffID) throws IOException {
-        if (getUserRepository().findOne(staffID) != null) {
+        if (getUserRepository().findOne(staffID) == null) {
             throw new IOException("Staff does not exists");
         }
         getUserRepository().delete(staffID);
