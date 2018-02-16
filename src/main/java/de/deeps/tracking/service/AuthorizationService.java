@@ -22,7 +22,7 @@ import java.util.List;
 @Setter(AccessLevel.PRIVATE)
 public class AuthorizationService {
 
-    @Getter(AccessLevel.PRIVATE) private static final String STAFF_ROLE = "Staff", ADMIN_ROLE = "admin";
+    @Getter(AccessLevel.PRIVATE) private static final String STAFF_ROLE = "Staff", ADMIN_ROLE = "Admin";
 
     private AuthorizationTokensRepository authorizationTokensRepository;
     private RoleRepository roleRepository;
@@ -85,6 +85,7 @@ public class AuthorizationService {
 
     public boolean isAdmin(String authorizationToken) throws IOException {
         Role role = getRoleByAuthorizationToken(authorizationToken);
+        System.out.println(role);
         return role.getName().equals(getADMIN_ROLE());
     }
 
