@@ -38,7 +38,7 @@ public class ParcelManagementController extends GenericController {
         return new CreateParcelResponse(trackingNumber);
     }
 
-    @RequestMapping(value = "/addStation", method = RequestMethod.POST)
+    @RequestMapping(value = "/addStation", method = RequestMethod.PATCH)
     public void addStation(@RequestBody AddStationParameter parameter) throws IOException {
         checkPrivilege(parameter, "canAddStation");
         boolean success = getParcelManagementService().addStationToParcel(parameter.getTrackingNumber(), parameter.getStation());
