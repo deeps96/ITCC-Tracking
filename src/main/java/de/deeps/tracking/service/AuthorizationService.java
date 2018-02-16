@@ -1,7 +1,7 @@
 package de.deeps.tracking.service;
 
 import de.deeps.tracking.model.Authorization;
-import de.deeps.tracking.model.dbobjects.AuthorizationEntry;
+import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.model.dbobjects.AuthorizationToken;
 import de.deeps.tracking.repository.AuthorizationEntriesRepository;
 import de.deeps.tracking.repository.AuthorizationTokensRepository;
@@ -29,7 +29,7 @@ public class AuthorizationService {
 
     //convenience
     public boolean isAuthorized(String email, String password) {
-        AuthorizationEntry entry = getAuthorizationEntriesRepository().findByEmail(email);
+        User entry = getAuthorizationEntriesRepository().findByEmail(email);
         return Authorization.isAuthorized(entry, password);
     }
 

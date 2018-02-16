@@ -1,7 +1,7 @@
 package de.deeps.tracking.model;
 
 
-import de.deeps.tracking.model.dbobjects.AuthorizationEntry;
+import de.deeps.tracking.model.dbobjects.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Setter(AccessLevel.PRIVATE)
 class AuthorizationTest {
 
-    private AuthorizationEntry authorizationEntry;
+    private User authorizationEntry;
 
     @BeforeEach
     void setUp() {
@@ -23,7 +23,7 @@ class AuthorizationTest {
     }
 
     private void setUpAuthorizationEntry() {
-        AuthorizationEntry entry = new AuthorizationEntry();
+        User entry = new User();
         entry.setHashedPassword("998ed4d621742d0c2d85ed84173db569afa194d4597686cae947324aa58ab4bb");
         setAuthorizationEntry(entry);
     }

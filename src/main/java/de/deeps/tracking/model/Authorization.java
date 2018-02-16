@@ -1,7 +1,7 @@
 package de.deeps.tracking.model;
 
 import com.google.common.hash.Hashing;
-import de.deeps.tracking.model.dbobjects.AuthorizationEntry;
+import de.deeps.tracking.model.dbobjects.User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -15,7 +15,7 @@ public class Authorization {
         return UUID.randomUUID().toString();
     }
 
-    public static boolean isAuthorized(AuthorizationEntry entry, String password) {
+    public static boolean isAuthorized(User entry, String password) {
         return entry != null && entry.getHashedPassword().equals(hashPassword(password));
     }
 
