@@ -29,9 +29,12 @@ public class ParcelManagementController extends GenericController {
     }
 
     @RequestMapping(value = "/createParcel", method = RequestMethod.POST,  produces = "application/json")
-    public CreateParcelResponse createParcel(@RequestBody CreateParcelParameter parameter){
+    public CreateParcelResponse createParcel(@RequestBody CreateParcelParameter parameter) throws IOException {
         String trackingNumber = getParcelManagementService().createParcel(parameter.getParcelTypeName(), parameter.getDeparture(),
                 parameter.getDestination(), parameter.getHandOverTimestamp());
+        if (trackingNumber == null) {
+            throw new IOException("Required parameter missing!");
+        }
         return new CreateParcelResponse(trackingNumber);
     }
 
