@@ -1,9 +1,6 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.AddStaffParameter;
-import de.deeps.tracking.dto.AuthorizationResponse;
-import de.deeps.tracking.dto.CreateParcelParameter;
-import de.deeps.tracking.dto.CreateParcelResponse;
+import de.deeps.tracking.dto.*;
 import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import lombok.AccessLevel;
@@ -13,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -50,6 +49,16 @@ public class AuthorizationController extends GenericController {
                             String authorizationToken) throws IOException {
         checkPrivilege(authorizationToken, "canRemoveStaff");
         getService().removeStaffMember(staffID);
+    }
+
+    @RequestMapping(value = "/listStaff", method = RequestMethod.GET, produces = "application/json")
+    public ListStaffResponse listStaff(@RequestParam(value="authorizationToken")
+                                                   String authorizationToken) throws IOException {
+        checkPrivilege(authorizationToken, "canListStaff");
+        List<StaffMember> staffMembers = getService().getStaff().stream().map(user ->
+            new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId())
+        ).collect(Collectors.toList());
+        return new ListStaffResponse(staffMembers);
     }
 
 }
