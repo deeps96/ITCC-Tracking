@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
@@ -10,16 +10,19 @@ import {CookieService} from "ngx-cookie";
 import {HelperMethods} from "./helper-methods";
 import {RouterConfig} from "./config";
 import {ROUTER_CONFIG} from "../assets/config";
-import {StaffMember} from "./authorization";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthorizationService {
 
   public AUTHORIZATION_TOKEN_COOKIE = 'authorizationToken';
 
+  private helperMethods: HelperMethods;
   private routerConfig: RouterConfig = ROUTER_CONFIG;
 
-  constructor(private http: Http, private cookieService: CookieService) {}
+  constructor(private router: Router, private http: Http, private cookieService: CookieService) {
+    this.helperMethods = new HelperMethods(this);
+  }
 
   public login(email: string, password: string): Observable<boolean> {
     const params = {
@@ -28,7 +31,7 @@ export class AuthorizationService {
     };
     return this.http.get(this.routerConfig.serverAddress + '/authorize', {params: params})
                     .map(HelperMethods.extractData)
-                    .catch(HelperMethods.handleError)
+                    .catch(event => this.helperMethods.handleError(event))
                     .map(response => {
                       if (response.authorized) {
                         this.storeTokenIntoCookies(response.authorizationToken);
@@ -43,7 +46,7 @@ export class AuthorizationService {
     };
     return this.http.get(this.routerConfig.serverAddress + '/isAdmin', {params: params})
                     .map(HelperMethods.extractData)
-                    .catch(HelperMethods.handleError)
+                    .catch(event => this.helperMethods.handleError(event))
                     .map(response => response.admin);
   }
 
@@ -53,7 +56,7 @@ export class AuthorizationService {
     };
     return this.http.get(this.routerConfig.serverAddress + '/isStaff', {params: params})
                     .map(HelperMethods.extractData)
-                    .catch(HelperMethods.handleError)
+                    .catch(event => this.helperMethods.handleError(event))
                     .map(response => response.admin);
   }
 
@@ -63,6 +66,7 @@ export class AuthorizationService {
 
   public logout(): void {
     this.cookieService.remove(this.AUTHORIZATION_TOKEN_COOKIE);
+    this.router.navigateByUrl('/login');
   }
 
   //actions

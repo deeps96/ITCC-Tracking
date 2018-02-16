@@ -22,8 +22,7 @@ export class StaffManagementComponent implements OnInit {
 
   ngOnInit() {
     this.updateStaffMembers();
-    this.newStaffMember = new StaffMember();
-    this.newStaffMember.password = HelperMethods.generateInitialPassword();
+    this.generateNewStaffmember();
   }
 
   public openNewStaffModal(): void {
@@ -37,6 +36,14 @@ export class StaffManagementComponent implements OnInit {
   }
 
   public addStaff(staffMember: StaffMember): void {
+    let success: boolean = true;
+    this.staffManagementService.addStaffMember(staffMember)
+      .catch(error => { success = false; return error}).subscribe(response => {
+        if (success) {
+          this.updateStaffMembers();
+          this.generateNewStaffmember();
+        }
+      });
   }
 
   public deleteStaff(id: string): void {
@@ -48,4 +55,8 @@ export class StaffManagementComponent implements OnInit {
     this.staffManagementService.listStaff().subscribe(response => this.staffMembers = response);
   }
 
+  private generateNewStaffmember(): void {
+    this.newStaffMember = new StaffMember();
+    this.newStaffMember.password = HelperMethods.generateInitialPassword();
+  }
 }

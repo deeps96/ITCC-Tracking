@@ -14,6 +14,7 @@
                 <th>Forename</th>
                 <th>Lastname</th>
                 <th>Email</th>
+                <th>Department</th>
                 <th class="center-align">Delete</th>
               </tr>
             </thead>
@@ -22,6 +23,7 @@
               <td>{{staffMember.foreName}}</td>
               <td>{{staffMember.lastName}}</td>
               <td>{{staffMember.email}}</td>
+              <td>{{staffMember.department}}</td>
               <td class="center">
                 <a class="modal-trigger" (click)="openDeleteStaffModal(staffMember)" href="#deleteStaffModal">
                   <i class="material-icons deleteIcon blue-grey-text">delete</i>
@@ -84,8 +86,20 @@
           </div>
           <div class="row no-margin">
             <div class="input-field col s12">
-              <input id="email" type="text" class="validate" name="email" [(ngModel)]="newStaffMember.email" required>
+              <input id="email" type="email" class="validate" name="email" [(ngModel)]="newStaffMember.email" required>
               <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row no-margin">
+            <div class="input-field col s12">
+              <input disabled id="password" type="text" class="validate" name="password" [(ngModel)]="newStaffMember.password" required>
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <div class="row no-margin">
+            <div class="input-field col s12">
+              <input id="department" type="text" class="validate" name="department" [(ngModel)]="newStaffMember.department" required>
+              <label for="department">Department</label>
             </div>
           </div>
         </form>

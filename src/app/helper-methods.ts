@@ -1,21 +1,28 @@
 import {Response} from "@angular/http";
+import {AuthorizationService} from "./authorization.service";
 
 declare var Materialize: any;
 
 export class HelperMethods {
-  static extractData(res: Response) {
+
+  constructor(private authorizationService: AuthorizationService) {}
+
+  public static extractData(res: Response) {
     let body = res.json();
     return body || {};
   }
 
-  static handleError(error: any) {
+  public handleError(error: any) {
     let errMsg = (error.message) ? error.message : (error._body) ? JSON.parse(error._body).message : 'Server error';
     console.error(error);
+    if (errMsg == 'Authorization token expired') {
+      this.authorizationService.logout();
+    }
     Materialize.toast(errMsg, 3000, "");
-    return [];
+    return error;
   }
 
-  static generateInitialPassword(): string {
+  public static generateInitialPassword(): string {
     return Math.random().toString(36).slice(-8);
   }
 }
