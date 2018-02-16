@@ -16,14 +16,18 @@ public class AuthorizationToken {
     private static final int EXPIRES_AFTER_SECONDS = 600; //ten minutes
 
     @Field
-    @Indexed(name = "createdTimestampIndex", expireAfterSeconds = EXPIRES_AFTER_SECONDS)
-    private Date createdTimestamp;
+    @Indexed(name = "lastEditTimestampIndex", expireAfterSeconds = EXPIRES_AFTER_SECONDS)
+    private Date lastEditTimestamp;
 
-    private String email, token;
+    private String userID, token;
 
-    public AuthorizationToken(String email, String token) {
-        setCreatedTimestamp(new Date());
-        setEmail(email);
+    public AuthorizationToken(String userID, String token) {
+        refreshLastEditTimestamp();
+        setUserID(userID);
         setToken(token);
+    }
+
+    public void refreshLastEditTimestamp() {
+        setLastEditTimestamp(new Date());
     }
 }

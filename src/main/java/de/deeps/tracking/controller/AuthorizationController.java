@@ -1,6 +1,7 @@
 package de.deeps.tracking.controller;
 
 import de.deeps.tracking.dto.AuthorizationResponse;
+import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,9 +25,10 @@ public class AuthorizationController {
     public AuthorizationResponse authorize(@RequestParam(value="email") String email, @RequestParam(value="password")
             String password) {
         AuthorizationResponse response = new AuthorizationResponse();
-        response.setAuthorized(getService().isAuthorized(email, password));
+        User user = getService().getAuthorizedUser(email, password);
+        response.setAuthorized(user != null);
         if (response.isAuthorized()) {
-            response.setAuthorizationToken(getService().generateAuthenticationToken(email));
+            response.setAuthorizationToken(getService().generateAuthenticationToken(user.getId()));
         }
         return response;
     }

@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 public class User {
 
-    private String email, hashedPassword, forename, lastname, department, roleID    ;
+    private String department, email, hashedPassword, forename, id, lastname,roleID;
 
 }
