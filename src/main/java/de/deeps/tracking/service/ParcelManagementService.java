@@ -80,6 +80,11 @@ public class ParcelManagementService {
         return getParcelTypeRepository().findAll().stream().map(ParcelType::getName).collect(Collectors.toList());
     }
 
+    public List<String> getTransportationModes() {
+        return getTransportationModeRepository().findAll().stream().map(TransportationMode::getMode).collect(Collectors
+                .toList());
+    }
+
     //actions
     private synchronized void completeParcelInformation(ParcelEntry parcelEntry, String parcelTypeName) {
         ParcelType parcelType = getParcelTypeRepository().findByName(parcelTypeName);

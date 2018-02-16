@@ -51,4 +51,10 @@ public class ParcelManagementController extends GenericController {
         List<String> parcelTypes = getParcelManagementService().getParcelTypes();
         return new ListParcelTypesResponse(parcelTypes);
     }
+
+    @RequestMapping(value = "/listTransportationModes", method = RequestMethod.GET, produces = "application/json")
+    public ListTransportationModesResponse listTransportationModes() {
+        List<String> transportationModes = getParcelManagementService().getTransportationModes();
+        return new ListTransportationModesResponse(transportationModes);
+    }
 }
