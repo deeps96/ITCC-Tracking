@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddStationParameter {
+public class AddStationParameter extends AuthorizationParameter{
 
     private Station station;
     private String trackingNumber;

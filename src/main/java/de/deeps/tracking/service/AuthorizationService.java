@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @Getter(AccessLevel.PRIVATE)
@@ -35,12 +36,12 @@ public class AuthorizationService {
     }
 
     //convenience
-    public boolean hasPrivilege(String token, String privileg) throws IOException {
+    public boolean hasPrivileges(String token, List<String> privileges) throws IOException {
         Role role = getRoleByAuthorizationToken(token);
-        if (role != null) {
+        if (role == null) {
             throw new IOException("Internal error - role is not set!");
         }
-        return role.getPrivileges() != null && role.getPrivileges().contains(privileg);
+        return role.getPrivileges() != null && role.getPrivileges().containsAll(privileges);
     }
 
     public User getAuthorizedUser(String email, String password) {
