@@ -8,12 +8,15 @@ import * as shajs from 'sha.js';
 
 import {CookieService} from "ngx-cookie";
 import {HelperMethods} from "./helper-methods";
+import {RouterConfig} from "./config";
+import {ROUTER_CONFIG} from "../assets/config";
 
 @Injectable()
 export class AuthenticationService {
 
-  private SERVER_ADDRESS: string = 'http://localhost:2018';
   private AUTHORIZATION_TOKEN_COOKIE = 'authorizationToken';
+
+  private routerConfig: RouterConfig = ROUTER_CONFIG;
 
   constructor(private http: Http, private cookieService: CookieService) {}
 
@@ -22,7 +25,7 @@ export class AuthenticationService {
       email: email,
       password: AuthenticationService.hashPassword(password)
     };
-    return this.http.get(this.SERVER_ADDRESS + '/authorize', {params: params})
+    return this.http.get(this.routerConfig.serverAddress + '/authorize', {params: params})
                     .map(HelperMethods.extractData)
                     .catch(HelperMethods.handleError)
                     .map(response => {
@@ -33,7 +36,27 @@ export class AuthenticationService {
                     });
   }
 
-  public isAuthorized(): boolean {
+  public isAdmin(): Observable<boolean> {
+    const params = {
+      authorizationToken: this.getToken()
+    };
+    return this.http.get(this.routerConfig.serverAddress + '/isAdmin', {params: params})
+                    .map(HelperMethods.extractData)
+                    .catch(HelperMethods.handleError)
+                    .map(response => response.admin);
+  }
+
+  public isStaff(): Observable<boolean> {
+    const params = {
+      authorizationToken: this.getToken()
+    };
+    return this.http.get(this.routerConfig.serverAddress + '/isStaff', {params: params})
+                    .map(HelperMethods.extractData)
+                    .catch(HelperMethods.handleError)
+                    .map(response => response.admin);
+  }
+
+  public isAuthenticated(): boolean {
     return this.cookieService.get(this.AUTHORIZATION_TOKEN_COOKIE) != null;
   }
 
@@ -48,6 +71,10 @@ export class AuthenticationService {
 
   private storeTokenIntoCookies(token: string): void {
     this.cookieService.put(this.AUTHORIZATION_TOKEN_COOKIE, token, {expires: AuthenticationService.generateExpireDate()});
+  }
+
+  private getToken(): string {
+    return this.cookieService.get(this.AUTHORIZATION_TOKEN_COOKIE);
   }
 
   private static generateExpireDate(): Date {

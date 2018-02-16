@@ -5,12 +5,14 @@ import {HelperMethods} from "./helper-methods";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { Observable } from 'rxjs/Rx';
+import {RouterConfig} from "./config";
+import {ROUTER_CONFIG} from "../assets/config";
 
 
 @Injectable()
 export class ParcelManagementService {
 
-  private SERVER_ADDRESS: string = 'http://localhost:2018';
+  private routerConfig: RouterConfig = ROUTER_CONFIG;
 
   constructor(private http: Http) { }
 
@@ -24,7 +26,7 @@ export class ParcelManagementService {
     };
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.SERVER_ADDRESS + '/createParcel', JSON.stringify(parameter), options)
+    return this.http.post(this.routerConfig.serverAddress + '/createParcel', JSON.stringify(parameter), options)
       .map(HelperMethods.extractData)
       .catch(HelperMethods.handleError)
       .map(response => {
