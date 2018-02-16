@@ -15,13 +15,14 @@ public class ParcelManagement {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
 
-
+    //convenience
     public void completeParcelInformation(ParcelEntry parcelEntry, ParcelType parcelType, long count) {
         parcelEntry.setParcelTypeID(parcelType.getId());
         generateTrackingNumberForParcel(parcelEntry, parcelType, count);
     }
 
-    private synchronized void generateTrackingNumberForParcel(ParcelEntry parcelEntry, ParcelType parcelType, long count) {
+    //actions
+    private void generateTrackingNumberForParcel(ParcelEntry parcelEntry, ParcelType parcelType, long count) {
         StringBuilder trackingNumber = new StringBuilder(parcelType.getKey());
         trackingNumber.append(parcelEntry.getDeparture().getCity().getZipCode());
         trackingNumber.append(parcelEntry.getDestination().getCity().getZipCode());
