@@ -4,13 +4,13 @@ export const ROUTER_CONFIG: RouterConfig = {
   serverAddress: 'http://localhost:2018',
   allowedUserRoutes: [
     '^$',
-    '^/login$'
+    '^/login'
   ],
   allowedAdminRoutes: [
     '.*'
   ],
   allowedStaffRoutes: [
     '^$',
-    '^/login$'
+    '^/login'
   ]
 }
