@@ -40,7 +40,7 @@ public class AuthorizationController extends GenericController {
         checkPrivilege(parameter, "canAddStaff");
         StaffMember member = parameter.getStaffMember();
         getAuthorizationService().addStaffMember(member.getForeName(), member.getLastName(), member.getDepartment(),
-                member.getEmail(), member.getPassword(), member.getRoleName());
+                member.getEmail(), member.getPassword());
     }
 
     @RequestMapping(value = "/removeStaff", method = RequestMethod.DELETE)

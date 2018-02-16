@@ -50,9 +50,8 @@ public class AuthorizationService {
         return getUserRepository().findByEmailAndHashedPassword(email, Authorization.hashPassword(password));
     }
 
-    public void addStaffMember(String forename, String lastname, String department, String email, String password,
-                               String roleName) throws IOException {
-        Role role = getRoleRepository().findByName(roleName);
+    public void addStaffMember(String forename, String lastname, String department, String email, String password) throws IOException {
+        Role role = getRoleRepository().findByName(getSTAFF_ROLE());
         if (role == null) {
             throw new IOException("Role unkown");
         }
