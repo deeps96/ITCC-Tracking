@@ -15,7 +15,7 @@ import {StaffMember} from "./authorization";
 @Injectable()
 export class AuthorizationService {
 
-  private AUTHORIZATION_TOKEN_COOKIE = 'authorizationToken';
+  public AUTHORIZATION_TOKEN_COOKIE = 'authorizationToken';
 
   private routerConfig: RouterConfig = ROUTER_CONFIG;
 
@@ -65,15 +65,6 @@ export class AuthorizationService {
     this.cookieService.remove(this.AUTHORIZATION_TOKEN_COOKIE);
   }
 
-  public listStaff(): Observable<StaffMember[]> {
-    const params = {
-      authorizationToken: this.getToken()
-    };
-    return this.http.get(this.routerConfig.serverAddress + '/listStaff', {params: params})
-                    .map(HelperMethods.extractData)
-                    .catch(HelperMethods.handleError);
-  }
-
   //actions
   private static hashPassword(rawPassword: string): string {
     return shajs('sha256').update(rawPassword).digest('hex');
@@ -83,7 +74,7 @@ export class AuthorizationService {
     this.cookieService.put(this.AUTHORIZATION_TOKEN_COOKIE, token);
   }
 
-  private getToken(): string {
+  public getToken(): string {
     return this.cookieService.get(this.AUTHORIZATION_TOKEN_COOKIE);
   }
 

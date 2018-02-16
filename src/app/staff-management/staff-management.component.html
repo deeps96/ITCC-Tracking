@@ -5,25 +5,94 @@
         <h1 class="center-align">Staff members</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <table>
-          <thead>
-            <th>Forename</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Delete</th>
-          </thead>
-          <tbody>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <table>
+            <thead>
+              <tr>
+                <th>Forename</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th class="center-align">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
             <tr *ngFor="let staffMember of staffMembers">
-              <td>staffMember.forename</td>
-              <td>staffMember.lastname</td>
-              <td>staffMember.email</td>
-              <td><i class="material-icons">delete</i></td>
+              <td>{{staffMember.foreName}}</td>
+              <td>{{staffMember.lastName}}</td>
+              <td>{{staffMember.email}}</td>
+              <td class="center">
+                <a class="modal-trigger" (click)="openDeleteStaffModal(staffMember)" href="#deleteStaffModal">
+                  <i class="material-icons deleteIcon blue-grey-text">delete</i>
+                </a>
+              </td>
             </tr>
-          </tbody>
-        </table>
+            <tr *ngIf="staffMembers && staffMembers.length == 0">
+              <td colspan="4" class="center">No staff members in database!</td>
+            </tr>
+            <tr>
+              <td>
+                <a materialize="tooltip" class="btn-floating waves-effect waves-light blue-grey tooltipped modal-trigger"
+                   data-delay="50" data-tooltip="Add a staff member" data-position="right" (click)="openNewStaffModal()" href="#addStaffModal">
+                  <i class="material-icons">add</i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
+  </div>
+  <!-- Delete staff member modal -->
+  <div id="deleteStaffModal" class="modal bottom-sheet blue-grey lighten-5" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="deleteStaffModalActions">
+    <div class="modal-content">
+      <h4>Are you sure, that you want to delete the staff member?</h4>
+      <p *ngIf="deleteStaffMember">{{deleteStaffMember.foreName}} {{deleteStaffMember.lastName}} want be able to access the staff section if you proceed.</p>
+    </div>
+    <div class="modal-footer blue-grey lighten-5">
+      <a class="modal-action modal-close btn-flat">Abort</a>
+      <a class="modal-action modal-close waves-effect waves-red waves-darken-3 btn-flat" (click)="deleteStaff(deleteStaffMember.id);">Proceed</a>
+    </div>
+  </div>
+  <!-- Add staff member modal -->
+
+  <div id="addStaffModal" class="modal blue-grey lighten-5" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="newStaffModalActions">
+    <div class="modal-content">
+      <a class="modal-action modal-close waves-effect waves-red waves-darken-3 btn-flat">
+        <i class="material-icons blue-grey-text">cancel</i>
+      </a>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <h4 class="center-align">Add a new staff member</h4>
+          </div>
+        </div>
+        <form>
+          <div class="row no-margin">
+            <div class="input-field col s12">
+              <input id="forename" type="text" class="validate" name="forename" [(ngModel)]="newStaffMember.foreName" required>
+              <label for="forename">Forename</label>
+            </div>
+          </div>
+          <div class="row no-margin">
+            <div class="input-field col s12">
+              <input id="lastname" type="text" class="validate" name="lastname" [(ngModel)]="newStaffMember.lastName" required>
+              <label for="lastname">Lastname</label>
+            </div>
+          </div>
+          <div class="row no-margin">
+            <div class="input-field col s12">
+              <input id="email" type="text" class="validate" name="email" [(ngModel)]="newStaffMember.email" required>
+              <label for="email">Email</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer blue-grey lighten-5">
+      <a class="waves-effect modal-action modal-close waves-green waves-darken-3 btn-flat" (click)="addStaff(newStaffMember);">Add Staff</a>
     </div>
   </div>
 </div>

@@ -14,4 +14,8 @@ export class HelperMethods {
     Materialize.toast(errMsg, 3000, "");
     return [];
   }
+
+  static generateInitialPassword(): string {
+    return Math.random().toString(36).slice(-8);
+  }
 }

@@ -14,6 +14,7 @@ import { CreateParcelComponent } from './create-parcel/create-parcel.component';
 import {ParcelManagementService} from "./parcel-management.service";
 import { StaffManagementComponent } from './staff-management/staff-management.component';
 import {AuthGuard} from "./auth.guard";
+import {StaffManagementService} from "./staff-management.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import {AuthGuard} from "./auth.guard";
     MaterializeModule,
     AppRoutesModule
   ],
-  providers: [AuthorizationService, AuthGuard, ParcelManagementService],
+  providers: [AuthorizationService, AuthGuard, ParcelManagementService, StaffManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
