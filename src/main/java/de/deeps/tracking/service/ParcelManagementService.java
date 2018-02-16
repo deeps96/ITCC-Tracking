@@ -76,18 +76,16 @@ public class ParcelManagementService {
         return true;
     }
 
-    public List<String> getParcelTypes() {
-        return getParcelTypeRepository().findAll().stream().map(ParcelType::getName).collect(Collectors.toList());
+    public List<ParcelType> getParcelTypes() {
+        return getParcelTypeRepository().findAll();
     }
 
-    public List<String> getTransportationModes() {
-        return getTransportationModeRepository().findAll().stream().map(TransportationMode::getMode).collect(Collectors
-                .toList());
+    public List<TransportationMode> getTransportationModes() {
+        return getTransportationModeRepository().findAll();
     }
 
-    public List<String> getActionDescriptions() {
-        return getActionDescriptionRepository().findAll().stream().map(ActionDescription::getAction).collect(Collectors
-                .toList());
+    public List<ActionDescription> getActionDescriptions() {
+        return getActionDescriptionRepository().findAll();
     }
 
     //actions
