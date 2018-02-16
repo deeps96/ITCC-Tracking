@@ -9,8 +9,8 @@ export class HelperMethods {
   }
 
   static handleError(error: any) {
-    let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg);
+    let errMsg = (error.message) ? error.message : (error._body) ? JSON.parse(error._body).message : 'Server error';
+    console.error(error);
     Materialize.toast(errMsg, 3000, "");
     return [];
   }
