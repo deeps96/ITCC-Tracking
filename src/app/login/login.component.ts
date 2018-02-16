@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-
-
   private routeToPrevPage(): void {
     this.router.navigateByUrl(this.returnUrl);
   }

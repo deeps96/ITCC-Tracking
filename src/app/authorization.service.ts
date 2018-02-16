@@ -67,6 +67,10 @@ export class AuthorizationService {
   public logout(): void {
     this.cookieService.remove(this.AUTHORIZATION_TOKEN_COOKIE);
     this.router.navigateByUrl('/login');
+    const params = {
+      authorizationToken: this.getToken()
+    };
+    this.http.delete(this.routerConfig.serverAddress + '/logout', {params: params}).subscribe();
   }
 
   //actions
