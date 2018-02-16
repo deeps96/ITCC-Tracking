@@ -1,5 +1,6 @@
 package de.deeps.tracking.service;
 
+import de.deeps.tracking.dto.StaffMember;
 import de.deeps.tracking.model.Authorization;
 import de.deeps.tracking.model.dbobjects.Role;
 import de.deeps.tracking.model.dbobjects.User;
@@ -20,6 +21,8 @@ import java.util.List;
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
 public class AuthorizationService {
+
+    @Getter(AccessLevel.PRIVATE) private static final String STAFF_ROLE = "Staff";
 
     private AuthorizationTokensRepository authorizationTokensRepository;
     private RoleRepository roleRepository;
@@ -45,8 +48,7 @@ public class AuthorizationService {
     }
 
     public User getAuthorizedUser(String email, String password) {
-        User user = getUserRepository().findByEmail(email);
-        return (Authorization.isAuthorized(user, password)) ? user : null;
+        return getUserRepository().findByEmailAndHashedPassword(email, Authorization.hashPassword(password));
     }
 
     public void addStaffMember(String forename, String lastname, String department, String email, String password,
@@ -71,6 +73,14 @@ public class AuthorizationService {
             throw new IOException("Staff does not exists");
         }
         getUserRepository().delete(staffID);
+    }
+
+    public List<User> getStaff() throws IOException {
+        Role staffRole = getRoleRepository().findByName(getSTAFF_ROLE());
+        if (staffRole == null) {
+            throw new IOException("Internal server error - Role " + getSTAFF_ROLE() + " does not exist");
+        }
+        return getUserRepository().findByRoleID(staffRole.getId());
     }
 
     //actions

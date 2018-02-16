@@ -15,12 +15,7 @@ public class Authorization {
         return UUID.randomUUID().toString();
     }
 
-    public static boolean isAuthorized(User entry, String password) {
-        return entry != null && entry.getHashedPassword().equals(hashPassword(password));
-    }
-
-    //actions
-    private static String hashPassword(String rawPassword) {
+    public static String hashPassword(String rawPassword) {
         return Hashing.sha256().hashString(rawPassword, StandardCharsets.UTF_8).toString();
     }
 }
