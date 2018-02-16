@@ -25,7 +25,11 @@ public abstract class GenericController {
     }
 
     protected void checkPrivilege(AuthorizationParameter parameter, String... privileges) throws IOException {
-        if (!getAuthorizationService().hasPrivileges(parameter.getAuthorizationToken(), Arrays.asList(privileges))) {
+        checkPrivilege(parameter.getAuthorizationToken(), privileges);
+    }
+
+    protected  void checkPrivilege(String authorizationToken, String... privileges) throws IOException {
+        if (!getAuthorizationService().hasPrivileges(authorizationToken, Arrays.asList(privileges))) {
             throw new IOException("Not enough privileges!");
         }
     }

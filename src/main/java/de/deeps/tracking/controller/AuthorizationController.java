@@ -45,4 +45,11 @@ public class AuthorizationController extends GenericController {
                 parameter.getEmail(), parameter.getPassword(), parameter.getRole());
     }
 
+    @RequestMapping(value = "/removeStaff", method = RequestMethod.DELETE)
+    public void removeStaff(@RequestParam(value="staffID") String staffID, @RequestParam(value="authorizationToken")
+                            String authorizationToken) throws IOException {
+        checkPrivilege(authorizationToken, "canRemoveStaff");
+        getService().removeStaffMember(staffID);
+    }
+
 }

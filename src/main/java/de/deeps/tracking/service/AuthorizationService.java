@@ -66,6 +66,13 @@ public class AuthorizationService {
         return token;
     }
 
+    public void removeStaffMember(String staffID) throws IOException {
+        if (getUserRepository().findOne(staffID) != null) {
+            throw new IOException("Staff does not exists");
+        }
+        getUserRepository().delete(staffID);
+    }
+
     //actions
     private AuthorizationToken getAuthorizationToken(String authorizationToken) {
         AuthorizationToken token = getAuthorizationTokensRepository().findByToken(authorizationToken);
