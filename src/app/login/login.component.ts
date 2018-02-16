@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../authorization.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,13 +13,15 @@ export class LoginComponent implements OnInit {
 
   public email: string;
   public password: string;
+  private returnUrl: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
     let isAuthorized = this.authenticationService.isAuthenticated();
     if (isAuthorized) {
-      this.routeToIndex();
+      this.routeToPrevPage();
     }
   }
 
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         if (response) {
           this.hideWrongCredentialsAlert();
-          this.routeToIndex();
+          this.routeToPrevPage();
         } else {
           this.showWrongCredentialsAlert();
         }
@@ -38,8 +40,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  private routeToIndex(): void {
-    this.router.navigate(['']);
+  private routeToPrevPage(): void {
+    this.router.navigateByUrl(this.returnUrl);
   }
 
   private showWrongCredentialsAlert(): void {

@@ -15,8 +15,12 @@ export const ROUTE_CONFIG: Routes = [
     component: StaffManagementComponent
   },
   {
-    path: '**',
+    path: '',
     component: HomeComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
