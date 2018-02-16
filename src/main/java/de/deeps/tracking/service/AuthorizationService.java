@@ -88,6 +88,11 @@ public class AuthorizationService {
         return role.getName().equals(getADMIN_ROLE());
     }
 
+    public boolean isStaff(String authorizationToken) throws IOException {
+        Role role = getRoleByAuthorizationToken(authorizationToken);
+        return role.getName().equals(getSTAFF_ROLE());
+    }
+
     //actions
     private AuthorizationToken getAuthorizationToken(String authorizationToken) {
         AuthorizationToken token = getAuthorizationTokensRepository().findByToken(authorizationToken);

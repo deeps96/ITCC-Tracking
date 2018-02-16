@@ -65,4 +65,10 @@ public class AuthorizationController extends GenericController {
         return new IsAdminResponse(getAuthorizationService().isAdmin(authorizationToken));
     }
 
+    @RequestMapping(value = "/isStaff", method = RequestMethod.GET, produces = "application/json")
+    public IsStaffResponse isStaff(@RequestParam(value="authorizationToken") String authorizationToken) throws
+            IOException {
+        return new IsStaffResponse(getAuthorizationService().isStaff(authorizationToken));
+    }
+
 }
