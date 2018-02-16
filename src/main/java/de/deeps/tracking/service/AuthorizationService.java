@@ -1,13 +1,12 @@
 package de.deeps.tracking.service;
 
-import de.deeps.tracking.dto.StaffMember;
 import de.deeps.tracking.model.Authorization;
+import de.deeps.tracking.model.dbobjects.AuthorizationToken;
 import de.deeps.tracking.model.dbobjects.Role;
 import de.deeps.tracking.model.dbobjects.User;
-import de.deeps.tracking.model.dbobjects.AuthorizationToken;
+import de.deeps.tracking.repository.AuthorizationTokensRepository;
 import de.deeps.tracking.repository.RoleRepository;
 import de.deeps.tracking.repository.UserRepository;
-import de.deeps.tracking.repository.AuthorizationTokensRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

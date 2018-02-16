@@ -19,7 +19,7 @@ public class AuthorizationToken {
     @Indexed(name = "lastEditTimestampIndex", expireAfterSeconds = EXPIRES_AFTER_SECONDS)
     private Date lastEditTimestamp;
 
-    private String userID, token;
+    private String id, userID, token;
 
     public AuthorizationToken(String userID, String token) {
         refreshLastEditTimestamp();
