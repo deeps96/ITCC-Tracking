@@ -55,7 +55,7 @@ public class AuthorizationService {
         if (role == null) {
             throw new IOException("Role unkown");
         }
-        User newStaff = new User(forename, lastname, department, email, password);
+        User newStaff = new User(department, email, password, forename, lastname);
         newStaff.setRoleID(role.getId());
         getUserRepository().save(newStaff);
     }
