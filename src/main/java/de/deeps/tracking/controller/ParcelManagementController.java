@@ -19,14 +19,12 @@ import java.util.Arrays;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
-public class ParcelManagementController {
+public class ParcelManagementController extends GenericController {
 
-    private AuthorizationService authorizationService;
     private ParcelManagementService parcelManagementService;
 
     @Autowired
     public ParcelManagementController(AuthorizationService authorizationService, ParcelManagementService parcelManagementService){
-        setAuthorizationService(authorizationService);
         setParcelManagementService(parcelManagementService);
     }
 
@@ -43,12 +41,6 @@ public class ParcelManagementController {
         boolean success = getParcelManagementService().addStationToParcel(parameter.getTrackingNumber(), parameter.getStation());
         if (!success) {
             throw new IOException("Error while adding station to " + parameter.getTrackingNumber());
-        }
-    }
-
-    private void checkPrivilege(AuthorizationParameter parameter, String... privileges) throws IOException {
-        if (!getAuthorizationService().hasPrivileges(parameter.getAuthorizationToken(), Arrays.asList(privileges))) {
-            throw new IOException("Not enough privileges!");
         }
     }
 }

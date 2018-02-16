@@ -13,7 +13,7 @@ import java.util.List;
 public class Role {
 
     private List<String> privileges;
-    private String name;
+    private String id, name;
 
     public Role() {
         setPrivileges(new LinkedList<>());

@@ -49,6 +49,17 @@ public class AuthorizationService {
         return (Authorization.isAuthorized(user, password)) ? user : null;
     }
 
+    public void addStaffMember(String forename, String lastname, String department, String email, String password,
+                               String roleName) throws IOException {
+        Role role = getRoleRepository().findByName(roleName);
+        if (role == null) {
+            throw new IOException("Role unkown");
+        }
+        User newStaff = new User(forename, lastname, department, email, password);
+        newStaff.setRoleID(role.getId());
+        getUserRepository().save(newStaff);
+    }
+
     public String generateAuthenticationToken(String userID) {
         String token = Authorization.generateNewToken();
         getAuthorizationTokensRepository().save(new AuthorizationToken(userID, token));

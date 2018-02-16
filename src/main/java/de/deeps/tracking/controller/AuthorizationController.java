@@ -1,6 +1,9 @@
 package de.deeps.tracking.controller;
 
+import de.deeps.tracking.dto.AddStaffParameter;
 import de.deeps.tracking.dto.AuthorizationResponse;
+import de.deeps.tracking.dto.CreateParcelParameter;
+import de.deeps.tracking.dto.CreateParcelResponse;
 import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import lombok.AccessLevel;
@@ -9,10 +12,12 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
-public class AuthorizationController {
+public class AuthorizationController extends GenericController {
 
     private AuthorizationService service;
 
@@ -31,6 +36,13 @@ public class AuthorizationController {
             response.setAuthorizationToken(getService().generateAuthenticationToken(user.getId()));
         }
         return response;
+    }
+
+    @RequestMapping(value = "/addStaff", method = RequestMethod.POST)
+    public void addStaff(@RequestBody AddStaffParameter parameter) throws IOException {
+        checkPrivilege(parameter, "canAddStaff");
+        getService().addStaffMember(parameter.getForename(), parameter.getLastname(), parameter.getDepartment(),
+                parameter.getEmail(), parameter.getPassword(), parameter.getRole());
     }
 
 }

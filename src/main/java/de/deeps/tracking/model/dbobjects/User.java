@@ -11,4 +11,11 @@ public class User {
 
     private String department, email, hashedPassword, forename, id, lastname,roleID;
 
+    public User(String department, String email, String hashedPassword, String forename, String lastname) {
+        setDepartment(department);
+        setEmail(email);
+        setHashedPassword(hashedPassword);
+        setForename(forename);
+        setLastname(lastname);
+    }
 }
