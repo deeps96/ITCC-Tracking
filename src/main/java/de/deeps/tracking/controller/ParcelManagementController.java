@@ -28,6 +28,7 @@ public class ParcelManagementController extends GenericController {
 
     @Autowired
     public ParcelManagementController(AuthorizationService authorizationService, ParcelManagementService parcelManagementService){
+        super(authorizationService);
         setParcelManagementService(parcelManagementService);
     }
 

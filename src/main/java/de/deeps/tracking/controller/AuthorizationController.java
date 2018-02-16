@@ -18,21 +18,19 @@ import java.util.stream.Collectors;
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
 public class AuthorizationController extends GenericController {
 
-    private AuthorizationService service;
-
     @Autowired
-    public AuthorizationController(AuthorizationService service){
-        setService(service);
+    public AuthorizationController(AuthorizationService authorizationService) {
+        super(authorizationService);
     }
 
     @RequestMapping(value = "/authorize", method = RequestMethod.GET, produces = "application/json")
     public AuthorizationResponse authorize(@RequestParam(value="email") String email, @RequestParam(value="password")
             String password) {
         AuthorizationResponse response = new AuthorizationResponse();
-        User user = getService().getAuthorizedUser(email, password);
+        User user = getAuthorizationService().getAuthorizedUser(email, password);
         response.setAuthorized(user != null);
         if (response.isAuthorized()) {
-            response.setAuthorizationToken(getService().generateAuthenticationToken(user.getId()));
+            response.setAuthorizationToken(getAuthorizationService().generateAuthenticationToken(user.getId()));
         }
         return response;
     }
@@ -40,7 +38,7 @@ public class AuthorizationController extends GenericController {
     @RequestMapping(value = "/addStaff", method = RequestMethod.POST)
     public void addStaff(@RequestBody AddStaffParameter parameter) throws IOException {
         checkPrivilege(parameter, "canAddStaff");
-        getService().addStaffMember(parameter.getForename(), parameter.getLastname(), parameter.getDepartment(),
+        getAuthorizationService().addStaffMember(parameter.getForename(), parameter.getLastname(), parameter.getDepartment(),
                 parameter.getEmail(), parameter.getPassword(), parameter.getRole());
     }
 
@@ -48,14 +46,14 @@ public class AuthorizationController extends GenericController {
     public void removeStaff(@RequestParam(value="staffID") String staffID, @RequestParam(value="authorizationToken")
                             String authorizationToken) throws IOException {
         checkPrivilege(authorizationToken, "canRemoveStaff");
-        getService().removeStaffMember(staffID);
+        getAuthorizationService().removeStaffMember(staffID);
     }
 
     @RequestMapping(value = "/listStaff", method = RequestMethod.GET, produces = "application/json")
     public ListStaffResponse listStaff(@RequestParam(value="authorizationToken")
                                                    String authorizationToken) throws IOException {
         checkPrivilege(authorizationToken, "canListStaff");
-        List<StaffMember> staffMembers = getService().getStaff().stream().map(user ->
+        List<StaffMember> staffMembers = getAuthorizationService().getStaff().stream().map(user ->
             new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId())
         ).collect(Collectors.toList());
         return new ListStaffResponse(staffMembers);

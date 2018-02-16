@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.Arrays;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
+@Getter(AccessLevel.PROTECTED) @Setter(AccessLevel.PRIVATE)
 public abstract class GenericController {
 
     private AuthorizationService authorizationService;
 
-    @Autowired
-    public GenericController() {
+    public GenericController(AuthorizationService authorizationService) {
         setAuthorizationService(authorizationService);
     }
 
