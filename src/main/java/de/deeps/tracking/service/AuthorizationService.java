@@ -59,14 +59,14 @@ public class AuthorizationService {
     private AuthorizationToken getAuthorizationToken(String authorizationToken) {
         AuthorizationToken token = getAuthorizationTokensRepository().findByToken(authorizationToken);
         if (token != null) {
-            updateExpireDate(token);
+            token = updateExpireDate(token);
         }
         return token;
     }
 
-    private void updateExpireDate(AuthorizationToken token) {
+    private AuthorizationToken updateExpireDate(AuthorizationToken token) {
         token.refreshLastEditTimestamp();
-        getAuthorizationTokensRepository().save(token);
+        return getAuthorizationTokensRepository().save(token);
     }
 
     private Role getRoleByAuthorizationToken(String authorizationToken) throws IOException {

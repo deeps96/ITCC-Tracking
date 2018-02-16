@@ -47,7 +47,7 @@ public class ParcelManagementController {
     }
 
     private void checkPrivilege(AuthorizationParameter parameter, String... privileges) throws IOException {
-        if (!getAuthorizationService().hasPrivileges(parameter.getAccessToken(), Arrays.asList(privileges))) {
+        if (!getAuthorizationService().hasPrivileges(parameter.getAuthorizationToken(), Arrays.asList(privileges))) {
             throw new IOException("Not enough privileges!");
         }
     }

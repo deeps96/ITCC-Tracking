@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public abstract class AuthorizationParameter {
 
-    private String accessToken;
+    private String authorizationToken;
 }
