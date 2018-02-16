@@ -1,10 +1,8 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.AddStationParameter;
-import de.deeps.tracking.dto.AuthorizationParameter;
-import de.deeps.tracking.dto.CreateParcelParameter;
-import de.deeps.tracking.dto.CreateParcelResponse;
+import de.deeps.tracking.dto.*;
 import de.deeps.tracking.model.Authorization;
+import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import de.deeps.tracking.service.ParcelManagementService;
 import lombok.AccessLevel;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,5 +44,11 @@ public class ParcelManagementController extends GenericController {
         if (!success) {
             throw new IOException("Error while adding station to " + parameter.getTrackingNumber());
         }
+    }
+
+    @RequestMapping(value = "/listParcelTypes", method = RequestMethod.GET, produces = "application/json")
+    public ListParcelTypesResponse listParcelTypes() {
+        List<String> parcelTypes = getParcelManagementService().getParcelTypes();
+        return new ListParcelTypesResponse(parcelTypes);
     }
 }

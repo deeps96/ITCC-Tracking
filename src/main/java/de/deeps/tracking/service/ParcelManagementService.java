@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @Getter(AccessLevel.PRIVATE)
@@ -72,6 +74,10 @@ public class ParcelManagementService {
         parcel.getStations().add(dbStation);
         getParcelRepository().save(parcel);
         return true;
+    }
+
+    public List<String> getParcelTypes() {
+        return getParcelTypeRepository().findAll().stream().map(ParcelType::getName).collect(Collectors.toList());
     }
 
     //actions
