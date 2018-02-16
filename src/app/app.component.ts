@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
-import {AuthenticationService} from "./authorization.service";
+import {AuthorizationService} from "./authorization.service";
 
 declare var Materialize: any;
 
@@ -15,7 +15,7 @@ export class AppComponent {
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private authenticationService: AuthorizationService) {
     router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => {

@@ -14,14 +14,13 @@ export class CreateParcelComponent implements OnInit {
   public parcelTypeNames: string[];
   private selectedParcelType: string;
 
-  constructor(private parcelManagementService: ParcelManagementService) {
-    this.departure = new Location();
-    this.destination = new Location();
-    this.parcelTypeNames = ['Basic parcel'];
-
-  }
+  constructor(private parcelManagementService: ParcelManagementService) {}
 
   ngOnInit() {
+    this.departure = new Location();
+    this.destination = new Location();
+    this.selectedParcelType = null;
+    this.parcelTypeNames = ['Basic parcel'];
   }
 
   public parcelTypeChanged(selectedType: any): void {

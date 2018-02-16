@@ -1,4 +1,6 @@
-export class AuthorizationResponse {
-  authorized: boolean;
-  authorizationToken: string;
+export class StaffMember {
+  forename: string;
+  lastname: string;
+  email: string;
+  id: string;
 }

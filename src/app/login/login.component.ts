@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService} from "../authorization.service";
+import {AuthorizationService} from "../authorization.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   public password: string;
   private returnUrl: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authenticationService: AuthorizationService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';

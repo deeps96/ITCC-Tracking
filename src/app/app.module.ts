@@ -7,7 +7,7 @@ import {AppRoutesModule} from "./app.routes";
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import {CookieModule} from "ngx-cookie";
-import {AuthenticationService} from "./authorization.service";
+import {AuthorizationService} from "./authorization.service";
 import {HttpModule} from "@angular/http";
 import { HomeComponent } from './home/home.component';
 import { CreateParcelComponent } from './create-parcel/create-parcel.component';
@@ -31,7 +31,7 @@ import {AuthGuard} from "./auth.guard";
     MaterializeModule,
     AppRoutesModule
   ],
-  providers: [AuthenticationService, AuthGuard, ParcelManagementService],
+  providers: [AuthorizationService, AuthGuard, ParcelManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,9 +10,10 @@ import {CookieService} from "ngx-cookie";
 import {HelperMethods} from "./helper-methods";
 import {RouterConfig} from "./config";
 import {ROUTER_CONFIG} from "../assets/config";
+import {StaffMember} from "./authorization";
 
 @Injectable()
-export class AuthenticationService {
+export class AuthorizationService {
 
   private AUTHORIZATION_TOKEN_COOKIE = 'authorizationToken';
 
@@ -23,7 +24,7 @@ export class AuthenticationService {
   public login(email: string, password: string): Observable<boolean> {
     const params = {
       email: email,
-      password: AuthenticationService.hashPassword(password)
+      password: AuthorizationService.hashPassword(password)
     };
     return this.http.get(this.routerConfig.serverAddress + '/authorize', {params: params})
                     .map(HelperMethods.extractData)
@@ -64,22 +65,26 @@ export class AuthenticationService {
     this.cookieService.remove(this.AUTHORIZATION_TOKEN_COOKIE);
   }
 
+  public listStaff(): Observable<StaffMember[]> {
+    const params = {
+      authorizationToken: this.getToken()
+    };
+    return this.http.get(this.routerConfig.serverAddress + '/listStaff', {params: params})
+                    .map(HelperMethods.extractData)
+                    .catch(HelperMethods.handleError);
+  }
+
   //actions
   private static hashPassword(rawPassword: string): string {
     return shajs('sha256').update(rawPassword).digest('hex');
   }
 
   private storeTokenIntoCookies(token: string): void {
-    this.cookieService.put(this.AUTHORIZATION_TOKEN_COOKIE, token, {expires: AuthenticationService.generateExpireDate()});
+    this.cookieService.put(this.AUTHORIZATION_TOKEN_COOKIE, token);
   }
 
   private getToken(): string {
     return this.cookieService.get(this.AUTHORIZATION_TOKEN_COOKIE);
   }
 
-  private static generateExpireDate(): Date {
-    let current = new Date();
-    current.setMinutes(current.getMinutes() + 10);
-    return current;
-  }
 }

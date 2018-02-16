@@ -1,0 +1,9 @@
+#background {
+  min-height: 100vh;
+  min-width: 100vw;
+  padding-top: 100px;
+}
+
+#container {
+  padding: 20px;
+}
