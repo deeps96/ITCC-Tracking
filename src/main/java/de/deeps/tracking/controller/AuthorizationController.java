@@ -36,8 +36,8 @@ public class AuthorizationController extends GenericController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
-    public void removeStaff(@RequestParam(value="authorizationToken")
-            String authorizationToken) throws IOException {
+    public void logout(@RequestParam(value="authorizationToken")
+            String authorizationToken) {
         getAuthorizationService().removeAuthorizationToken(authorizationToken);
     }
 
