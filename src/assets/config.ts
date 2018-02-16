@@ -13,4 +13,4 @@ export const ROUTER_CONFIG: RouterConfig = {
     '^$',
     '^/login'
   ]
-}
+};
