@@ -22,15 +22,17 @@ export class AuthGuard implements CanActivate {
     if (this.isAnonymUser()) {
       allow = this.routeMatchesRegexFromList(this.routerConfig.allowedUserRoutes, route);
     } else {
-      if (this.authenticationService.isAdmin()) {
-        allow = this.routeMatchesRegexFromList(this.routerConfig.allowedAdminRoutes, route);
-      } else if (this.authenticationService.isStaff()) {
-        allow = this.routeMatchesRegexFromList(this.routerConfig.allowedStaffRoutes, route);
+      this.authenticationService.isAdmin().subscribe(response => {
+          if (response) { allow = this.routeMatchesRegexFromList(this.routerConfig.allowedAdminRoutes, route); }
+        });
+      if (!allow) {
+        this.authenticationService.isStaff().subscribe(response => {
+          if (response) { allow = this.routeMatchesRegexFromList(this.routerConfig.allowedStaffRoutes, route); }
+        });
       }
     }
     if (!allow) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-
     }
     return allow;
   }
