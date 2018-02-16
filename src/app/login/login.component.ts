@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    let isAuthorized = this.authenticationService.isAuthorized();
+    let isAuthorized = this.authenticationService.isAuthenticated();
     if (isAuthorized) {
       this.routeToIndex();
     }

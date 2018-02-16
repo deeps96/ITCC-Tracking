@@ -30,7 +30,7 @@ export class AppComponent {
   }
 
   private isLoggedIn(): boolean {
-    return this.authenticationService.isAuthorized();
+    return this.authenticationService.isAuthenticated();
   }
 
   public logout(): void {

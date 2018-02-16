@@ -12,13 +12,16 @@ import {HttpModule} from "@angular/http";
 import { HomeComponent } from './home/home.component';
 import { CreateParcelComponent } from './create-parcel/create-parcel.component';
 import {ParcelManagementService} from "./parcel-management.service";
+import { StaffManagementComponent } from './staff-management/staff-management.component';
+import {AuthGuard} from "./auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CreateParcelComponent
+    CreateParcelComponent,
+    StaffManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import {ParcelManagementService} from "./parcel-management.service";
     MaterializeModule,
     AppRoutesModule
   ],
-  providers: [AuthenticationService, ParcelManagementService],
+  providers: [AuthenticationService, AuthGuard, ParcelManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
