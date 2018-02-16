@@ -38,8 +38,9 @@ public class AuthorizationController extends GenericController {
     @RequestMapping(value = "/addStaff", method = RequestMethod.POST)
     public void addStaff(@RequestBody AddStaffParameter parameter) throws IOException {
         checkPrivilege(parameter, "canAddStaff");
-        getAuthorizationService().addStaffMember(parameter.getForename(), parameter.getLastname(), parameter.getDepartment(),
-                parameter.getEmail(), parameter.getPassword(), parameter.getRole());
+        StaffMember member = parameter.getStaffMember();
+        getAuthorizationService().addStaffMember(member.getForeName(), member.getLastName(), member.getDepartment(),
+                member.getEmail(), member.getPassword(), member.getRoleName());
     }
 
     @RequestMapping(value = "/removeStaff", method = RequestMethod.DELETE)
@@ -54,7 +55,7 @@ public class AuthorizationController extends GenericController {
             IOException {
         checkPrivilege(authorizationToken, "canListStaff");
         List<StaffMember> staffMembers = getAuthorizationService().getStaff().stream().map(user ->
-            new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId())
+            new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId(), user.getDepartment())
         ).collect(Collectors.toList());
         return new ListStaffResponse(staffMembers);
     }

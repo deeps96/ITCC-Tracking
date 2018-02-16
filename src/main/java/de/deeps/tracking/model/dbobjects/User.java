@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 public class User {
 
-    private String department, email, hashedPassword, forename, id, lastname,roleID;
+    private String department, email, hashedPassword, forename, id, lastname, roleID;
 
     public User() {}
 

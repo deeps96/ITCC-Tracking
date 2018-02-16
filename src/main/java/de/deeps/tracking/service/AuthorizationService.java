@@ -84,7 +84,6 @@ public class AuthorizationService {
 
     public boolean isAdmin(String authorizationToken) throws IOException {
         Role role = getRoleByAuthorizationToken(authorizationToken);
-        System.out.println(role);
         return role.getName().equals(getADMIN_ROLE());
     }
 

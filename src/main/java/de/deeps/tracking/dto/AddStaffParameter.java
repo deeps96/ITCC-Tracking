@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class AddStaffParameter extends AuthorizationParameter{
 
-    private String forename, lastname, department, email, password, role;
+    private StaffMember staffMember;
 }

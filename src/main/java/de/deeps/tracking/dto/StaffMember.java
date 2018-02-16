@@ -7,12 +7,13 @@ import lombok.Setter;
 @Setter
 public class StaffMember {
 
-    private String foreName, lastName, email, id;
+    private String department, email, foreName, id, lastName, password, roleName;
 
-    public StaffMember(String foreName, String lastName, String email, String id) {
+    public StaffMember(String foreName, String lastName, String email, String id, String department) {
        setForeName(foreName);
        setLastName(lastName);
        setEmail(email);
        setId(id);
+       setDepartment(department);
     }
 }
