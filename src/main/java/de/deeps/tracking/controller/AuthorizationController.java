@@ -50,8 +50,8 @@ public class AuthorizationController extends GenericController {
     }
 
     @RequestMapping(value = "/listStaff", method = RequestMethod.GET, produces = "application/json")
-    public ListStaffResponse listStaff(@RequestParam(value="authorizationToken")
-                                                   String authorizationToken) throws IOException {
+    public ListStaffResponse listStaff(@RequestParam(value="authorizationToken") String authorizationToken) throws
+            IOException {
         checkPrivilege(authorizationToken, "canListStaff");
         List<StaffMember> staffMembers = getAuthorizationService().getStaff().stream().map(user ->
             new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId())
