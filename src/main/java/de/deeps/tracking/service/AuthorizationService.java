@@ -91,6 +91,13 @@ public class AuthorizationService {
         return role.getName().equals(getSTAFF_ROLE());
     }
 
+    public void removeAuthorizationToken(String authorizationToken) {
+        AuthorizationToken token = getAuthorizationTokensRepository().findByToken(authorizationToken);
+        if (token != null) {
+            getAuthorizationTokensRepository().delete(token);
+        }
+    }
+
     //actions
     private AuthorizationToken getAuthorizationToken(String authorizationToken) {
         AuthorizationToken token = getAuthorizationTokensRepository().findByToken(authorizationToken);
