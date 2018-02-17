@@ -6,6 +6,8 @@ import {ROUTER_CONFIG} from "../assets/config";
 import {RouterConfig} from "./config";
 import {forEach} from "@angular/router/src/utils/collection";
 
+declare var Materialize: any;
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
@@ -31,15 +33,20 @@ export class AuthGuard implements CanActivate {
         }).map(allowed => {
           if (!allowed) {
             this.router.navigate(['']);
+            this.showForbiddenToast(route);
           }
           return allowed;
-        });
+        }).subscribe();
       }
     });
 
   }
 
   //actions
+  private showForbiddenToast(url: string): void {
+    Materialize.toast('You are not allowed to access the page ' + url, 3000, "");
+  }
+
   private canAnonymActivate(route: string): boolean {
     if (!this.routeMatchesRegexFromList(this.routerConfig.allowedUserRoutes, route)) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: route }});

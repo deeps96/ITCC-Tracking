@@ -31,6 +31,7 @@ export class CreateParcelComponent implements OnInit {
     this.parcelManagementService
       .createParcel(this.departure, this.destination, this.selectedParcelType)
       .subscribe(response => {
+        //Todo redirect to response
         alert(response);
       });
   }
