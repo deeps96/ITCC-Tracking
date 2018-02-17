@@ -29,4 +29,4 @@ export const ROUTE_CONFIG: Routes = [
   }
 ];
 
-export const AppRoutesModule = RouterModule.forRoot(ROUTE_CONFIG, {enableTracing: true});
+export const AppRoutesModule = RouterModule.forRoot(ROUTE_CONFIG);
