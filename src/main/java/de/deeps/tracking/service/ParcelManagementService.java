@@ -119,7 +119,7 @@ public class ParcelManagementService {
         if (entry == null) { return null; }
         List<Station> stations = convertDBStationsToStations(entry.getStations());
         ParcelType parcelType = getParcelTypeRepository().findOne(entry.getParcelTypeID());
-        if (parcelType != null) {
+        if (parcelType == null) {
             return null;
         }
         return new Parcel(stations, entry.getDeparture(), entry.getDestination(), entry.getHandOverTimestamp(),

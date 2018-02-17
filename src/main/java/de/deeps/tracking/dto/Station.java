@@ -11,6 +11,8 @@ public class Station {
     private Location location;
     private String actionDescription, notes, transportationMode;
 
+    public Station() {}
+
     public Station(Location location, String actionDescription, String notes, String transportationMode) {
         setLocation(location);
         setActionDescription(actionDescription);

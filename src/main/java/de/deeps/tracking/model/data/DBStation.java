@@ -14,6 +14,8 @@ public class DBStation {
     private String actionDescriptionID, transportationModeID;
     private String notes;
 
+    public DBStation() {}
+
     public DBStation(Station station){
         setLocation(station.getLocation());
         setNotes(station.getNotes());
