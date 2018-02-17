@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import {AuthorizationService} from "./authorization.service";
 import {ROUTER_CONFIG} from "../assets/config";
 import {RouterConfig} from "./config";
-import {forEach} from "@angular/router/src/utils/collection";
 
 declare var Materialize: any;
 

@@ -12,3 +12,7 @@ export class City {
   name: string;
   zipCode: string;
 }
+
+export class Parcel {
+
+}

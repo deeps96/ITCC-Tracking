@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {Location} from "./parcel-management";
+import {Location, Parcel} from "./parcel-management";
 import {HelperMethods} from "./helper-methods";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
@@ -41,5 +41,9 @@ export class ParcelManagementService {
                     .map(HelperMethods.extractData)
                     .catch(event => this.helperMethods.handleError(event))
                     .map(response => response.parcelTypes);
+  }
+
+  public getParcel(trackingNumber: string): Observable<Parcel> {
+    return null;
   }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {Parcel} from "../parcel-management";
+import {ParcelManagementService} from "../parcel-management.service";
 
 @Component({
   selector: 'app-parcel-details',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParcelDetailsComponent implements OnInit {
 
-  constructor() { }
+  public parcel: Parcel;
+
+  constructor(private route: ActivatedRoute, private parcelManagementService: ParcelManagementService) { }
 
   ngOnInit() {
+    this.parcel = this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.parcelManagementService.getParcel(params.get('trackingNumber')));
   }
 
 }
