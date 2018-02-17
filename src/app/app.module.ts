@@ -15,6 +15,7 @@ import {ParcelManagementService} from "./parcel-management.service";
 import { StaffManagementComponent } from './staff-management/staff-management.component';
 import {AuthGuard} from "./auth.guard";
 import {StaffManagementService} from "./staff-management.service";
+import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {StaffManagementService} from "./staff-management.service";
     LoginComponent,
     HomeComponent,
     CreateParcelComponent,
-    StaffManagementComponent
+    StaffManagementComponent,
+    ParcelDetailsComponent
   ],
   imports: [
     BrowserModule,
