@@ -4,6 +4,7 @@ import de.deeps.tracking.model.data.Location;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,12 @@ public class Parcel {
     private Location departure, destination;
     private long handOverTimestamp;
     private String trackingNumber, parcelTypeName;
+
+    public Parcel() {}
+
+    public Parcel(Location departure, Location destination, long handOverTimestamp, String parcelTypeName) {
+        this(new LinkedList<>(), departure, destination, handOverTimestamp, null, parcelTypeName);
+    }
 
     public Parcel(List<Station> stations, Location departure, Location destination, long handOverTimestamp, String
             trackingNumber, String parcelTypeName) {

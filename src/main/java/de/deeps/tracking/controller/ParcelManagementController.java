@@ -31,8 +31,9 @@ public class ParcelManagementController extends GenericController {
 
     @RequestMapping(value = "/createParcel", method = RequestMethod.POST,  produces = "application/json")
     public CreateParcelResponse createParcel(@RequestBody CreateParcelParameter parameter) throws IOException {
-        String trackingNumber = getParcelManagementService().createParcel(parameter.getParcelTypeName(), parameter.getDeparture(),
-                parameter.getDestination(), parameter.getHandOverTimestamp());
+        Parcel parcel = parameter.getParcel();
+        String trackingNumber = getParcelManagementService().createParcel(parcel.getParcelTypeName(), parcel.getDeparture(),
+                parcel.getDestination(), parcel.getHandOverTimestamp());
         if (trackingNumber == null) {
             throw new IOException("Required parameter missing!");
         }
