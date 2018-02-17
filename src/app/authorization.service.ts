@@ -74,7 +74,7 @@ export class AuthorizationService {
   }
 
   //actions
-  private static hashPassword(rawPassword: string): string {
+  public static hashPassword(rawPassword: string): string {
     return shajs('sha256').update(rawPassword).digest('hex');
   }
 

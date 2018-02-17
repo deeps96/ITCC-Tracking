@@ -37,6 +37,7 @@ export class StaffManagementService {
   }
 
   public addStaffMember(staffMember: StaffMember): Observable<any> {
+    staffMember.password = AuthorizationService.hashPassword(staffMember.password);
     const body = {
       authorizationToken: this.authorizationService.getToken(),
       staffMember: staffMember
