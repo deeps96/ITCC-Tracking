@@ -1,11 +1,9 @@
 package de.deeps.tracking.controller;
 
 import de.deeps.tracking.dto.*;
-import de.deeps.tracking.model.Authorization;
 import de.deeps.tracking.model.dbobjects.ActionDescription;
 import de.deeps.tracking.model.dbobjects.ParcelType;
 import de.deeps.tracking.model.dbobjects.TransportationMode;
-import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import de.deeps.tracking.service.ParcelManagementService;
 import lombok.AccessLevel;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,4 +68,10 @@ public class ParcelManagementController extends GenericController {
                 (ActionDescription::getAction).collect(Collectors.toList());
         return new ListActionDescriptionsResponse(actionDescriptions);
     }
+
+    @RequestMapping(value = "/getParcel", method = RequestMethod.GET, produces = "application/json")
+    public GetParcelResponse getParcel(@RequestParam(value="trackingNumber") String trackingNumber) throws IOException {
+        return new GetParcelResponse(getParcelManagementService().getParcel(trackingNumber));
+    }
+
 }

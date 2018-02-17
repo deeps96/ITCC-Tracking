@@ -1,5 +1,6 @@
 package de.deeps.tracking.service;
 
+import de.deeps.tracking.dto.Parcel;
 import de.deeps.tracking.dto.Station;
 import de.deeps.tracking.model.ParcelManagement;
 import de.deeps.tracking.model.data.DBStation;
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -88,6 +89,12 @@ public class ParcelManagementService {
         return getActionDescriptionRepository().findAll();
     }
 
+    public Parcel getParcel(String trackingNumber) throws IOException {
+        ParcelEntry entry = getParcelRepository().findByTrackingNumber(trackingNumber);
+        if (entry == null) { throw new IOException("No parcel found for given tracking number"); }
+        return convertParcelEntryToParcel(entry);
+    }
+
     //actions
     private synchronized void completeParcelInformation(ParcelEntry parcelEntry, String parcelTypeName) {
         ParcelType parcelType = getParcelTypeRepository().findByName(parcelTypeName);
@@ -95,6 +102,7 @@ public class ParcelManagementService {
         getParcelManagement().completeParcelInformation(parcelEntry, parcelType, getParcelRepository().count());
     }
 
+    //conversion
     private DBStation convertStationToDBStation(Station station) {
         DBStation dbStation = new DBStation(station);
         ActionDescription description = getActionDescriptionRepository().findByAction(station.getActionDescription());
@@ -107,4 +115,25 @@ public class ParcelManagementService {
         return dbStation;
     }
 
+    private Parcel convertParcelEntryToParcel(ParcelEntry entry) {
+        if (entry == null) { return null; }
+        List<Station> stations = convertDBStationsToStations(entry.getStations());
+        ParcelType parcelType = getParcelTypeRepository().findOne(entry.getParcelTypeID());
+        if (parcelType != null) {
+            return null;
+        }
+        return new Parcel(stations, entry.getDeparture(), entry.getDestination(), entry.getHandOverTimestamp(),
+                entry.getTrackingNumber(), parcelType.getName());
+    }
+
+    private List<Station> convertDBStationsToStations(List<DBStation> stations) {
+        return stations.stream().map(dbStation -> {
+            ActionDescription actionDescription = getActionDescriptionRepository().findOne(dbStation
+                    .getActionDescriptionID());
+            TransportationMode mode = getTransportationModeRepository().findOne(dbStation.getTransportationModeID());
+            if (actionDescription == null || mode == null) { return null; }
+            return new Station(dbStation.getLocation(), actionDescription.getAction(), dbStation.getNotes(), mode
+                    .getMode());
+        }).collect(Collectors.toList());
+    }
 }
