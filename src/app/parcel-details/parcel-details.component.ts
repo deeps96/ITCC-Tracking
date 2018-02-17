@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {Parcel} from "../parcel-management";
 import {ParcelManagementService} from "../parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
+import LatLngLiteral = google.maps.LatLngLiteral;
 
 @Component({
   selector: 'app-parcel-details',
@@ -11,6 +12,9 @@ import MapOptions = google.maps.MapOptions;
   styleUrls: ['./parcel-details.component.css']
 })
 export class ParcelDetailsComponent implements OnInit {
+
+  @ViewChild('map')
+  private mapComponent: any;
 
   private center = {lat: 52.040055, lng: 8.540920};
   public mapOptions: MapOptions = {
@@ -216,6 +220,7 @@ export class ParcelDetailsComponent implements OnInit {
     ]
   };
   public parcel: Parcel;
+  public positions: LatLngLiteral[];
 
   constructor(private route: ActivatedRoute, private parcelManagementService: ParcelManagementService) { }
 
@@ -223,7 +228,36 @@ export class ParcelDetailsComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.parcelManagementService.getParcel(params.get('trackingNumber')))
-      .subscribe(parcel => this.parcel = parcel);
+      .subscribe(parcel => {
+        this.parcel = parcel;
+        this.loadPositions();
+      });
+  }
+
+  public onMarkerInit(marker): void {
+    const bounds = new google.maps.LatLngBounds();
+    this.positions.forEach(marker => bounds.extend(marker));
+    this.mapComponent.map.fitBounds(bounds);
+  }
+
+  private loadPositions(): void {
+    this.positions = [];
+    let addresses: string[] = this.buildAddressArrayForStations();
+    addresses.forEach(address => {
+      this.mapComponent.geoCoder.geocode({address: address})
+        .map(response => response[0])
+        .subscribe(response =>
+          this.positions.push({lat: response.geometry.location.lat(), lng: response.geometry.location.lng()}));
+    });
+  }
+
+  private buildAddressArrayForStations(): string[] {
+    let addresses: string[] = [];
+    addresses.push(this.parcel.departure.road + ', ' + this.parcel.departure.city.name + ' ' + this.parcel.departure.country);
+    this.parcel.stations.forEach(station =>
+      addresses.push(station.location.road + ', ' + station.location.city.name + ' ' + station.location.country));
+    addresses.push(this.parcel.destination.road + ', ' + this.parcel.destination.city.name + ' ' + this.parcel.destination.country);
+    return addresses;
   }
 
 }

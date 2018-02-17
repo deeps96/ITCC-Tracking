@@ -1,1 +1,6 @@
-<ngui-map [options]="mapOptions"></ngui-map>
+<ngui-map #map [options]="mapOptions">
+    <marker *ngFor="let position of positions; let iPosition = index"
+            [position]="position"
+            (initialized$)="onMarkerInit($event);">
+    </marker>
+</ngui-map>
