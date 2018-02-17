@@ -14,6 +14,7 @@ export class AppComponent {
 
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
+  public showNav: boolean;
 
   constructor(private router: Router, private authenticationService: AuthorizationService) {
     router.events
@@ -21,10 +22,15 @@ export class AppComponent {
       .subscribe((event: NavigationStart) => {
         this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
         this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
+        this.showNav = !AppComponent.isParcelDetailPage(event);
       });
   }
 
   //actions
+  private static isParcelDetailPage(event: NavigationStart): boolean {
+    return event.url.startsWith('/track');
+  }
+
   private static isLoginPage(event: NavigationStart): boolean {
     return event.url == '/login';
   }

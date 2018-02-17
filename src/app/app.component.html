@@ -1,4 +1,4 @@
-<nav class="transparent z-depth-0">
+<nav class="transparent z-depth-0" *ngIf="showNav">
   <div class="nav-wrapper">
     <ul class="right">
       <li *ngIf="showLoginButton"><a [routerLink]="['/login']" class="light-blue-text text-lighten-3">Login</a></li>
