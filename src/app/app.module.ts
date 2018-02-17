@@ -16,6 +16,7 @@ import { StaffManagementComponent } from './staff-management/staff-management.co
 import {AuthGuard} from "./auth.guard";
 import {StaffManagementService} from "./staff-management.service";
 import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
+import {NguiMapModule} from "@ngui/map";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ParcelDetailsComponent } from './parcel-details/parcel-details.componen
     FormsModule,
     HttpModule,
     MaterializeModule,
-    AppRoutesModule
+    AppRoutesModule,
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCQLhnDxhB2Gb7CRWLlZvWcYdEqK0GqseI'})
   ],
   providers: [AuthorizationService, AuthGuard, ParcelManagementService, StaffManagementService],
   bootstrap: [AppComponent]

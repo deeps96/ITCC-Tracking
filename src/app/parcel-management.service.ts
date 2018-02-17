@@ -20,14 +20,9 @@ export class ParcelManagementService {
     this.helperMethods = new HelperMethods(authorizationService);
   }
 
-  public createParcel(departure: Location, destination: Location, parcelTypeName: string): Observable<string> {
+  public createParcel(parcel: Parcel): Observable<string> {
     let handOverTimestamp: string = Date.now().toString();
-    const parameter = {
-      parcelTypeName: parcelTypeName,
-      departure: departure,
-      destination: destination,
-      handOverTimestamp: handOverTimestamp
-    };
+    const parameter = {parcel: parcel};
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.routerConfig.serverAddress + '/createParcel', JSON.stringify(parameter), options)
@@ -44,6 +39,10 @@ export class ParcelManagementService {
   }
 
   public getParcel(trackingNumber: string): Observable<Parcel> {
-    return null;
+    const params = {trackingNumber: trackingNumber}
+    return this.http.get(this.routerConfig.serverAddress + '/getParcel', {params: params})
+                    .map(HelperMethods.extractData)
+                    .catch(event => this.helperMethods.handleError(event))
+                    .map(response => response.parcel);
   }
 }

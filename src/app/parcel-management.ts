@@ -14,5 +14,22 @@ export class City {
 }
 
 export class Parcel {
+  stations?: Station[];
+  departure: Location;
+  destination: Location;
+  handOverTimestamp: string;
+  trackingNumber?: string;
+  parcelTypeName: string;
 
+  constructor() {
+    this.departure = new Location();
+    this.destination = new Location();
+  }
+}
+
+export class Station {
+  location: Location;
+  actionDescription: string;
+  notes: string;
+  transportationMode: string;
 }
