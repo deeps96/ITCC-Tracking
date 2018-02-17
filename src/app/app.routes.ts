@@ -16,7 +16,7 @@ export const ROUTE_CONFIG: Routes = [
     component: StaffManagementComponent
   },
   {
-    path: 'track:trackingNumber',
+    path: 'track/:trackingNumber',
     component: ParcelDetailsComponent
   },
   {
