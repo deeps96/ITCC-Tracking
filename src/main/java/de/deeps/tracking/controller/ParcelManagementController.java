@@ -68,7 +68,7 @@ public class ParcelManagementController extends GenericController {
     @RequestMapping(value = "/listActionDescriptions", method = RequestMethod.GET, produces = "application/json")
     public ListActionDescriptionsResponse listActionDescriptions() {
         List<String> actionDescriptions = getParcelManagementService().getActionDescriptions().stream().map
-                (ActionDescription::getAction).collect(Collectors.toList());;
+                (ActionDescription::getAction).collect(Collectors.toList());
         return new ListActionDescriptionsResponse(actionDescriptions);
     }
 }

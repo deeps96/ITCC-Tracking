@@ -1,5 +1,6 @@
 package de.deeps.tracking.service;
 
+import de.deeps.tracking.model.Authorization;
 import de.deeps.tracking.model.dbobjects.Role;
 import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.repository.RoleRepository;
@@ -37,6 +38,7 @@ public class StaffManagementService extends AbstractUserService{
             throw new IOException("Role unkown");
         }
         User newStaff = new User(department, email, password, forename, lastname);
+        newStaff.setHashedPassword(Authorization.hashPassword(password));
         newStaff.setRoleID(role.getId());
         getUserRepository().save(newStaff);
     }
