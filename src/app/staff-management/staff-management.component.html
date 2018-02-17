@@ -25,7 +25,8 @@
               <td>{{staffMember.email}}</td>
               <td>{{staffMember.department}}</td>
               <td class="center">
-                <a class="modal-trigger" (click)="openDeleteStaffModal(staffMember)" href="#deleteStaffModal">
+                <a materialize="tooltip" class="modal-trigger tooltipped" (click)="openDeleteStaffModal(staffMember)" href="#deleteStaffModal"
+                   data-delay="50" data-tooltip="Delete staff member" data-position="bottom">
                   <i class="material-icons deleteIcon blue-grey-text">delete</i>
                 </a>
               </td>

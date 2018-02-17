@@ -57,7 +57,7 @@ export class AuthorizationService {
     return this.http.get(this.routerConfig.serverAddress + '/isStaff', {params: params})
                     .map(HelperMethods.extractData)
                     .catch(event => this.helperMethods.handleError(event))
-                    .map(response => response.admin);
+                    .map(response => response.staff);
   }
 
   public isAuthenticated(): boolean {

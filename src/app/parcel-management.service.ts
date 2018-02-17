@@ -33,8 +33,13 @@ export class ParcelManagementService {
     return this.http.post(this.routerConfig.serverAddress + '/createParcel', JSON.stringify(parameter), options)
       .map(HelperMethods.extractData)
       .catch(event => this.helperMethods.handleError(event))
-      .map(response => {
-        return response.trackingNumber;
-      });
+      .map(response => response.trackingNumber);
+  }
+
+  public listParcelTypes(): Observable<string[]> {
+    return this.http.get(this.routerConfig.serverAddress + '/listParcelTypes')
+                    .map(HelperMethods.extractData)
+                    .catch(event => this.helperMethods.handleError(event))
+                    .map(response => response.parcelTypes);
   }
 }

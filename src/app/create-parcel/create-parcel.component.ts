@@ -20,7 +20,7 @@ export class CreateParcelComponent implements OnInit {
     this.departure = new Location();
     this.destination = new Location();
     this.selectedParcelType = null;
-    this.parcelTypeNames = ['Basic parcel'];
+    this.parcelManagementService.listParcelTypes().subscribe(response => this.parcelTypeNames = response);
   }
 
   public parcelTypeChanged(selectedType: any): void {
