@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,22 +20,18 @@ import java.util.List;
 @Service
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class AuthorizationService {
+public class AuthorizationService extends AbstractUserService{
 
-    @Getter(AccessLevel.PRIVATE) private static final String STAFF_ROLE = "Staff", ADMIN_ROLE = "Admin";
 
     private AuthorizationTokensRepository authorizationTokensRepository;
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
 
     //initialization
     @Autowired
     public AuthorizationService(UserRepository userRepository,
                                 AuthorizationTokensRepository authorizationTokensRepository, RoleRepository
                                             roleRepository) {
-        setUserRepository(userRepository);
+        super(roleRepository, userRepository);
         setAuthorizationTokensRepository(authorizationTokensRepository);
-        setRoleRepository(roleRepository);
     }
 
     //convenience
@@ -50,35 +47,10 @@ public class AuthorizationService {
         return getUserRepository().findByEmailAndHashedPassword(email, Authorization.hashPassword(password));
     }
 
-    public void addStaffMember(String forename, String lastname, String department, String email, String password) throws IOException {
-        Role role = getRoleRepository().findByName(getSTAFF_ROLE());
-        if (role == null) {
-            throw new IOException("Role unkown");
-        }
-        User newStaff = new User(department, email, password, forename, lastname);
-        newStaff.setRoleID(role.getId());
-        getUserRepository().save(newStaff);
-    }
-
     public String generateAuthenticationToken(String userID) {
         String token = Authorization.generateNewToken();
         getAuthorizationTokensRepository().save(new AuthorizationToken(userID, token));
         return token;
-    }
-
-    public void removeStaffMember(String staffID) throws IOException {
-        if (getUserRepository().findOne(staffID) == null) {
-            throw new IOException("Staff does not exists");
-        }
-        getUserRepository().delete(staffID);
-    }
-
-    public List<User> getStaff() throws IOException {
-        Role staffRole = getRoleRepository().findByName(getSTAFF_ROLE());
-        if (staffRole == null) {
-            throw new IOException("Internal server error - Role " + getSTAFF_ROLE() + " does not exist");
-        }
-        return getUserRepository().findByRoleID(staffRole.getId());
     }
 
     public boolean isAdmin(String authorizationToken) throws IOException {
