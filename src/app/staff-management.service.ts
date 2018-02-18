@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Headers, Http, RequestOptions} from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {RouterConfig} from "./config";
 import {ROUTER_CONFIG} from "../assets/config";
 import {Observable} from "rxjs/Rx";
@@ -36,7 +36,7 @@ export class StaffManagementService {
       .catch(event => this.helperMethods.handleError(event));
   }
 
-  public addStaffMember(staffMember: StaffMember): Observable<any> {
+  public addStaffMember(staffMember: StaffMember): Observable<Response> {
     staffMember.password = AuthorizationService.hashPassword(staffMember.password);
     const body = {
       authorizationToken: this.authorizationService.getToken(),

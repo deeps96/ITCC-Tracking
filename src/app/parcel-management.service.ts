@@ -31,13 +31,6 @@ export class ParcelManagementService {
       .map(response => response.trackingNumber);
   }
 
-  public listParcelTypes(): Observable<string[]> {
-    return this.http.get(this.routerConfig.serverAddress + '/listParcelTypes')
-                    .map(HelperMethods.extractData)
-                    .catch(event => this.helperMethods.handleError(event))
-                    .map(response => response.parcelTypes);
-  }
-
   public getParcel(trackingNumber: string): Observable<Parcel> {
     const params = {trackingNumber: trackingNumber}
     return this.http.get(this.routerConfig.serverAddress + '/getParcel', {params: params})

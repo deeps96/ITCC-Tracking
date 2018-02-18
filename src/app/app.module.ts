@@ -19,6 +19,7 @@ import { ParcelDetailsComponent } from './parcel-details/parcel-details.componen
 import {NguiMapModule} from "@ngui/map";
 import {VerticalTimelineModule} from "angular-vertical-timeline";
 import { DataManagementComponent } from './data-management/data-management.component';
+import {DataManagementService} from "./data-management.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,12 @@ import { DataManagementComponent } from './data-management/data-management.compo
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCQLhnDxhB2Gb7CRWLlZvWcYdEqK0GqseI'}),
     VerticalTimelineModule
   ],
-  providers: [AuthorizationService, AuthGuard, ParcelManagementService, StaffManagementService],
+  providers: [
+    AuthorizationService,
+    AuthGuard,
+    DataManagementService,
+    ParcelManagementService,
+    StaffManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

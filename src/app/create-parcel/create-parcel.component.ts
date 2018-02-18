@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Location, Parcel} from "../parcel-management";
 import {ParcelManagementService} from "../parcel-management.service";
 import {Router} from "@angular/router";
+import {DataManagementComponent} from "../data-management/data-management.component";
+import {DataManagementService} from "../data-management.service";
 
 @Component({
   selector: 'app-create-parcel',
@@ -13,11 +15,11 @@ export class CreateParcelComponent implements OnInit {
   public parcelTypeNames: string[];
   public parcel: Parcel;
 
-  constructor(private router: Router, private parcelManagementService: ParcelManagementService) {}
+  constructor(private router: Router, private parcelManagementService: ParcelManagementService, private dataManagementService: DataManagementService) {}
 
   ngOnInit() {
     this.parcel = new Parcel();
-    this.parcelManagementService.listParcelTypes().subscribe(response => this.parcelTypeNames = response);
+    this.dataManagementService.listParcelTypes().subscribe(response => this.parcelTypeNames = response);
   }
 
   public parcelTypeChanged(selectedType: any): void {
