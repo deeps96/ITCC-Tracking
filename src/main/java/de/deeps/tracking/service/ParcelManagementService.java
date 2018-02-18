@@ -78,18 +78,6 @@ public class ParcelManagementService {
         return true;
     }
 
-    public List<ParcelType> getParcelTypes() {
-        return getParcelTypeRepository().findAll();
-    }
-
-    public List<TransportationMode> getTransportationModes() {
-        return getTransportationModeRepository().findAll();
-    }
-
-    public List<ActionDescription> getActionDescriptions() {
-        return getActionDescriptionRepository().findAll();
-    }
-
     public Parcel getParcel(String trackingNumber) throws IOException {
         ParcelEntry entry = getParcelRepository().findByTrackingNumber(trackingNumber);
         if (entry == null) { throw new IOException("No parcel found for given tracking number"); }
