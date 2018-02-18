@@ -30,6 +30,12 @@
             </div>
             <div class="row no-margin">
               <div class="input-field col s12">
+                <input id="departurePerson" type="text" class="validate" name="departurePerson" [(ngModel)]="parcel.departurePersonDetails" required>
+                <label for="departurePerson">Person</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
                 <input id="departureRoad" type="text" class="validate" name="departureRoad" [(ngModel)]="parcel.departure.road" required>
                 <label for="departureRoad">Road</label>
               </div>
@@ -58,6 +64,12 @@
             <div class="row no-margin">
               <div class="input-field col s12">
                 <p class="center-align">Destination</p>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="destinationPerson" type="text" class="validate" name="destinationPerson" [(ngModel)]="parcel.destinationPersonDestails" required>
+                <label for="destinationPerson">Person</label>
               </div>
             </div>
             <div class="row no-margin">
