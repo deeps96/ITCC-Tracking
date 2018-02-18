@@ -17,6 +17,7 @@ import {AuthGuard} from "./auth.guard";
 import {StaffManagementService} from "./staff-management.service";
 import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
 import {NguiMapModule} from "@ngui/map";
+import {VerticalTimelineModule} from "angular-vertical-timeline";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {NguiMapModule} from "@ngui/map";
     HttpModule,
     MaterializeModule,
     AppRoutesModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCQLhnDxhB2Gb7CRWLlZvWcYdEqK0GqseI'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCQLhnDxhB2Gb7CRWLlZvWcYdEqK0GqseI'}),
+    VerticalTimelineModule
   ],
   providers: [AuthorizationService, AuthGuard, ParcelManagementService, StaffManagementService],
   bootstrap: [AppComponent]

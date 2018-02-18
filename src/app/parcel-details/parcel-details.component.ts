@@ -186,9 +186,7 @@ export class ParcelDetailsComponent implements OnInit {
   }
 
   private loadPositions(): void {
-    if (!google) {
-      return;
-    }
+    if (!google) { return; }
     this.positions = [];
     this.buildAddressArrayForStations();
     this.addresses.forEach(address => {
