@@ -21,6 +21,7 @@ import {VerticalTimelineModule} from "angular-vertical-timeline";
 import { DataManagementComponent } from './data-management/data-management.component';
 import {DataManagementService} from "./data-management.service";
 import { ParcelTypeComponent } from './parcel-type/parcel-type.component';
+import { ActionDescriptionComponent } from './action-description/action-description.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ParcelTypeComponent } from './parcel-type/parcel-type.component';
     StaffManagementComponent,
     ParcelDetailsComponent,
     DataManagementComponent,
-    ParcelTypeComponent
+    ParcelTypeComponent,
+    ActionDescriptionComponent
   ],
   imports: [
     BrowserModule,
