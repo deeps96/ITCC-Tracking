@@ -1,4 +1,7 @@
-# ITCC-Tracking
-This project was created based on the requirement of the IT-Talents Code Competition 02/2018. The goal was to develop a tracking web service.
+# Used technologies/ frameworks etc.
+The backend is based on a Java stack and uses mainly the Spring Boot Framework for the REST-Interface of the tracking service.
+Furhtermore the project uses Lombok to generate Getters & Setters during compiling in order to increase readability.
+SonarLint is used as Lint checker.
 
-For more details check out this link: https://www.it-talents.de/foerderung/code-competition/code-competition-hermes
+## IDE
+I used IntelliJ to develop - if you want to compile the project you need to install the Lombok plugin first.
