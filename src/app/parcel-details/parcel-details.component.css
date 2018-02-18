@@ -1,3 +1,17 @@
 ngui-map {
-  height: 33vh;
+  height: 50vh;
+}
+
+#background {
+  min-height: 50vh;
+  width: 100vw;
+}
+
+.counterMarker {
+  font-size: 1.2rem;
+  padding: 0 10px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #607d8b;
+  color: #eceff1;
 }

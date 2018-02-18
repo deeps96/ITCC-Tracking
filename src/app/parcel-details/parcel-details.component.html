@@ -1,6 +1,18 @@
 <ngui-map #map [options]="mapOptions">
-    <marker *ngFor="let position of positions; let iPosition = index"
-            [position]="position"
+    <custom-marker *ngFor="let address of addresses; let iAddress = index"
+            [position]="address"
             (initialized$)="onMarkerInit($event);">
-    </marker>
+      <div class="counterMarker">{{iAddress + 1}}</div>
+    </custom-marker>
 </ngui-map>
+<div id="background" class="blue-grey lighten-5" *ngIf="parcel">
+  <div class="container">
+    <div class="row">
+      <div class="col s8 offset-s2">
+        <div class="card-panel light-blue lighten-5 center blue-grey-text">
+          Tracking number: {{parcel.trackingNumber}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
