@@ -4,9 +4,9 @@
 <section id="bodySection" class="blue-grey lighten-5">
   <section id="searchSection">
     <div id="searchContainer" class="container">
-      <form action="/search" method="get" class="white" #searchForm>
+      <form (ngSubmit)="onSubmit()" class="white" #searchForm>
         <div class="input-field">
-          <input id="search" type="search" placeholder="Enter your tracking number" (focus)="hideCreateNewSection();" required>
+          <input #search id="search" type="search" placeholder="Enter your tracking number" (focus)="hideCreateNewSection();" required>
           <label id="searchIcon" class="label-icon" for="search">
             <i class="material-icons">search</i>
           </label>

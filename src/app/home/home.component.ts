@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -9,19 +10,24 @@ import * as $ from 'jquery';
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild('createNewSection') private createNewSection : ElementRef;
+  @ViewChild ('search') private search: ElementRef;
+  @ViewChild('createNewSection') private createNewSection: ElementRef;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  private showCreateNewSection(): void {
+  public onSubmit(): void {
+    this.router.navigate(['track', this.search.nativeElement.value]);
+  }
+
+  public showCreateNewSection(): void {
     this.createNewSection.nativeElement.style.display = 'block';
     $("html, body").animate({ scrollTop: $('#createNewSection').offset().top }, 1000);
   }
 
-  private hideCreateNewSection(): void {
+  public hideCreateNewSection(): void {
     this.createNewSection.nativeElement.style.display = 'none';
   }
 
