@@ -82,7 +82,7 @@ td {
   }
 }
 ::ng-deep vertical-timeline .timeline-img {
-  position: absolute !important;
+  position: relative !important;
   top: 0 !important;
   left: 0 !important;
   width: 40px !important;
@@ -104,6 +104,9 @@ td {
   ::ng-deep vertical-timeline .timeline-img {
     font-size: 17px;
   }
+  ::ng-deep vertical-timeline .timeline-img p {
+    padding-top: 18px !important;
+  }
   ::ng-deep vertical-timeline .cssanimations .timeline-img.is-hidden {
     visibility: hidden !important;
   }
@@ -121,6 +124,7 @@ td {
   border-radius: 0.25em !important;
   padding: 1em !important;
   box-shadow: 0 3px 0 #d7e4ed !important;
+  margin-top: -60px;
   margin-bottom: 20px;
 }
 ::ng-deep vertical-timeline .timeline-content:after {
