@@ -1,7 +1,9 @@
-<a materialize="tooltip" [routerLink]="['']" class="tooltipped" data-delay="50" data-tooltip="Return to home" data-position="right">
-  <i class="material-icons medium left light-blue-text text-lighten-3">chevron_left</i>
-</a>
-<h2 *ngIf="parcel" class="center-align blue-grey-text">Tracking {{parcel.trackingNumber}}</h2>
+<div class="white">
+  <a materialize="tooltip" [routerLink]="['']" class="tooltipped" data-delay="50" data-tooltip="Return to home" data-position="right">
+    <i class="material-icons medium left light-blue-text text-lighten-3">chevron_left</i>
+  </a>
+  <h3 *ngIf="parcel" class="center-align blue-grey-text">Tracking {{parcel.trackingNumber}}</h3>
+</div>
 <ngui-map #map [options]="mapOptions" (mapReady$)="onMapReady($event)">
     <custom-marker *ngFor="let address of addresses; let iAddress = index"
             [position]="address"
@@ -24,19 +26,9 @@
     </div>
     <div class="row">
       <vertical-timeline>
-
-        <!-- Add some cards to the timeline. It works with *ngFor too -->
-
-        <!-- If no value is passed for the date, the current time is used. -->
-        <vertical-timeline-card>
-          <h1>Today</h1>
+        <vertical-timeline-card *ngFor="let station of parcel.stations" [dateValue]="station.timestamp">
+          <h2>{{station.actionDescription}}</h2>
         </vertical-timeline-card>
-
-        <!-- tomorrow = new Date(2017, 9, 20, 14,34); -->
-        <vertical-timeline-card [dateValue]="tomorrow">
-          <h1>Tomorrow</h1>
-        </vertical-timeline-card>
-
       </vertical-timeline>
     </div>
   </div>

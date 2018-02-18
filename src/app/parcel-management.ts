@@ -32,4 +32,5 @@ export class Station {
   actionDescription: string;
   notes: string;
   transportationMode: string;
+  timestamp: number;
 }
