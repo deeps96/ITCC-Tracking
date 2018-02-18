@@ -17,6 +17,8 @@ export class AppComponent {
   public backendRunning: boolean = true;
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
+  public showDataButton: boolean;
+  public showStaffButton: boolean;
   public showNav: boolean;
 
   constructor(private router: Router, private authenticationService: AuthorizationService) {
@@ -26,6 +28,12 @@ export class AppComponent {
         this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
         this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
         this.showNav = !AppComponent.isParcelDetailPage(event);
+        if (this.isLoggedIn()) {
+          this.authenticationService.isAdmin().subscribe(isAdmin => {
+            this.showDataButton = !AppComponent.isDataPage(event) && isAdmin;
+            this.showStaffButton = !AppComponent.isStaffPage(event) && isAdmin;
+          })
+        }
       });
     authenticationService.isBackendRunning()
       .timeout(3000)
@@ -37,12 +45,20 @@ export class AppComponent {
   }
 
   //actions
+  private static isStaffPage(event: NavigationStart): boolean {
+    return event.url.startsWith('/staff');
+  }
+
+  private static isDataPage(event: NavigationStart): boolean {
+    return event.url.startsWith('/data');
+  }
+
   private static isParcelDetailPage(event: NavigationStart): boolean {
     return event.url.startsWith('/track');
   }
 
   private static isLoginPage(event: NavigationStart): boolean {
-    return event.url == '/login';
+    return event.url.startsWith('/login');
   }
 
   private isLoggedIn(): boolean {
