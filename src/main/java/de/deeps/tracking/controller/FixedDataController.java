@@ -70,4 +70,26 @@ public class FixedDataController extends GenericController {
         checkPrivilege(parameter, "canAddParcelType");
         getFixedDataService().addParcelType(parameter.getKey(), parameter.getType());
     }
+
+    @RequestMapping(value = "/removeTransportationMode", method = RequestMethod.DELETE)
+    public void removeTransportationMode(@RequestParam(value="authorizationToken") String authorizationToken,
+                                      @RequestParam(value="mode") String mode) throws IOException {
+        checkPrivilege(authorizationToken, "canRemoveTransportationMode");
+        getFixedDataService().removeTransportationMode(mode);
+    }
+
+    @RequestMapping(value = "/removeActionDescription", method = RequestMethod.DELETE)
+    public void removeActionDescription(@RequestParam(value="authorizationToken") String authorizationToken,
+                                      @RequestParam(value="action") String action) throws IOException {
+        checkPrivilege(authorizationToken, "canRemoveActionDescription");
+        getFixedDataService().removeActionDescription(action);
+    }
+
+    @RequestMapping(value = "/removeParcelType", method = RequestMethod.DELETE)
+    public void removeParcelType(@RequestParam(value="authorizationToken") String authorizationToken,
+                                        @RequestParam(value="type") String type) throws IOException {
+        checkPrivilege(authorizationToken, "canRemoveParcelType");
+        getFixedDataService().removeParcelType(type);
+    }
+
 }

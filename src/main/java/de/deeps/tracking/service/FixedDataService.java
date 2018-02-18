@@ -83,4 +83,28 @@ public class FixedDataService {
         }
         getParcelTypeRepository().save(parcelType);
     }
+
+    public void removeTransportationMode(String mode) {
+        TransportationMode transportationMode = getTransportationModeRepository().findByMode(mode);
+        if (transportationMode != null) {
+            transportationMode.setRemoved(true);
+            getTransportationModeRepository().save(transportationMode);
+        }
+    }
+
+    public void removeActionDescription(String action) {
+        ActionDescription actionDescription = getActionDescriptionRepository().findByAction(action);
+        if (actionDescription != null) {
+            actionDescription.setRemoved(true);
+            getActionDescriptionRepository().save(actionDescription);
+        }
+    }
+
+    public void removeParcelType(String type) {
+        ParcelType parcelType = getParcelTypeRepository().findByName(type);
+        if (parcelType != null) {
+            parcelType.setRemoved(true);
+            getParcelTypeRepository().save(parcelType);
+        }
+    }
 }
