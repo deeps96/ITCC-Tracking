@@ -12,6 +12,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -43,4 +45,42 @@ public class FixedDataService {
         return getActionDescriptionRepository().findAll();
     }
 
+    public void addTransportationMode(String mode) throws IOException {
+        TransportationMode transportationMode = getTransportationModeRepository().findByMode(mode);
+        if (transportationMode != null) {
+            if (!transportationMode.isRemoved()) {
+                throw new IOException("Transportation mode is already existing!");
+            }
+            transportationMode.setRemoved(false);
+        } else {
+            transportationMode = new TransportationMode(mode);
+        }
+        getTransportationModeRepository().save(transportationMode);
+    }
+
+    public void addActionDescription(String action) throws IOException {
+        ActionDescription actionDescription = getActionDescriptionRepository().findByAction(action);
+        if (actionDescription != null) {
+            if (!actionDescription.isRemoved()) {
+                throw new IOException("Action description is already existing!");
+            }
+            actionDescription.setRemoved(false);
+        } else {
+            actionDescription = new ActionDescription(action);
+        }
+        getActionDescriptionRepository().save(actionDescription);
+    }
+
+    public void addParcelType(String key, String type) throws IOException {
+        ParcelType parcelType = getParcelTypeRepository().findByName(type);
+        if (parcelType != null) {
+            if (!parcelType.isRemoved()) {
+                throw new IOException("Parcel type is already existing!");
+            }
+            parcelType.setRemoved(false);
+        } else {
+            parcelType = new ParcelType(type, key);
+        }
+        getParcelTypeRepository().save(parcelType);
+    }
 }

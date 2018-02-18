@@ -1,8 +1,6 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.ListActionDescriptionsResponse;
-import de.deeps.tracking.dto.ListParcelTypesResponse;
-import de.deeps.tracking.dto.ListTransportationModesResponse;
+import de.deeps.tracking.dto.*;
 import de.deeps.tracking.model.dbobjects.ActionDescription;
 import de.deeps.tracking.model.dbobjects.ParcelType;
 import de.deeps.tracking.model.dbobjects.TransportationMode;
@@ -12,11 +10,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,5 +48,26 @@ public class FixedDataController extends GenericController {
         List<String> actionDescriptions = getFixedDataService().getActionDescriptions().stream().map
                 (ActionDescription::getAction).collect(Collectors.toList());
         return new ListActionDescriptionsResponse(actionDescriptions);
+    }
+
+    @RequestMapping(value = "/addTransportationMode", method = RequestMethod.POST)
+    public void addTransportationMode(@RequestBody AddTransportationModeParameter parameter) throws
+            IOException {
+        checkPrivilege(parameter, "canAddTransportationMode");
+        getFixedDataService().addTransportationMode(parameter.getMode());
+    }
+
+    @RequestMapping(value = "/addActionDescription", method = RequestMethod.POST)
+    public void addActionDescription(@RequestBody AddActionDescriptionParameter parameter) throws
+            IOException {
+        checkPrivilege(parameter, "canAddActionDescription");
+        getFixedDataService().addActionDescription(parameter.getActionDescription());
+    }
+
+    @RequestMapping(value = "/addParcelType", method = RequestMethod.POST)
+    public void addParcelType(@RequestBody AddParcelTypeParameter parameter) throws
+            IOException {
+        checkPrivilege(parameter, "canAddParcelType");
+        getFixedDataService().addParcelType(parameter.getKey(), parameter.getType());
     }
 }

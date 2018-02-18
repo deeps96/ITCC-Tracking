@@ -10,11 +10,18 @@ import java.util.IllegalFormatException;
 @Document(collection = "parcel-types")
 @Getter
 @Setter
-public class ParcelType {
+public class ParcelType  extends AbstractFixedData {
 
     @Getter(AccessLevel.PRIVATE) private static final int KEY_LENGTH = 2;
 
     private String id, key, name;
+
+    public ParcelType() {}
+
+    public ParcelType(String name, String key) {
+        setKey(key);
+        setName(name);
+    }
 
     public void setKey(String key) {
         if (!validateKey(key)) {

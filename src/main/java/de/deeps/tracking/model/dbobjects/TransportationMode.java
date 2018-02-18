@@ -7,8 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "transportation-modes")
 @Getter
 @Setter
-public class TransportationMode {
+public class TransportationMode extends AbstractFixedData {
 
     private String id, mode;
 
+    public TransportationMode() {}
+
+    public TransportationMode(String mode) {
+        setMode(mode);
+    }
 }

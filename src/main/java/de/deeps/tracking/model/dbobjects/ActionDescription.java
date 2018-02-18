@@ -7,8 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "action-descriptions")
 @Getter
 @Setter
-public class ActionDescription {
+public class ActionDescription extends AbstractFixedData{
 
     private String action, id;
 
+    public ActionDescription() {}
+
+    public ActionDescription(String action) {
+        setAction(action);
+    }
 }
