@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,15 +33,15 @@ public class FixedDataService {
     }
 
     public List<ParcelType> getParcelTypes() {
-        return getParcelTypeRepository().findAll();
+        return getParcelTypeRepository().findByRemoved(false);
     }
 
     public List<TransportationMode> getTransportationModes() {
-        return getTransportationModeRepository().findAll();
+        return getTransportationModeRepository().findByRemoved(false);
     }
 
     public List<ActionDescription> getActionDescriptions() {
-        return getActionDescriptionRepository().findAll();
+        return getActionDescriptionRepository().findByRemoved(false);
     }
 
     public void addTransportationMode(String mode) throws IOException {
