@@ -25,6 +25,7 @@ export class ParcelDetailsComponent implements OnInit {
     minZoom: 4,
     zoom: 13,
     disableDefaultUI: true,
+    fullscreenControl: true,
     zoomControl: true,
     styles: [{
       "featureType": "all",
@@ -190,7 +191,7 @@ export class ParcelDetailsComponent implements OnInit {
     parsedActionDescription = parsedActionDescription.replace("#Location#", station.location.city.name + ', ' + station.location.country);
     parsedActionDescription = parsedActionDescription.replace("#Transport#", station.transportationMode);
     parsedActionDescription = parsedActionDescription.replace("#DeparturePerson#", this.parcel.departurePersonDetails);
-    parsedActionDescription = parsedActionDescription.replace("#DestinationPerson#", this.parcel.destinationPersonDestails);
+    parsedActionDescription = parsedActionDescription.replace("#DestinationPerson#", this.parcel.destinationPersonDetails);
     parsedActionDescription = parsedActionDescription.replace("#NoteOrPerson#",
       station.notes ? station.notes : this.parcel.departurePersonDetails);
     return parsedActionDescription;

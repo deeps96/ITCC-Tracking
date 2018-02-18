@@ -19,7 +19,7 @@ export class Parcel {
   trackingNumber?: string;
   parcelTypeName: string;
   departurePersonDetails: string;
-  destinationPersonDestails: string;
+  destinationPersonDetails: string;
 
   constructor() {
     this.departure = new Location();

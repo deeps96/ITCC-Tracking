@@ -17,6 +17,15 @@ ngui-map {
   color: #eceff1;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
+td {
+  padding: 5px;
+  vertical-align: top;
+}
+
 /* Time line component has to be styled in styles.scss */
 
 /*

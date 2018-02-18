@@ -35,5 +35,44 @@
         </vertical-timeline-card>
       </vertical-timeline>
     </div>
+    <div class="row">
+      <div class="col s12">
+        <h3 class="blue-grey-text center-align">Details</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s8 offset-s2">
+        <div class="card-panel blue-grey lighten-4">
+          <div class="row no-margin">
+            <div class="col s2 bold-text">Type</div>
+            <div class="col s10">{{parcel.parcelTypeName}}</div>
+          </div>
+          <div class="row no-margin">
+            <div class="col s6">
+              <div class="row no-margin">
+                <div class="col s4 bold-text" style="padding-left: 0;">From</div>
+                <div class="col s8">
+                  {{parcel.departurePersonDetails}}<br />
+                  {{parcel.departure.road}}<br />
+                  {{parcel.departure.city.name + ' ' + parcel.departure.city.zipCode}}<br />
+                  {{parcel.departure.country}}
+                </div>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="row no-margin">
+                <div class="col s4 bold-text">To</div>
+                <div class="col s8">
+                  {{parcel.destinationPersonDetails}}<br />
+                  {{parcel.destination.road}}<br />
+                  {{parcel.destination.city.name + ' ' + parcel.destination.city.zipCode}}<br />
+                  {{parcel.destination.country}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
