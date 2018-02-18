@@ -50,30 +50,25 @@ ngui-map {
     margin-left: -2px !important;
   }
 }
-
-.timeline-block {
-  position: relative !important;
-  margin: 2em 0 !important;
-}
-::ng-deep vertical-timeline .timeline-block:after {
+::ng-deep vertical-timeline .timeline-item:after {
   content: "" !important;
   display: table !important;
   clear: both !important;
 }
-::ng-deep vertical-timeline .timeline-block:first-child {
+::ng-deep vertical-timeline .timeline-item:first-child {
   margin-top: 0 !important;
 }
-::ng-deep vertical-timeline .timeline-block:last-child {
+::ng-deep vertical-timeline .timeline-item:last-child {
   margin-bottom: 0 !important;
 }
 @media only screen and (min-width: 1170px) {
-  ::ng-deep vertical-timeline .timeline-block {
+  ::ng-deep vertical-timeline .timeline-item {
     margin: 4em 0 !important;
   }
-  ::ng-deep vertical-timeline .timeline-block:first-child {
+  ::ng-deep vertical-timeline .timeline-item:first-child {
     margin-top: 0 !important;
   }
-  ::ng-deep vertical-timeline .timeline-block:last-child {
+  ::ng-deep vertical-timeline .timeline-item:last-child {
     margin-bottom: 0 !important;
   }
 }
@@ -86,16 +81,6 @@ ngui-map {
   border-radius: 50% !important;
   text-align: center;
   background-color: #b0bec5 !important;
-}
-::ng-deep vertical-timeline .timeline-img img {
-  display: block !important;
-  width: 24px !important;
-  height: 24px !important;
-  position: relative !important;
-  left: 50% !important;
-  top: 50% !important;
-  margin-left: -12px !important;
-  margin-top: -12px !important;
 }
 @media only screen and (min-width: 1170px) {
   ::ng-deep vertical-timeline .timeline-img {
@@ -182,6 +167,7 @@ ngui-map {
   border-radius: 0.25em !important;
   padding: 1em !important;
   box-shadow: 0 3px 0 #d7e4ed !important;
+  margin-bottom: 20px;
 }
 ::ng-deep vertical-timeline .timeline-content:after {
   content: "" !important;
@@ -248,17 +234,17 @@ ngui-map {
     top: 6px !important;
     font-size: 1rem !important;
   }
-  ::ng-deep vertical-timeline .timeline-block:nth-child(even) .timeline-content {
+  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content {
     float: right !important;
   }
-  ::ng-deep vertical-timeline .timeline-block:nth-child(even) .timeline-content::before {
+  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content::before {
     top: 24px !important;
     left: auto !important;
     right: 100% !important;
     border-color: transparent !important;
     border-right-color: white !important;
   }
-  ::ng-deep vertical-timeline .timeline-block:nth-child(even) .timeline-content .date {
+  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content .date {
     left: auto !important;
     right: 122% !important;
     text-align: right !important;
@@ -276,7 +262,7 @@ ngui-map {
 
 @media only screen and (min-width: 1170px) {
   /* inverse bounce effect on even content blocks */
-  ::ng-deep vertical-timeline .cssanimations .timeline-block:nth-child(even) .timeline-content.bounce-in {
+  ::ng-deep vertical-timeline .cssanimations .timeline-item:nth-child(even) .timeline-content.bounce-in {
     -webkit-animation: cd-bounce-2-inverse 0.6s !important;
     -moz-animation: cd-bounce-2-inverse 0.6s !important;
     animation: cd-bounce-2-inverse 0.6s !important;
