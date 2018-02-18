@@ -27,8 +27,15 @@
     <div class="row">
       <vertical-timeline>
         <vertical-timeline-card *ngFor="let station of parcel.stations" [dateValue]="station.timestamp">
-          <h2>{{station.actionDescription}}</h2>
+          <div class="row">
+            <div class="col s12">
+              <h2>{{parseActionDescription(station)}}</h2>
 
+            </div>
+          </div>
+          <div class="row">
+
+          </div>
         </vertical-timeline-card>
       </vertical-timeline>
     </div>

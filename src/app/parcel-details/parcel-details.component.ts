@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {Parcel} from "../parcel-management";
+import {Parcel, Station} from "../parcel-management";
 import {ParcelManagementService} from "../parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
@@ -183,6 +183,17 @@ export class ParcelDetailsComponent implements OnInit {
     const bounds = new google.maps.LatLngBounds();
     this.positions.forEach(marker => bounds.extend(marker));
     this.mapComponent.map.fitBounds(bounds);
+  }
+
+  public parseActionDescription(station: Station): string {
+    let parsedActionDescription: string = station.actionDescription;
+    parsedActionDescription = parsedActionDescription.replace("#Location#", station.location.city.name + ', ' + station.location.country);
+    parsedActionDescription = parsedActionDescription.replace("#Transport#", station.transportationMode);
+    parsedActionDescription = parsedActionDescription.replace("#DeparturePerson#", this.parcel.departurePersonDetails);
+    parsedActionDescription = parsedActionDescription.replace("#DestinationPerson#", this.parcel.destinationPersonDestails);
+    parsedActionDescription = parsedActionDescription.replace("#NoteOrPerson#",
+      station.notes ? station.notes : this.parcel.departurePersonDetails);
+    return parsedActionDescription;
   }
 
   private loadPositions(): void {

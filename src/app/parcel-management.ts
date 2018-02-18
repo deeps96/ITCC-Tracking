@@ -2,7 +2,6 @@ export class Location {
   city: City;
   country: string;
   road: string;
-
   constructor() {
     this.city = new City();
   }
@@ -17,9 +16,10 @@ export class Parcel {
   stations?: Station[];
   departure: Location;
   destination: Location;
-  handOverTimestamp: string;
   trackingNumber?: string;
   parcelTypeName: string;
+  departurePersonDetails: string;
+  destinationPersonDestails: string;
 
   constructor() {
     this.departure = new Location();
