@@ -1,5 +1,6 @@
 # ITCCTracking
 
+I used WebStorm to develop the front end. There are no further plugins required, but you have to install Node and npm.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.8.
 
 ## Development server
