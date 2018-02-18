@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col s12">
+    <h1 class="center-align">Transportation modes</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <table>
+        <thead>
+        <tr>
+          <th>Modes</th>
+          <th class="center-align">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let mode of modes">
+          <td>{{mode}}</td>
+          <td class="center">
+            <a materialize="tooltip" class="modal-trigger tooltipped" (click)="openDeleteModeModal(mode)" href="#deleteModeModal"
+               data-delay="50" data-tooltip="Delete mode" data-position="bottom">
+              <i class="material-icons deleteIcon blue-grey-text">delete</i>
+            </a>
+          </td>
+        </tr>
+        <tr *ngIf="modes && modes.length == 0">
+          <td colspan="4" class="center">No transportation mode in database!</td>
+        </tr>
+        <tr>
+          <td>
+            <a materialize="tooltip" class="btn-floating waves-effect waves-light blue-grey tooltipped modal-trigger"
+               data-delay="50" data-tooltip="Add a transportation mode" data-position="right" (click)="openNewModeModal()" href="#addModeModal">
+              <i class="material-icons">add</i>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Delete mode modal -->
+<div id="deleteModeModal" class="modal bottom-sheet blue-grey lighten-5" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="deleteModeModalActions">
+  <div class="modal-content">
+    <h4>Are you sure, that you want to delete the mode?</h4>
+    <p *ngIf="delMode">{{delMode}} can´t get selected anymore if you proceed.</p>
+  </div>
+  <div class="modal-footer blue-grey lighten-5">
+    <a class="modal-mode modal-close btn-flat">Abort</a>
+    <a class="modal-mode modal-close waves-effect waves-red waves-darken-3 btn-flat" (click)="deleteMode(delMode);">Proceed</a>
+  </div>
+</div>
+
+<!-- Add mode modal -->
+<div id="addModeModal" class="modal blue-grey lighten-5" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="newModeModalActions">
+  <div class="modal-content">
+    <a class="modal-mode modal-close waves-effect waves-red waves-darken-3 btn-flat">
+      <i class="material-icons blue-grey-text">cancel</i>
+    </a>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h4 class="center-align">Add a new transportation mode</h4>
+        </div>
+      </div>
+      <form>
+        <div class="row no-margin">
+          <div class="input-field col s12">
+            <input id="mode" type="text" class="validate" name="mode" [(ngModel)]="newMode" required>
+            <label for="mode">Transportation mode</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer blue-grey lighten-5">
+    <a class="waves-effect modal-mode modal-close waves-green waves-darken-3 btn-flat" (click)="addMode(newMode);">Add transportation mode</a>
+  </div>
+</div>
