@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {AuthorizationService} from "./authorization.service";
+import 'rxjs/add/operator/timeout'
 
 declare var Materialize: any;
 
@@ -12,6 +13,8 @@ declare var Materialize: any;
 })
 export class AppComponent {
 
+  public showLoading: boolean = true;
+  public backendRunning: boolean = true;
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
   public showNav: boolean;
@@ -24,6 +27,13 @@ export class AppComponent {
         this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
         this.showNav = !AppComponent.isParcelDetailPage(event);
       });
+    authenticationService.isBackendRunning()
+      .timeout(3000)
+      .catch(error => {
+        this.backendRunning = false;
+        this.showLoading = false;
+        return [];
+      }).subscribe(response => this.showLoading = false);
   }
 
   //actions

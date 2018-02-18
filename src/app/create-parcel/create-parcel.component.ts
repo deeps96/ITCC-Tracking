@@ -29,7 +29,7 @@ export class CreateParcelComponent implements OnInit {
       .createParcel(this.parcel)
       .subscribe(trackingNumber => {
         if (trackingNumber) {
-          this.router.navigate(['/track', { trackingNumber: trackingNumber }]);
+          this.router.navigate(['track', trackingNumber]);
         }
       });
   }

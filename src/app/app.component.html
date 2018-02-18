@@ -1,9 +1,59 @@
-<nav class="transparent z-depth-0" *ngIf="showNav">
-  <div class="nav-wrapper">
-    <ul class="right">
-      <li *ngIf="showLoginButton"><a [routerLink]="['/login']" class="light-blue-text text-lighten-3">Login</a></li>
-      <li *ngIf="showLogoutButton"><a (click)="logout();" class="light-blue-text text-lighten-3">Logout</a></li>
-    </ul>
-  </div>
-</nav>
-<router-outlet></router-outlet>
+<ng-container *ngIf="!showLoading && backendRunning">
+  <nav class="transparent z-depth-0" *ngIf="showNav">
+    <div class="nav-wrapper">
+      <ul class="right">
+        <li *ngIf="showLoginButton"><a [routerLink]="['/login']" class="light-blue-text text-lighten-3">Login</a></li>
+        <li *ngIf="showLogoutButton"><a (click)="logout();" class="light-blue-text text-lighten-3">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="!showLoading && !backendRunning">
+  <h1 id="backendNotRunning" class="red-text text-darken-3 blue-grey lighten-5 no-margin">The backend is not running</h1>
+</ng-container>
+<ng-container *ngIf="showLoading">
+ <div id="loading">
+   <div class="preloader-wrapper big active">
+     <div class="spinner-layer spinner-blue">
+       <div class="circle-clipper left">
+         <div class="circle"></div>
+       </div><div class="gap-patch">
+       <div class="circle"></div>
+     </div><div class="circle-clipper right">
+       <div class="circle"></div>
+     </div>
+     </div>
+
+     <div class="spinner-layer spinner-red">
+       <div class="circle-clipper left">
+         <div class="circle"></div>
+       </div><div class="gap-patch">
+       <div class="circle"></div>
+     </div><div class="circle-clipper right">
+       <div class="circle"></div>
+     </div>
+     </div>
+
+     <div class="spinner-layer spinner-yellow">
+       <div class="circle-clipper left">
+         <div class="circle"></div>
+       </div><div class="gap-patch">
+       <div class="circle"></div>
+     </div><div class="circle-clipper right">
+       <div class="circle"></div>
+     </div>
+     </div>
+
+     <div class="spinner-layer spinner-green">
+       <div class="circle-clipper left">
+         <div class="circle"></div>
+       </div><div class="gap-patch">
+       <div class="circle"></div>
+     </div><div class="circle-clipper right">
+       <div class="circle"></div>
+     </div>
+     </div>
+   </div>
+ </div>
+</ng-container>
