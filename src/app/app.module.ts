@@ -18,6 +18,7 @@ import {StaffManagementService} from "./staff-management.service";
 import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
 import {NguiMapModule} from "@ngui/map";
 import {VerticalTimelineModule} from "angular-vertical-timeline";
+import { DataManagementComponent } from './data-management/data-management.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {VerticalTimelineModule} from "angular-vertical-timeline";
     HomeComponent,
     CreateParcelComponent,
     StaffManagementComponent,
-    ParcelDetailsComponent
+    ParcelDetailsComponent,
+    DataManagementComponent
   ],
   imports: [
     BrowserModule,
