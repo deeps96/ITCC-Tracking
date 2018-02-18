@@ -8,15 +8,18 @@ import lombok.Setter;
 @Setter
 public class Station {
 
+    private long timestamp;
     private Location location;
     private String actionDescription, notes, transportationMode;
 
     public Station() {}
 
-    public Station(Location location, String actionDescription, String notes, String transportationMode) {
+    public Station(Location location, String actionDescription, String notes, String transportationMode, long
+            timestamp) {
         setLocation(location);
         setActionDescription(actionDescription);
         setNotes(notes);
         setTransportationMode(transportationMode);
+        setTimestamp(timestamp);
     }
 }

@@ -10,9 +10,9 @@ import org.bson.types.ObjectId;
 public class DBStation {
 
     private Location location;
+    private long timestamp;
     private ObjectId stationId;
-    private String actionDescriptionID, transportationModeID;
-    private String notes;
+    private String actionDescriptionID, transportationModeID, notes;
 
     public DBStation() {}
 
@@ -20,6 +20,7 @@ public class DBStation {
         setLocation(station.getLocation());
         setNotes(station.getNotes());
         setStationId(new ObjectId());
+        setTimestamp(station.getTimestamp());
     }
 
 }

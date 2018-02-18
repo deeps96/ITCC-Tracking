@@ -133,7 +133,7 @@ public class ParcelManagementService {
             TransportationMode mode = getTransportationModeRepository().findOne(dbStation.getTransportationModeID());
             if (actionDescription == null || mode == null) { return null; }
             return new Station(dbStation.getLocation(), actionDescription.getAction(), dbStation.getNotes(), mode
-                    .getMode());
+                    .getMode(), dbStation.getTimestamp());
         }).collect(Collectors.toList());
     }
 }
