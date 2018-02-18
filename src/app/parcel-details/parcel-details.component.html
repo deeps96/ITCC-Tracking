@@ -1,9 +1,15 @@
-<ngui-map #map [options]="mapOptions">
+<ngui-map #map [options]="mapOptions" (mapReady$)="onMapReady($event)">
     <custom-marker *ngFor="let address of addresses; let iAddress = index"
             [position]="address"
             (initialized$)="onMarkerInit($event);">
       <div class="counterMarker">{{iAddress + 1}}</div>
     </custom-marker>
+    <polyline [editable]="false"
+            [path]="positions"
+            [geodesic]="true"
+            [strokeColor]="'#b0bec5'"
+            [strokeOpacity]="1"
+            [strokeWeight]="2"></polyline>
 </ngui-map>
 <div id="background" class="blue-grey lighten-5" *ngIf="parcel">
   <div class="container">

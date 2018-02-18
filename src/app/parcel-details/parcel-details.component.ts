@@ -4,7 +4,8 @@ import {Parcel} from "../parcel-management";
 import {ParcelManagementService} from "../parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
-import LatLngLiteral = google.maps.LatLngLiteral;
+
+declare var google: any;
 
 @Component({
   selector: 'app-parcel-details',
@@ -160,7 +161,7 @@ export class ParcelDetailsComponent implements OnInit {
 
   };
   public parcel: Parcel;
-  public positions: LatLngLiteral[];
+  public positions: any[];
 
   constructor(private route: ActivatedRoute, private parcelManagementService: ParcelManagementService) { }
 
@@ -174,6 +175,10 @@ export class ParcelDetailsComponent implements OnInit {
       });
   }
 
+  public onMapReady(map): void {
+    this.loadPositions();
+  }
+
   public onMarkerInit(marker): void {
     const bounds = new google.maps.LatLngBounds();
     this.positions.forEach(marker => bounds.extend(marker));
@@ -181,13 +186,16 @@ export class ParcelDetailsComponent implements OnInit {
   }
 
   private loadPositions(): void {
+    if (!google) {
+      return;
+    }
     this.positions = [];
     this.buildAddressArrayForStations();
     this.addresses.forEach(address => {
       this.mapComponent.geoCoder.geocode({address: address})
         .map(response => response[0])
         .subscribe(response =>
-          this.positions.push({lat: response.geometry.location.lat(), lng: response.geometry.location.lng()}));
+          this.positions.push(new google.maps.LatLng(response.geometry.location.lat(), response.geometry.location.lng())));
     });
   }
 
