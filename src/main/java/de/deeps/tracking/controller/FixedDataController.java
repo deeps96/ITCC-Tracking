@@ -1,6 +1,6 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.*;
+import de.deeps.tracking.dto.fixeddata.*;
 import de.deeps.tracking.model.dbobjects.ActionDescription;
 import de.deeps.tracking.model.dbobjects.ParcelType;
 import de.deeps.tracking.model.dbobjects.TransportationMode;

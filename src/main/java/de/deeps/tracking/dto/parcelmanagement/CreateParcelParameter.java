@@ -1,4 +1,4 @@
-package de.deeps.tracking.dto;
+package de.deeps.tracking.dto.parcelmanagement;
 
 import lombok.Getter;
 import lombok.Setter;

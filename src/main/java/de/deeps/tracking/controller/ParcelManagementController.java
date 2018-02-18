@@ -1,6 +1,10 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.*;
+import de.deeps.tracking.dto.parcelmanagement.AddStationParameter;
+import de.deeps.tracking.dto.parcelmanagement.CreateParcelParameter;
+import de.deeps.tracking.dto.parcelmanagement.CreateParcelResponse;
+import de.deeps.tracking.dto.parcelmanagement.GetParcelResponse;
+import de.deeps.tracking.dto.parcelmanagement.Parcel;
 import de.deeps.tracking.service.AuthorizationService;
 import de.deeps.tracking.service.ParcelManagementService;
 import lombok.AccessLevel;

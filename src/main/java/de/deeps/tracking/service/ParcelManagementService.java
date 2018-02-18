@@ -1,7 +1,7 @@
 package de.deeps.tracking.service;
 
-import de.deeps.tracking.dto.Parcel;
-import de.deeps.tracking.dto.Station;
+import de.deeps.tracking.dto.parcelmanagement.Parcel;
+import de.deeps.tracking.dto.parcelmanagement.Station;
 import de.deeps.tracking.model.ParcelManagement;
 import de.deeps.tracking.model.data.DBStation;
 import de.deeps.tracking.model.data.Location;

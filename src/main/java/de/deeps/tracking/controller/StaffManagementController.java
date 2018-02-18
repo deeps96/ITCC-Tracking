@@ -1,8 +1,8 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.AddStaffParameter;
-import de.deeps.tracking.dto.ListStaffResponse;
-import de.deeps.tracking.dto.StaffMember;
+import de.deeps.tracking.dto.staffmanagement.AddStaffParameter;
+import de.deeps.tracking.dto.staffmanagement.ListStaffResponse;
+import de.deeps.tracking.dto.staffmanagement.StaffMember;
 import de.deeps.tracking.service.AuthorizationService;
 import de.deeps.tracking.service.StaffManagementService;
 import lombok.AccessLevel;

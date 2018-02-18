@@ -1,6 +1,8 @@
 package de.deeps.tracking.controller;
 
-import de.deeps.tracking.dto.*;
+import de.deeps.tracking.dto.authorization.AuthorizationResponse;
+import de.deeps.tracking.dto.authorization.IsAdminResponse;
+import de.deeps.tracking.dto.authorization.IsStaffResponse;
 import de.deeps.tracking.model.dbobjects.User;
 import de.deeps.tracking.service.AuthorizationService;
 import lombok.AccessLevel;
@@ -10,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

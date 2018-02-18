@@ -1,4 +1,4 @@
-package de.deeps.tracking.dto;
+package de.deeps.tracking.dto.staffmanagement;
 
 import lombok.Getter;
 import lombok.Setter;
