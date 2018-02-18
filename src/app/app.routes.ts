@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {StaffManagementComponent} from "./staff-management/staff-management.component";
 import {AuthGuard} from "./auth.guard";
 import {ParcelDetailsComponent} from "./parcel-details/parcel-details.component";
+import {DataManagementComponent} from "./data-management/data-management.component";
 
 export const ROUTE_CONFIG: Routes = [
   {
@@ -18,6 +19,11 @@ export const ROUTE_CONFIG: Routes = [
   {
     path: 'track/:trackingNumber',
     component: ParcelDetailsComponent
+  },
+  {
+    path: 'data',
+    canActivate: [AuthGuard],
+    component: DataManagementComponent
   },
   {
     path: '',
