@@ -54,9 +54,10 @@ public class ParcelManagementService {
 
     //convenience
     public String createParcel(String parcelTypeName, Location departure, Location destination, long
-            handOverTimestamp) {
+            handOverTimestamp, String departurePersonDetails, String destinationPersonDetails) {
         try {
-            ParcelEntry parcelEntry = new ParcelEntry(departure, destination, handOverTimestamp);
+            ParcelEntry parcelEntry = new ParcelEntry(departure, destination, handOverTimestamp,
+                    departurePersonDetails, destinationPersonDetails);
             completeParcelInformation(parcelEntry, parcelTypeName);
             getParcelRepository().save(parcelEntry);
             return parcelEntry.getTrackingNumber();
@@ -123,7 +124,7 @@ public class ParcelManagementService {
             return null;
         }
         return new Parcel(stations, entry.getDeparture(), entry.getDestination(), entry.getHandOverTimestamp(),
-                entry.getTrackingNumber(), parcelType.getName());
+                entry.getTrackingNumber(), parcelType.getName(), entry.getDeparturePersonDetails(), entry.getDestinationPersonDetails());
     }
 
     private List<Station> convertDBStationsToStations(List<DBStation> stations) {

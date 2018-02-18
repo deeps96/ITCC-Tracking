@@ -33,7 +33,8 @@ public class ParcelManagementController extends GenericController {
     public CreateParcelResponse createParcel(@RequestBody CreateParcelParameter parameter) throws IOException {
         Parcel parcel = parameter.getParcel();
         String trackingNumber = getParcelManagementService().createParcel(parcel.getParcelTypeName(), parcel.getDeparture(),
-                parcel.getDestination(), parcel.getHandOverTimestamp());
+                parcel.getDestination(), parcel.getHandOverTimestamp(), parcel.getDeparturePersonDetails(), parcel
+                        .getDestinationPersonDetails());
         if (trackingNumber == null) {
             throw new IOException("Required parameter missing!");
         }

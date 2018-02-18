@@ -17,12 +17,15 @@ public class ParcelEntry {
     private List<DBStation> stations;
     private Location departure, destination;
     private long handOverTimestamp;
-    private String id, trackingNumber, parcelTypeID;
+    private String id, trackingNumber, parcelTypeID, departurePersonDetails, destinationPersonDetails;
 
-    public ParcelEntry(Location departure, Location destination, long handOverTimestamp) {
+    public ParcelEntry(Location departure, Location destination, long handOverTimestamp, String
+            departurePersonDetails, String destinationPersonDetails) {
         setDeparture(departure);
         setDestination(destination);
         setHandOverTimestamp(handOverTimestamp);
         setStations(new LinkedList<>());
+        setDeparturePersonDetails(departurePersonDetails);
+        setDestinationPersonDetails(destinationPersonDetails);
     }
 }

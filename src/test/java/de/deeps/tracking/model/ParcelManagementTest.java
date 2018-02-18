@@ -40,7 +40,7 @@ class ParcelManagementTest {
         departure.setCity(cityA);
         Location destination = new Location();
         destination.setCity(cityB);
-        setParcelEntry(new ParcelEntry(departure, destination, 0L));
+        setParcelEntry(new ParcelEntry(departure, destination, 0L, "Max", "Hans"));
     }
 
     private void setUpParcelType() {
