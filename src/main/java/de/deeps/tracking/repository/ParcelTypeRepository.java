@@ -1,5 +1,6 @@
 package de.deeps.tracking.repository;
 
+import de.deeps.tracking.dto.parcelmanagement.Parcel;
 import de.deeps.tracking.model.dbobjects.ParcelType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -8,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ParcelTypeRepository extends MongoRepository<ParcelType, String> {
 
     ParcelType findByName(String name);
+    Parcel findByKey(String key);
 }

@@ -78,6 +78,8 @@ public class FixedDataService {
                 throw new IOException("Parcel type is already existing!");
             }
             parcelType.setRemoved(false);
+        } else if (getParcelTypeRepository().findByKey(key) != null) {
+            throw new IOException("Key is already used for another type!");
         } else {
             parcelType = new ParcelType(type, key);
         }
