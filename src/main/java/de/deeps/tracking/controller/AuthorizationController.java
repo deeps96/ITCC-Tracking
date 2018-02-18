@@ -23,6 +23,9 @@ public class AuthorizationController extends GenericController {
         super(authorizationService);
     }
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public void ping(){}
+
     @RequestMapping(value = "/authorize", method = RequestMethod.GET, produces = "application/json")
     public AuthorizationResponse authorize(@RequestParam(value="email") String email, @RequestParam(value="password")
             String password) {
