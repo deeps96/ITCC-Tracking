@@ -32,7 +32,6 @@ export class StaffManagementComponent implements OnInit {
   public openDeleteStaffModal(staffMember: StaffMember): void {
     this.deleteStaffMember = staffMember;
     this.deleteStaffModalActions.emit({action: "modal", params: [ 'open' ]});
-
   }
 
   public addStaff(staffMember: StaffMember): void {

@@ -60,10 +60,11 @@ export class DataManagementService {
       .catch(event => this.helperMethods.handleError(event));
   }
 
-  public addParcelType(type: string): Observable<Response> {
+  public addParcelType(type: string, key: string): Observable<Response> {
     const body = {
       authorizationToken: this.authorizationService.getToken(),
-      type: type
+      type: type,
+      key: key
     };
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -76,8 +77,7 @@ export class DataManagementService {
       authorizationToken: this.authorizationService.getToken(),
       mode: mode
     };
-    return this.http.get(this.routerConfig.serverAddress + '/removeTransportationMode', {params: params})
-      .map(HelperMethods.extractData)
+    return this.http.delete(this.routerConfig.serverAddress + '/removeTransportationMode', {params: params})
       .catch(event => this.helperMethods.handleError(event));
   }
 
@@ -86,8 +86,7 @@ export class DataManagementService {
       authorizationToken: this.authorizationService.getToken(),
       action: action
     };
-    return this.http.get(this.routerConfig.serverAddress + '/removeActionDescription', {params: params})
-      .map(HelperMethods.extractData)
+    return this.http.delete(this.routerConfig.serverAddress + '/removeActionDescription', {params: params})
       .catch(event => this.helperMethods.handleError(event));
   }
 
@@ -96,11 +95,7 @@ export class DataManagementService {
       authorizationToken: this.authorizationService.getToken(),
       type: type
     };
-    return this.http.get(this.routerConfig.serverAddress + '/removeParcelType', {params: params})
-      .map(HelperMethods.extractData)
+    return this.http.delete(this.routerConfig.serverAddress + '/removeParcelType', {params: params})
       .catch(event => this.helperMethods.handleError(event));
   }
-
-
-
 }
