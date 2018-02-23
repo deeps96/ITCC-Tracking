@@ -23,6 +23,7 @@ import {DataManagementService} from "./services/data-management.service";
 import { ParcelTypeComponent } from './parcel-type/parcel-type.component';
 import { ActionDescriptionComponent } from './action-description/action-description.component';
 import { TransportationModeComponent } from './transportation-mode/transportation-mode.component';
+import { AddStationComponent } from './add-station/add-station.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TransportationModeComponent } from './transportation-mode/transportatio
     DataManagementComponent,
     ParcelTypeComponent,
     ActionDescriptionComponent,
-    TransportationModeComponent
+    TransportationModeComponent,
+    AddStationComponent
   ],
   imports: [
     BrowserModule,
