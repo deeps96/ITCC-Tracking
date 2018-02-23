@@ -5,6 +5,7 @@ import {StaffManagementComponent} from "../staff-management/staff-management.com
 import {AuthGuard} from "./auth.guard";
 import {ParcelDetailsComponent} from "../parcel-details/parcel-details.component";
 import {DataManagementComponent} from "../data-management/data-management.component";
+import {AddStationComponent} from "../add-station/add-station.component";
 
 export const ROUTE_CONFIG: Routes = [
   {
@@ -24,6 +25,11 @@ export const ROUTE_CONFIG: Routes = [
     path: 'data',
     canActivate: [AuthGuard],
     component: DataManagementComponent
+  },
+  {
+    path: 'parcelManagement',
+    canActivate: [AuthGuard],
+    component: AddStationComponent
   },
   {
     path: '',

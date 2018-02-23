@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import {AuthorizationService} from "../services/authorization.service";
 import {ROUTER_CONFIG} from "../../assets/config";
 import {RouterConfig} from "../data-objects/config";
+import "rxjs/add/observable/zip";
 
 declare var Materialize: any;
 
@@ -23,27 +24,24 @@ export class AuthGuard implements CanActivate {
     if (this.isAnonymUser()) {
       return this.canAnonymActivate(route);
     }
-    return this.authenticationService.isAdmin().map(response => {
-      if (response) {
-        return this.routeMatchesRegexFromList(this.routerConfig.allowedAdminRoutes, route);
-      } else {
-        return this.authenticationService.isStaff().map(response => {
-          response && this.routeMatchesRegexFromList(this.routerConfig.allowedStaffRoutes, route);
-        }).map(allowed => {
-          if (!allowed) {
-            this.router.navigate(['']);
-            this.showForbiddenToast(route);
-          }
-          return allowed;
-        }).subscribe();
+    return Observable.zip(
+      this.authenticationService.isAdmin(),
+      this.authenticationService.isStaff(),
+      (isAdmin, isStaff) => {
+        if (isAdmin) { return this.routeMatchesRegexFromList(this.routerConfig.allowedAdminRoutes, route); }
+        let canAccess = isStaff && this.routeMatchesRegexFromList(this.routerConfig.allowedStaffRoutes, route);
+        if (!canAccess ) {
+          this.router.navigate(['']);
+          AuthGuard.showForbiddenToast(route);
+        }
+        return canAccess
       }
-    });
-
+    );
   }
 
   //actions
-  private showForbiddenToast(url: string): void {
-    Materialize.toast('You are not allowed to access the page ' + url, 3000, "");
+  private static showForbiddenToast(url: string): void {
+    Materialize.toast('You are not allowed to access the page ' + url, 3000, '');
   }
 
   private canAnonymActivate(route: string): boolean {

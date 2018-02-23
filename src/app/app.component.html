@@ -2,6 +2,7 @@
   <nav class="transparent z-depth-0" *ngIf="showNav">
     <div class="nav-wrapper">
       <ul class="right">
+        <li *ngIf="showAdminButtons || showStaffButtons"><a [routerLink]="['/parcelManagement']" class="light-blue-text text-lighten-3">Manage a parcel</a></li>
         <li *ngIf="showAdminButtons"><a [routerLink]="['/staff']" class="light-blue-text text-lighten-3">Staff</a></li>
         <li *ngIf="showAdminButtons"><a [routerLink]="['/data']" class="light-blue-text text-lighten-3">Data</a></li>
         <li *ngIf="showLoginButton"><a [routerLink]="['/login']" class="light-blue-text text-lighten-3">Login</a></li>

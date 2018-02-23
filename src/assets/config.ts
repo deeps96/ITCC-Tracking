@@ -11,6 +11,7 @@ export const ROUTER_CONFIG: RouterConfig = {
   ],
   allowedStaffRoutes: [
     '^$',
-    '^/login'
+    '^/login',
+    '^/parcelManagement'
   ]
 };

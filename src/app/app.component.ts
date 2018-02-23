@@ -19,6 +19,7 @@ export class AppComponent {
   public showLogoutButton: boolean;
   public showNav: boolean;
   public showAdminButtons: boolean;
+  public showStaffButtons: boolean;
 
   constructor(private router: Router, private authenticationService: AuthorizationService) {
     router.events
@@ -28,7 +29,8 @@ export class AppComponent {
         this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
         this.showNav = !AppComponent.isParcelDetailPage(event);
         if (this.isLoggedIn()) {
-          this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin)
+          this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin);
+          this.authenticationService.isStaff().subscribe(isStaff => this.showStaffButtons = isStaff);
         }
       });
     authenticationService.isBackendRunning()
@@ -65,6 +67,8 @@ export class AppComponent {
     this.authenticationService.logout();
     this.showLoginButton = true;
     this.showLogoutButton = false;
+    this.showStaffButtons = false;
+    this.showAdminButtons = false;
     this.routeToIndex();
     Materialize.toast("Successfully logged out.", 3000, "");
   }
