@@ -17,9 +17,8 @@ export class AppComponent {
   public backendRunning: boolean = true;
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
-  public showDataButton: boolean;
-  public showStaffButton: boolean;
   public showNav: boolean;
+  public showAdminButtons: boolean;
 
   constructor(private router: Router, private authenticationService: AuthorizationService) {
     router.events
@@ -29,10 +28,7 @@ export class AppComponent {
         this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
         this.showNav = !AppComponent.isParcelDetailPage(event);
         if (this.isLoggedIn()) {
-          this.authenticationService.isAdmin().subscribe(isAdmin => {
-            this.showDataButton = !AppComponent.isDataPage(event) && isAdmin;
-            this.showStaffButton = !AppComponent.isStaffPage(event) && isAdmin;
-          })
+          this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin)
         }
       });
     authenticationService.isBackendRunning()

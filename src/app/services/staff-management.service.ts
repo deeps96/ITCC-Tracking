@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import {RouterConfig} from "./config";
-import {ROUTER_CONFIG} from "../assets/config";
+import {RouterConfig} from "../data-objects/config";
+import {ROUTER_CONFIG} from "../../assets/config";
 import {Observable} from "rxjs/Rx";
-import {StaffMember} from "./authorization";
-import {HelperMethods} from "./helper-methods";
+import {StaffMember} from "../data-objects/authorization";
+import {HelperMethods} from "../helper-methods";
 import {AuthorizationService} from "./authorization.service";
 
 @Injectable()
