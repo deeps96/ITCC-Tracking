@@ -1,3 +1,191 @@
-<p>
-  add-station works!
-</p>
+<div id="background" class="blue-grey lighten-5">
+  <div class="container white z-depth-1">
+    <div class="row">
+      <div class="col s12">
+        <h1 class="center-align">Parcel management</h1>
+      </div>
+    </div>
+    <div class="container" *ngIf="parcel">
+      <div class="row">
+        <div class="col s12">
+          <ul materialize="collapsible" class="collapsible" data-collapsible="expandable">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">receipt</i>General information</div>
+              <div class="collapsible-body">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td class="bold-text no-padding">Tracking number:</td>
+                    <td class="no-padding blue-grey-text">{{parcel.trackingNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Handover:</td>
+                    <td class="no-padding">{{convertToDate(parcel.handOverTimestamp)}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Parcel type:</td>
+                    <td class="no-padding">{{parcel.parcelTypeName}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">location_city</i>Departure</div>
+              <div class="collapsible-body">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td class="bold-text no-padding">Person details:</td>
+                    <td class="no-padding">{{parcel.departurePersonDetails}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Road:</td>
+                    <td class="no-padding">{{parcel.departure.road}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">City:</td>
+                    <td class="no-padding">{{parcel.departure.city.name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Country:</td>
+                    <td class="no-padding">{{parcel.departure.country}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">location_searching</i>Destination</div>
+              <div class="collapsible-body">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td class="bold-text no-padding">Person details:</td>
+                    <td class="no-padding">{{parcel.destinationPersonDetails}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Road:</td>
+                    <td class="no-padding">{{parcel.destination.road}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">City:</td>
+                    <td class="no-padding">{{parcel.destination.city.name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Country:</td>
+                    <td class="no-padding">{{parcel.destination.country}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <h3>Stations</h3>
+          <ul materialize="collapsible" class="collapsible" data-collapsible="expandable">
+            <li *ngFor="let station of parcel.stations; let iStation = index;">
+              <div class="collapsible-header valign-wrapper">
+                <span class="stationNumber">{{iStation + 1}}</span> {{parseActionDescription(station)}}
+              </div>
+              <div class="collapsible-body">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td class="bold-text no-padding">Timestamp:</td>
+                    <td class="no-padding">{{station.timestamp}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Transportation mode:</td>
+                    <td class="no-padding">{{station.transportationMode}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Notes:</td>
+                    <td class="no-padding">
+                      <ng-container *ngIf="station.notes && station.notes.length > 0">{{station.notes}}</ng-container>
+                      <ng-container *ngIf="!station.notes || station.notes.length == 0">-</ng-container>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Road:</td>
+                    <td class="no-padding">{{station.location.road}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">City:</td>
+                    <td class="no-padding">{{station.location.city.name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold-text no-padding">Country:</td>
+                    <td class="no-padding">{{station.location.country}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h4 class="center-align">Add a new station</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <form id="addStationForm" (ngSubmit)="addStation(newStation);">
+            <div class="row">
+              <div class="input-field col s8 offset-s2">
+                <select id="actionSelect" materialize="material_select" [materializeSelectOptions]="actionDescriptions" (change)="actionChanged($event)" class="validate" required>
+                  <option value="" disabled selected>Choose the action for the station</option>
+                  <option *ngFor="let action of actionDescriptions" [value]="action">{{action}}</option>
+                </select>
+                <label for="actionSelect">Action description</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s8 offset-s2">
+                <select id="transportSelect" materialize="material_select" [materializeSelectOptions]="transportationModes" (change)="transportChanged($event)" class="validate" required>
+                  <option value="" disabled selected>Choose the transport for the station</option>
+                  <option *ngFor="let transport of transportationModes" [value]="transport">{{transport}}</option>
+                </select>
+                <label for="actionSelect">Transportation mode</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="road" type="text" class="validate" name="road" [(ngModel)]="newStation.location.road" required>
+                <label for="road">Road</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s9">
+                <input id="cityName" type="text" class="validate" name="cityName" [(ngModel)]="newStation.location.city.name" required>
+                <label for="cityName">City</label>
+              </div>
+              <div class="input-field col s3">
+                <input id="zipCode" type="text" class="validate" name="zipyCode" [(ngModel)]="newStation.location.city.zipCode" required>
+                <label for="zipCode">ZIP</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="country" type="text" class="validate" name="country" [(ngModel)]="newStation.location.country" required>
+                <label for="country">Country</label>
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="col s12">
+                <button class="btn waves-effect waves-light right" type="submit" name="action">Add station
+                  <i class="material-icons right">add_to_photos</i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

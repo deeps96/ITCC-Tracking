@@ -1,5 +1,6 @@
 import {Response} from "@angular/http";
 import {AuthorizationService} from "./services/authorization.service";
+import {Parcel, Station} from "./data-objects/parcel-management";
 
 declare var Materialize: any;
 
@@ -24,5 +25,16 @@ export class HelperMethods {
 
   public static generateInitialPassword(): string {
     return Math.random().toString(36).slice(-8);
+  }
+
+  public static parseActionDescription(parcel: Parcel, station: Station): string {
+    let parsedActionDescription: string = station.actionDescription;
+    parsedActionDescription = parsedActionDescription.replace("#Location#", station.location.city.name + ', ' + station.location.country);
+    parsedActionDescription = parsedActionDescription.replace("#Transport#", station.transportationMode);
+    parsedActionDescription = parsedActionDescription.replace("#DeparturePerson#", parcel.departurePersonDetails);
+    parsedActionDescription = parsedActionDescription.replace("#DestinationPerson#", parcel.destinationPersonDetails);
+    parsedActionDescription = parsedActionDescription.replace("#NoteOrPerson#",
+      station.notes ? station.notes : parcel.departurePersonDetails);
+    return parsedActionDescription;
   }
 }

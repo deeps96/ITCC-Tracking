@@ -4,6 +4,7 @@ import {Parcel, Station} from "../data-objects/parcel-management";
 import {ParcelManagementService} from "../services/parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
+import {HelperMethods} from "../helper-methods";
 
 declare var google: any;
 
@@ -187,14 +188,7 @@ export class ParcelDetailsComponent implements OnInit {
   }
 
   public parseActionDescription(station: Station): string {
-    let parsedActionDescription: string = station.actionDescription;
-    parsedActionDescription = parsedActionDescription.replace("#Location#", station.location.city.name + ', ' + station.location.country);
-    parsedActionDescription = parsedActionDescription.replace("#Transport#", station.transportationMode);
-    parsedActionDescription = parsedActionDescription.replace("#DeparturePerson#", this.parcel.departurePersonDetails);
-    parsedActionDescription = parsedActionDescription.replace("#DestinationPerson#", this.parcel.destinationPersonDetails);
-    parsedActionDescription = parsedActionDescription.replace("#NoteOrPerson#",
-      station.notes ? station.notes : this.parcel.departurePersonDetails);
-    return parsedActionDescription;
+    return HelperMethods.parseActionDescription(this.parcel, station);
   }
 
   private loadPositions(): void {

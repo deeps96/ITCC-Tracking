@@ -20,6 +20,7 @@ export class Parcel {
   parcelTypeName: string;
   departurePersonDetails: string;
   destinationPersonDetails: string;
+  handOverTimestamp: number;
 
   constructor() {
     this.departure = new Location();
@@ -33,4 +34,8 @@ export class Station {
   notes: string;
   transportationMode: string;
   timestamp: number;
+
+  constructor() {
+    this.location = new Location();
+  }
 }

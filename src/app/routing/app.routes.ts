@@ -27,7 +27,7 @@ export const ROUTE_CONFIG: Routes = [
     component: DataManagementComponent
   },
   {
-    path: 'parcelManagement',
+    path: 'parcelManagement/:trackingNumber',
     canActivate: [AuthGuard],
     component: AddStationComponent
   },
