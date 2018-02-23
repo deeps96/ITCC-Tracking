@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {Location, Parcel} from "./parcel-management";
-import {HelperMethods} from "./helper-methods";
+import {Location, Parcel} from "../data-objects/parcel-management";
+import {HelperMethods} from "../helper-methods";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { Observable } from 'rxjs/Rx';
-import {RouterConfig} from "./config";
-import {ROUTER_CONFIG} from "../assets/config";
+import {RouterConfig} from "../data-objects/config";
+import {ROUTER_CONFIG} from "../../assets/config";
 import {AuthorizationService} from "./authorization.service";
 
 

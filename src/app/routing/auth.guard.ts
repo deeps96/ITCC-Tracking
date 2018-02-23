@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import {AuthorizationService} from "./authorization.service";
-import {ROUTER_CONFIG} from "../assets/config";
-import {RouterConfig} from "./config";
+import {AuthorizationService} from "../services/authorization.service";
+import {ROUTER_CONFIG} from "../../assets/config";
+import {RouterConfig} from "../data-objects/config";
 
 declare var Materialize: any;
 

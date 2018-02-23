@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MaterializeAction} from "angular2-materialize";
-import {DataManagementService} from "../data-management.service";
+import {DataManagementService} from "../services/data-management.service";
 
 @Component({
   selector: 'app-action-description',

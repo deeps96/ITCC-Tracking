@@ -7,9 +7,9 @@ import * as shajs from 'sha.js';
 
 
 import {CookieService} from "ngx-cookie";
-import {HelperMethods} from "./helper-methods";
-import {RouterConfig} from "./config";
-import {ROUTER_CONFIG} from "../assets/config";
+import {HelperMethods} from "../helper-methods";
+import {RouterConfig} from "../data-objects/config";
+import {ROUTER_CONFIG} from "../../assets/config";
 import {Router} from "@angular/router";
 
 @Injectable()

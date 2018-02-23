@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MaterializeAction} from "angular2-materialize";
-import {DataManagementService} from "../data-management.service";
-import {StaffMember} from "../authorization";
+import {DataManagementService} from "../services/data-management.service";
+import {StaffMember} from "../data-objects/authorization";
 
 @Component({
   selector: 'app-parcel-type',

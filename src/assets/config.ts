@@ -1,4 +1,4 @@
-import {RouterConfig} from "../app/config";
+import {RouterConfig} from "../app/data-objects/config";
 
 export const ROUTER_CONFIG: RouterConfig = {
   serverAddress: 'http://localhost:2018',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Location, Parcel} from "../parcel-management";
-import {ParcelManagementService} from "../parcel-management.service";
+import {Location, Parcel} from "../data-objects/parcel-management";
+import {ParcelManagementService} from "../services/parcel-management.service";
 import {Router} from "@angular/router";
 import {DataManagementComponent} from "../data-management/data-management.component";
-import {DataManagementService} from "../data-management.service";
+import {DataManagementService} from "../services/data-management.service";
 
 @Component({
   selector: 'app-create-parcel',

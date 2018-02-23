@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {AuthorizationService} from "./authorization.service";
-import {HelperMethods} from "./helper-methods";
+import {HelperMethods} from "../helper-methods";
 import {Observable} from "rxjs/Rx";
-import {ROUTER_CONFIG} from "../assets/config";
-import {RouterConfig} from "./config";
+import {ROUTER_CONFIG} from "../../assets/config";
+import {RouterConfig} from "../data-objects/config";
 
 @Injectable()
 export class DataManagementService {

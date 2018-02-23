@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {Parcel, Station} from "../parcel-management";
-import {ParcelManagementService} from "../parcel-management.service";
+import {Parcel, Station} from "../data-objects/parcel-management";
+import {ParcelManagementService} from "../services/parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
 

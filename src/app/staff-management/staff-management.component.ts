@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {StaffMember} from "../authorization";
-import {AuthorizationService} from "../authorization.service";
+import {StaffMember} from "../data-objects/authorization";
+import {AuthorizationService} from "../services/authorization.service";
 import {MaterializeAction} from "angular2-materialize";
 import {HelperMethods} from "../helper-methods";
-import {StaffManagementService} from "../staff-management.service";
+import {StaffManagementService} from "../services/staff-management.service";
 
 @Component({
   selector: 'app-staff-management',

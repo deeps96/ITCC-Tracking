@@ -1,5 +1,5 @@
 import {Response} from "@angular/http";
-import {AuthorizationService} from "./authorization.service";
+import {AuthorizationService} from "./services/authorization.service";
 
 declare var Materialize: any;
 
