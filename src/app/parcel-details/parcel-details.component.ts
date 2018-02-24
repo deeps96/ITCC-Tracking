@@ -5,6 +5,12 @@ import {ParcelManagementService} from "../services/parcel-management.service";
 import 'rxjs/add/operator/switchMap';
 import MapOptions = google.maps.MapOptions;
 import {HelperMethods} from "../helper-methods";
+import {Observable} from "rxjs/Observable";
+import GeocoderResult = google.maps.GeocoderResult;
+import "rxjs/add/observable/forkJoin";
+import "rxjs/add/observable/of";
+import {AuthorizationService} from "../services/authorization.service";
+import "rxjs/add/operator/zip";
 
 declare var google: any;
 
@@ -164,17 +170,23 @@ export class ParcelDetailsComponent implements OnInit {
   };
   public parcel: Parcel;
   public positions: any[];
+  public showAddStationButton: boolean = false;
 
-  constructor(private route: ActivatedRoute, private parcelManagementService: ParcelManagementService) { }
+  constructor(private route: ActivatedRoute, private authorizationService: AuthorizationService, private parcelManagementService: ParcelManagementService) { }
 
   ngOnInit() {
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.parcelManagementService.getParcel(params.get('trackingNumber')))
       .subscribe(parcel => {
+        parcel.stations = parcel.stations.reverse();
         this.parcel = parcel;
         this.loadPositions();
       });
+    if (this.authorizationService.isAuthenticated()) {
+      Observable.zip(this.authorizationService.isAdmin(), this.authorizationService.isStaff()).subscribe(
+        ([isAdmin, isStaff]) => this.showAddStationButton = (isAdmin || isStaff));
+    }
   }
 
   public onMapReady(map): void {
@@ -191,24 +203,39 @@ export class ParcelDetailsComponent implements OnInit {
     return HelperMethods.parseActionDescription(this.parcel, station);
   }
 
-  private loadPositions(): void {
-    if (!google) { return; }
-    this.positions = [];
-    this.buildAddressArrayForStations();
-    this.addresses.forEach(address => {
-      this.mapComponent.geoCoder.geocode({address: address})
-        .map(response => response[0])
-        .subscribe(response =>
-          this.positions.push(new google.maps.LatLng(response.geometry.location.lat(), response.geometry.location.lng())));
-    });
+  public convertToDate(timestamp: number) {
+    return new Date(timestamp);
   }
 
-  private buildAddressArrayForStations(): void {
-    this.addresses = [];
-    this.addresses.push(this.parcel.departure.road + ', ' + this.parcel.departure.city.name + ' ' + this.parcel.departure.country);
+  private loadPositions(): void {
+    if (typeof(google) == 'undefined' || !this.mapComponent) { return; }
+    let positions = [];
+    let addresses = this.buildAddressArrayForStations();
+    let geoObservables = addresses
+      .filter((address, index) => index > 0 && index < addresses.length - 1)
+      .map(address => this.mapComponent.geoCoder.geocode({address: address})
+        .catch(error => Observable.of({}))
+        .map(response => (response.length > 0) ? response[0] : []));
+    Observable.forkJoin(geoObservables)
+      .subscribe(responses => {
+        responses.forEach((response: GeocoderResult) => {
+          if (response.geometry) {
+            positions.push(new google.maps.LatLng(response.geometry.location.lat(), response.geometry.location.lng()));
+          }
+        });
+        this.positions = positions;
+        this.addresses = addresses;
+      });
+  }
+
+  private buildAddressArrayForStations(): string[] {
+    let addresses = [];
+    addresses.push(this.parcel.departure.road + ', ' + this.parcel.departure.city.name + ' ' + this.parcel.departure.country);
     this.parcel.stations.forEach(station =>
-      this.addresses.push(station.location.road + ', ' + station.location.city.name + ' ' + station.location.country));
-    this.addresses.push(this.parcel.destination.road + ', ' + this.parcel.destination.city.name + ' ' + this.parcel.destination.country);
+      addresses.push(station.location.road + ', ' + station.location.city.name + ' ' + station.location.country));
+    addresses.push(this.parcel.destination.road + ', ' + this.parcel.destination.city.name + ' ' + this.parcel.destination.country);
+    addresses = addresses.filter(address => address);
+    return addresses;
   }
 
 }

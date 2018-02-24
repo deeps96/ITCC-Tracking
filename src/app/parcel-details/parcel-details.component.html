@@ -1,73 +1,153 @@
-<div class="white">
-  <a materialize="tooltip" [routerLink]="['']" class="tooltipped" data-delay="50" data-tooltip="Return to home" data-position="right">
-    <i class="material-icons medium left light-blue-text text-lighten-3">chevron_left</i>
-  </a>
-  <h3 *ngIf="parcel" class="center-align blue-grey-text">Tracking {{parcel.trackingNumber}}</h3>
-</div>
-<ngui-map #map [options]="mapOptions" (mapReady$)="onMapReady($event)">
-    <custom-marker *ngFor="let address of addresses; let iAddress = index"
-            [position]="address"
-            (initialized$)="onMarkerInit($event);">
-      <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 1}">{{iAddress + 1}}</div>
-    </custom-marker>
-    <polyline [editable]="false"
-            [path]="positions"
-            [geodesic]="true"
-            [strokeColor]="'#b0bec5'"
-            [strokeOpacity]="1"
-            [strokeWeight]="2"></polyline>
-</ngui-map>
 <div id="background" class="blue-grey lighten-5" *ngIf="parcel">
-  <div class="container">
-    <div class="row">
-      <div class="col s12">
-        <h3 class="blue-grey-text center-align">History</h3>
-      </div>
-    </div>
-    <div class="row">
-      <vertical-timeline>
-        <vertical-timeline-card *ngFor="let station of parcel.stations" [dateValue]="station.timestamp">
-          <div class="row">
-            <div class="col s12">
-              <h2>{{parseActionDescription(station)}}</h2>
-            </div>
+  <div class="row no-margin">
+    <div class="col s5">
+      <div class="row">
+        <div class="col s12">
+          <div class="card-panel blue-grey z-depth-1 no-margin">
+            <a [routerLink]="['']" class="btn blue-grey lighten-4 blue-grey-text" data-delay="50">
+              <i class="material-icons medium left blue-grey-text">chevron_left</i>Back
+            </a>
+            <span id="trackingNumber" class="white-text">Shipment: {{parcel.trackingNumber}}</span>
           </div>
-        </vertical-timeline-card>
-      </vertical-timeline>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <h3 class="blue-grey-text center-align">Details</h3>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s8 offset-s2">
-        <div class="card-panel blue-grey lighten-4">
-          <div class="row no-margin">
-            <div class="col s2 bold-text">Type</div>
-            <div class="col s10">{{parcel.parcelTypeName}}</div>
+      <div class="row">
+        <div class="col s12">
+          <div class="card-panel z-depth-1 no-margin center" [ngClass]=
+            "{'green': parcel.stations[0].actionDescription == 'Parcel got delivered and was taken from #NoteOrPerson#',
+                'amber': parcel.stations[0].actionDescription != 'Parcel got delivered and was taken from #NoteOrPerson#'}">
+            <span id="progress" class="white-text">
+              {{parseActionDescription(parcel.stations[0])}}
+            </span>
           </div>
-          <div class="row no-margin">
-            <div class="col s6">
-              <div class="row no-margin">
-                <div class="col s4 bold-text" style="padding-left: 0;">From</div>
-                <div class="col s8">
-                  {{parcel.departurePersonDetails}}<br />
-                  {{parcel.departure.road}}<br />
-                  {{parcel.departure.city.name + ' ' + parcel.departure.city.zipCode}}<br />
-                  {{parcel.departure.country}}
-                </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div id="timelineCard" class="card-panel blue-grey z-depth-0 no-margin">
+            <div class="row" *ngIf="showAddStationButton">
+              <div class="col s12 center">
+                <a [routerLink]="['/parcelManagement', parcel.trackingNumber]" class="btn">Add a station</a>
               </div>
             </div>
-            <div class="col s6">
-              <div class="row no-margin">
-                <div class="col s4 bold-text">To</div>
-                <div class="col s8">
-                  {{parcel.destinationPersonDetails}}<br />
-                  {{parcel.destination.road}}<br />
-                  {{parcel.destination.city.name + ' ' + parcel.destination.city.zipCode}}<br />
-                  {{parcel.destination.country}}
-                </div>
+            <div class="row">
+              <div class="col s12">
+                <vertical-timeline style="overflow-y: scroll;">
+                  <vertical-timeline-card *ngFor="let station of parcel.stations" [dateValue]="station.timestamp">
+                    <div class="row">
+                      <div class="col s12">
+                        <h2>{{parseActionDescription(station)}}</h2>
+                      </div>
+                    </div>
+                  </vertical-timeline-card>
+                </vertical-timeline>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s7" style="padding-right: 30px;">
+      <div class="row">
+        <div class="col s12">
+          <ngui-map #map [options]="mapOptions" (mapReady$)="onMapReady($event)">
+            <custom-marker *ngFor="let address of addresses; let iAddress = index"
+                           [position]="address"
+                           (initialized$)="onMarkerInit($event);">
+              <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 2, 'disabled' : iAddress > 0 && iAddress < addresses.length - 1}">
+                <ng-container *ngIf="iAddress == 0"><i class="material-icons">receipt</i></ng-container>
+                <ng-container *ngIf="iAddress > 0 && iAddress < addresses.length - 1">{{iAddress - 1}}</ng-container>
+                <ng-container *ngIf="iAddress == addresses.length - 1"><i class="material-icons">location_searching</i></ng-container>
+              </div>
+            </custom-marker>
+            <polyline [editable]="false"
+                      [path]="positions"
+                      [geodesic]="true"
+                      [strokeColor]="'#a5d6a7'"
+                      [strokeOpacity]="1"
+                      [strokeWeight]="2"></polyline>
+          </ngui-map>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div id="shipmentDetails" class="card-panel blue-grey z-depth-0 no-margin">
+            <h5 class="white-text">Shipment details</h5>
+            <div class="row">
+              <div class="col s12">
+                <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header active"><i class="material-icons">receipt</i>General information</div>
+                    <div class="collapsible-body">
+                      <table class="striped">
+                        <tbody>
+                        <tr>
+                          <td class="bold-text no-padding">Tracking number:</td>
+                          <td class="no-padding blue-grey-text">{{parcel.trackingNumber}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Handover:</td>
+                          <td class="no-padding">{{convertToDate(parcel.handOverTimestamp)}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Parcel type:</td>
+                          <td class="no-padding">{{parcel.parcelTypeName}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">location_city</i>Departure</div>
+                    <div class="collapsible-body">
+                      <table class="striped">
+                        <tbody>
+                        <tr>
+                          <td class="bold-text no-padding">Person details:</td>
+                          <td class="no-padding">{{parcel.departurePersonDetails}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Road:</td>
+                          <td class="no-padding">{{parcel.departure.road}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">City:</td>
+                          <td class="no-padding">{{parcel.departure.city.name}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Country:</td>
+                          <td class="no-padding">{{parcel.departure.country}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Destination</div>
+                    <div class="collapsible-body">
+                      <table class="striped">
+                        <tbody>
+                        <tr>
+                          <td class="bold-text no-padding">Person details:</td>
+                          <td class="no-padding">{{parcel.destinationPersonDetails}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Road:</td>
+                          <td class="no-padding">{{parcel.destination.road}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">City:</td>
+                          <td class="no-padding">{{parcel.destination.city.name}}</td>
+                        </tr>
+                        <tr>
+                          <td class="bold-text no-padding">Country:</td>
+                          <td class="no-padding">{{parcel.destination.country}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

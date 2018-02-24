@@ -3,25 +3,66 @@ ngui-map {
 }
 
 #background {
-  min-height: 50vh;
+  padding-top: 20px;
+  min-height: 100vh;
   height: 100%;
   width: 100vw;
 }
 
 .counterMarker {
+  height: 30px;
+  width: 30px;
   font-size: 1.2rem;
   padding: 0 10px;
   line-height: 30px;
   border-radius: 50%;
-  background-color: #607d8b;
+  background-color: #95a5a6;
   color: #eceff1;
+}
+
+.counterMarker i {
+  font-size: 1.2rem;
+  margin-left: -4px;
+  line-height: 30px;
+}
+
+.counterMarker.disabled {
+  opacity: 0.6;
+}
+
+.counterMarker.pulse {
+  opacity: 1.0;
+}
+
+#progress {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 td {
   padding: 5px;
   vertical-align: top;
+  width: 200px;
 }
 
+#trackingNumber {
+  font-size: 2rem;
+  vertical-align: middle;
+  margin-left: 50px;
+}
+
+#timelineCard {
+  height: calc(100vh - 270px);
+  overflow-y: scroll;
+}
+
+.collapsible-body {
+  background-color: white;
+}
+
+#shipmentDetails {
+  height: calc(100vh - 540px);
+}
 /* Time line component has to be styled in styles.scss */
 
 /*
@@ -32,28 +73,19 @@ td {
 ::ng-deep vertical-timeline .timeline {
   position: relative !important;
   padding: 2em 0 !important;
-  margin-top: 2em !important;
-  margin-bottom: 2em !important;
+  margin-top: 5em !important;
 }
 ::ng-deep vertical-timeline .timeline::before {
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
   left: 18px !important;
-  height: 100% !important;
+  height: calc(100% - 160px) !important;
   width: 4px !important;
   background: #d7e4ed;
 }
-
-@media only screen and (min-width: 1170px) {
-  ::ng-deep vertical-timeline .timeline {
-    margin-top: 3em !important;
-    margin-bottom: 3em !important;
-  }
-  ::ng-deep vertical-timeline .timeline::before {
-    left: 50% !important;
-    margin-left: -2px !important;
-  }
+::ng-deep vertical-timeline .timeline > div {
+  margin-top: -90px !important;
 }
 ::ng-deep vertical-timeline .timeline-item:after {
   content: "" !important;
@@ -66,37 +98,21 @@ td {
 ::ng-deep vertical-timeline .timeline-item:last-child {
   margin-bottom: 0 !important;
 }
-@media only screen and (min-width: 1170px) {
-  ::ng-deep vertical-timeline .timeline-item {
-    margin: 4em 0 !important;
-  }
-  ::ng-deep vertical-timeline .timeline-item:first-child {
-    margin-top: 0 !important;
-  }
-  ::ng-deep vertical-timeline .timeline-item:last-child {
-    margin-bottom: 0 !important;
-  }
-}
 ::ng-deep vertical-timeline .timeline-img {
+  width: 60px !important;
+  height: 60px !important;
+  margin-left: -30px !important;
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0) !important;
+  -webkit-backface-visibility: hidden !important;
   position: relative !important;
   top: 0 !important;
-  left: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
+  left: 20px !important;
   border-radius: 50% !important;
   text-align: center;
   background-color: #b0bec5 !important;
 }
 @media only screen and (min-width: 1170px) {
-  ::ng-deep vertical-timeline .timeline-img {
-    width: 60px !important;
-    height: 60px !important;
-    left: 50% !important;
-    margin-left: -30px !important;
-    /* Force Hardware Acceleration in WebKit */
-    -webkit-transform: translateZ(0) !important;
-    -webkit-backface-visibility: hidden !important;
-  }
   ::ng-deep vertical-timeline .timeline-img {
     font-size: 17px;
   }
@@ -105,12 +121,6 @@ td {
   }
   ::ng-deep vertical-timeline .cssanimations .timeline-img.is-hidden {
     visibility: hidden !important;
-  }
-  ::ng-deep vertical-timeline .cssanimations .timeline-img.bounce-in {
-    visibility: visible !important;
-    -webkit-animation: cd-bounce-1 0.6s !important;
-    -moz-animation: cd-bounce-1 0.6s !important;
-    animation: cd-bounce-1 0.6s !important;
   }
 }
 ::ng-deep vertical-timeline .timeline-content {
@@ -149,14 +159,16 @@ td {
   background: none !important;
 }
 ::ng-deep vertical-timeline .timeline-content::before {
+  top: 24px !important;
+  left: auto !important;
+  right: 100% !important;
+  border-color: transparent !important;
   content: '' !important;
   position: absolute !important;
-  top: 16px !important;
-  right: 100% !important;
   height: 0 !important;
   width: 0 !important;
   border: 7px solid transparent !important;
-  border-right: 7px solid white !important;
+  border-right-color: white !important;
 }
 @media only screen and (min-width: 768px) {
   ::ng-deep vertical-timeline .timeline-content h2 {
@@ -169,56 +181,7 @@ td {
     font-size: 0.875rem !important;
   }
 }
-@media only screen and (min-width: 1170px) {
-  ::ng-deep vertical-timeline .timeline-content {
-    margin-left: 0 !important;
-    padding: 1.6em !important;
-    width: 45% !important;
-  }
-  ::ng-deep vertical-timeline .timeline-content::before {
-    top: 24px !important;
-    left: 100% !important;
-    border-color: transparent !important;
-    border-left-color: white !important;
-  }
-  ::ng-deep vertical-timeline .timeline-content .date {
-    position: absolute !important;
-    width: 100% !important;
-    left: 122% !important;
-    top: 6px !important;
-    font-size: 1rem !important;
-  }
-  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content {
-    float: right !important;
-  }
-  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content::before {
-    top: 24px !important;
-    left: auto !important;
-    right: 100% !important;
-    border-color: transparent !important;
-    border-right-color: white !important;
-  }
-  ::ng-deep vertical-timeline .timeline-item:nth-child(even) .timeline-content .date {
-    left: auto !important;
-    right: 122% !important;
-    text-align: right !important;
-  }
-  ::ng-deep vertical-timeline .cssanimations .timeline-content.is-hidden {
-    visibility: hidden !important;
-  }
-  ::ng-deep vertical-timeline .cssanimations .timeline-content.bounce-in {
-    visibility: visible !important;
-    -webkit-animation: cd-bounce-2 0.6s !important;
-    -moz-animation: cd-bounce-2 0.6s !important;
-    animation: cd-bounce-2 0.6s !important;
-  }
-}
 
-@media only screen and (min-width: 1170px) {
-  /* inverse bounce effect on even content blocks */
-  ::ng-deep vertical-timeline .cssanimations .timeline-item:nth-child(even) .timeline-content.bounce-in {
-    -webkit-animation: cd-bounce-2-inverse 0.6s !important;
-    -moz-animation: cd-bounce-2-inverse 0.6s !important;
-    animation: cd-bounce-2-inverse 0.6s !important;
-  }
+.amber {
+  background-color: #f1c40f !important;
 }

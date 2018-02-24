@@ -11,7 +11,6 @@ $error-color: color("red", "darken-3") !default;
 $link-color: color("light-blue", "lighten-3") !default;
 
 @import "~materialize-css/sass/materialize.scss";
-
 body {
   overflow-x: hidden;
 }
@@ -26,4 +25,12 @@ body {
 
 .bold-text {
   font-weight: bold;
+}
+
+.blue-grey {
+  background-color: #95a5a6 !important;
+}
+
+.blue-grey-text {
+  color: #95a5a6 !important;
 }
