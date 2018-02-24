@@ -207,12 +207,15 @@ export class ParcelDetailsComponent implements OnInit {
     return new Date(timestamp);
   }
 
+  public filterPositions(positions: any[]) {
+    return positions.filter((position, index) => index > 0 && index < positions.length - 1)
+  }
+
   private loadPositions(): void {
     if (typeof(google) == 'undefined' || !this.mapComponent) { return; }
     let positions = [];
     let addresses = this.buildAddressArrayForStations();
     let geoObservables = addresses
-      .filter((address, index) => index > 0 && index < addresses.length - 1)
       .map(address => this.mapComponent.geoCoder.geocode({address: address})
         .catch(error => Observable.of({}))
         .map(response => (response.length > 0) ? response[0] : []));

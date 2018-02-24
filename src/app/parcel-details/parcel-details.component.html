@@ -56,12 +56,12 @@
                            (initialized$)="onMarkerInit($event);">
               <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 2, 'disabled' : iAddress > 0 && iAddress < addresses.length - 1}">
                 <ng-container *ngIf="iAddress == 0"><i class="material-icons">receipt</i></ng-container>
-                <ng-container *ngIf="iAddress > 0 && iAddress < addresses.length - 1">{{iAddress - 1}}</ng-container>
+                <ng-container *ngIf="iAddress > 0 && iAddress < addresses.length - 1">{{iAddress}}</ng-container>
                 <ng-container *ngIf="iAddress == addresses.length - 1"><i class="material-icons">location_searching</i></ng-container>
               </div>
             </custom-marker>
-            <polyline [editable]="false"
-                      [path]="positions"
+            <polyline *ngIf="positions" [editable]="false"
+                      [path]="filterPositions(positions)"
                       [geodesic]="true"
                       [strokeColor]="'#a5d6a7'"
                       [strokeOpacity]="1"
