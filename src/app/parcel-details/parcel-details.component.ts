@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Parcel, Station} from "../data-objects/parcel-management";
 import {ParcelManagementService} from "../services/parcel-management.service";
 import 'rxjs/add/operator/switchMap';
@@ -172,12 +172,13 @@ export class ParcelDetailsComponent implements OnInit {
   public positions: any[];
   public showAddStationButton: boolean = false;
 
-  constructor(private route: ActivatedRoute, private authorizationService: AuthorizationService, private parcelManagementService: ParcelManagementService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private authorizationService: AuthorizationService, private parcelManagementService: ParcelManagementService) { }
 
   ngOnInit() {
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.parcelManagementService.getParcel(params.get('trackingNumber')))
+      .catch(error => {this.router.navigate(['']); return []; })
       .subscribe(parcel => {
         parcel.stations = parcel.stations.reverse();
         this.parcel = parcel;
