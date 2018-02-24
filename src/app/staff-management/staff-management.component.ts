@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {StaffMember} from "../data-objects/authorization";
-import {AuthorizationService} from "../services/authorization.service";
-import {MaterializeAction} from "angular2-materialize";
-import {HelperMethods} from "../helper-methods";
-import {StaffManagementService} from "../services/staff-management.service";
+import {StaffMember} from '../data-objects/authorization';
+import {AuthorizationService} from '../services/authorization.service';
+import {MaterializeAction} from 'angular2-materialize';
+import {HelperMethods} from '../helper-methods';
+import {StaffManagementService} from '../services/staff-management.service';
 
 @Component({
   selector: 'app-staff-management',
@@ -26,12 +26,12 @@ export class StaffManagementComponent implements OnInit {
   }
 
   public openNewStaffModal(): void {
-    this.newStaffModalActions.emit({action: "modal", params: [ 'open' ]});
+    this.newStaffModalActions.emit({action: 'modal', params: [ 'open' ]});
   }
 
   public openDeleteStaffModal(staffMember: StaffMember): void {
     this.deleteStaffMember = staffMember;
-    this.deleteStaffModalActions.emit({action: "modal", params: [ 'open' ]});
+    this.deleteStaffModalActions.emit({action: 'modal', params: [ 'open' ]});
   }
 
   public addStaff(staffMember: StaffMember): void {

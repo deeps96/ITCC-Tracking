@@ -22,7 +22,7 @@ export class ParcelManagementService {
   }
 
   public createParcel(parcel: Parcel): Observable<string> {
-    let handOverTimestamp: string = Date.now().toString();
+    parcel.handOverTimestamp = new Date().getTime();
     const parameter = {parcel: parcel};
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

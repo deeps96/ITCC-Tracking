@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {MaterializeAction} from "angular2-materialize";
-import {DataManagementService} from "../services/data-management.service";
+import {MaterializeAction} from 'angular2-materialize';
+import {DataManagementService} from '../services/data-management.service';
 
 @Component({
   selector: 'app-transportation-mode',
@@ -20,22 +20,22 @@ export class TransportationModeComponent implements OnInit {
 
   ngOnInit() {
     this.updateModes();
-    this.newMode = "";
+    this.newMode = '';
   }
 
   public openDeleteModeModal(action: string): void {
     this.delMode = action;
-    this.deleteModeModalActions.emit({action: "modal", params: ['open']});
+    this.deleteModeModalActions.emit({action: 'modal', params: ['open']});
   }
 
   public openNewModeModal(): void {
-    this.newModeModalActions.emit({action: "modal", params: ['open']});
+    this.newModeModalActions.emit({action: 'modal', params: ['open']});
   }
 
   public addMode(action: string): void {
     this.dataManagementService.addTransportationMode(action).subscribe(response => {
       this.updateModes();
-      this.newMode = "";
+      this.newMode = '';
     });
   }
 

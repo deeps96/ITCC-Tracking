@@ -24,33 +24,11 @@ export class AppComponent {
   constructor(private router: Router, private authenticationService: AuthorizationService) {
     router.events
       .filter(event => event instanceof NavigationStart)
-      .subscribe((event: NavigationStart) => {
-        this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
-        this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
-        this.showNav = !AppComponent.isParcelDetailPage(event);
-        if (this.isLoggedIn()) {
-          this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin);
-          this.authenticationService.isStaff().subscribe(isStaff => this.showStaffButtons = isStaff);
-        }
-      });
-    authenticationService.isBackendRunning()
-      .timeout(3000)
-      .catch(error => {
-        this.backendRunning = false;
-        this.showLoading = false;
-        return [];
-      }).subscribe(response => this.showLoading = false);
+      .subscribe((event: NavigationStart) => this.updateButtonVisibilities(event));
+    this.showPreloader();
   }
 
   //actions
-  private static isStaffPage(event: NavigationStart): boolean {
-    return event.url.startsWith('/staff');
-  }
-
-  private static isDataPage(event: NavigationStart): boolean {
-    return event.url.startsWith('/data');
-  }
-
   private static isParcelDetailPage(event: NavigationStart): boolean {
     return event.url.startsWith('/track');
   }
@@ -77,4 +55,23 @@ export class AppComponent {
     this.router.navigate(['']);
   }
 
+  private updateButtonVisibilities(event: NavigationStart) {
+    this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
+    this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
+    this.showNav = !AppComponent.isParcelDetailPage(event);
+    if (this.isLoggedIn()) {
+      this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin);
+      this.authenticationService.isStaff().subscribe(isStaff => this.showStaffButtons = isStaff);
+    }
+  }
+
+  private showPreloader(): void {
+    this.authenticationService.isBackendRunning()
+      .timeout(3000)
+      .catch(error => {
+        this.backendRunning = false;
+        this.showLoading = false;
+        return [];
+      }).subscribe(response => this.showLoading = false);
+  }
 }

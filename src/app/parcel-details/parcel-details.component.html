@@ -33,7 +33,7 @@
             <div class="row">
               <div class="col s12">
                 <vertical-timeline style="overflow-y: scroll;">
-                  <vertical-timeline-card *ngFor="let station of parcel.stations" [dateValue]="station.timestamp">
+                  <vertical-timeline-card *ngFor="let station of parcel.stations.reverse()" [dateValue]="station.timestamp">
                     <div class="row">
                       <div class="col s12">
                         <h2>{{parseActionDescription(station)}}</h2>
@@ -54,14 +54,14 @@
             <custom-marker *ngFor="let address of addresses; let iAddress = index"
                            [position]="address"
                            (initialized$)="onMarkerInit($event);">
-              <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 2, 'disabled' : iAddress > 0 && iAddress < addresses.length - 1}">
+              <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 2, 'disabled' : iAddress > 0 && iAddress < addresses.length - 2}">
                 <ng-container *ngIf="iAddress == 0"><i class="material-icons">receipt</i></ng-container>
                 <ng-container *ngIf="iAddress > 0 && iAddress < addresses.length - 1">{{iAddress}}</ng-container>
                 <ng-container *ngIf="iAddress == addresses.length - 1"><i class="material-icons">location_searching</i></ng-container>
               </div>
             </custom-marker>
             <polyline *ngIf="positions" [editable]="false"
-                      [path]="filterPositions(positions)"
+                      [path]="filterStationPositions(positions)"
                       [geodesic]="true"
                       [strokeColor]="'#a5d6a7'"
                       [strokeOpacity]="1"

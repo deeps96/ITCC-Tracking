@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Parcel, Station} from "../data-objects/parcel-management";
 import {ParcelManagementService} from "../services/parcel-management.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
@@ -17,7 +17,9 @@ export class AddStationComponent implements OnInit {
   public transportationModes: string[];
   public actionDescriptions: string[];
 
-  constructor(private route: ActivatedRoute, private parcelManagementService: ParcelManagementService, private dataManagementService: DataManagementService) {}
+  constructor(private route: ActivatedRoute,
+              private parcelManagementService: ParcelManagementService,
+              private dataManagementService: DataManagementService) {}
 
   ngOnInit() {
     this.dataManagementService.listTransportationModes().subscribe(response => this.transportationModes = response);

@@ -25,9 +25,8 @@ export class ParcelDetailsComponent implements OnInit {
   private mapComponent: any;
 
   public addresses: string[];
-  private center = {lat: 52.040055, lng: 8.540920};
   public mapOptions: MapOptions = {
-    center: this.center,
+    center: {lat: 52.040055, lng: 8.540920},
     maxZoom: 17,
     minZoom: 4,
     zoom: 13,
@@ -172,22 +171,14 @@ export class ParcelDetailsComponent implements OnInit {
   public positions: any[];
   public showAddStationButton: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authorizationService: AuthorizationService, private parcelManagementService: ParcelManagementService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private authorizationService: AuthorizationService,
+              private parcelManagementService: ParcelManagementService) { }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.parcelManagementService.getParcel(params.get('trackingNumber')))
-      .catch(error => {this.router.navigate(['']); return []; })
-      .subscribe(parcel => {
-        parcel.stations = parcel.stations.reverse();
-        this.parcel = parcel;
-        this.loadPositions();
-      });
-    if (this.authorizationService.isAuthenticated()) {
-      Observable.zip(this.authorizationService.isAdmin(), this.authorizationService.isStaff()).subscribe(
-        ([isAdmin, isStaff]) => this.showAddStationButton = (isAdmin || isStaff));
-    }
+    this.loadParcel();
+    this.updateShowAddStationButton();
   }
 
   public onMapReady(map): void {
@@ -208,38 +199,60 @@ export class ParcelDetailsComponent implements OnInit {
     return new Date(timestamp);
   }
 
-  public filterPositions(positions: any[]) {
+  public filterStationPositions(positions: any[]) {
     return positions.filter((position, index) => index > 0 && index < positions.length - 1)
   }
 
   private loadPositions(): void {
     if (typeof(google) == 'undefined' || !this.mapComponent) { return; }
-    let positions = [];
     let addresses = this.buildAddressArrayForStations();
-    let geoObservables = addresses
+    let geoObservables = this.prepareAddressTranslation(addresses);
+    Observable.forkJoin(geoObservables).subscribe(responses => {
+        this.positions = this.extractPositions(responses);;
+        this.addresses = addresses;
+      });
+  }
+
+  private prepareAddressTranslation(addresses: string[]): Observable<any>[] {
+    return addresses
       .map(address => this.mapComponent.geoCoder.geocode({address: address})
         .catch(error => Observable.of({}))
         .map(response => (response.length > 0) ? response[0] : []));
-    Observable.forkJoin(geoObservables)
-      .subscribe(responses => {
-        responses.forEach((response: GeocoderResult) => {
-          if (response.geometry) {
-            positions.push(new google.maps.LatLng(response.geometry.location.lat(), response.geometry.location.lng()));
-          }
-        });
-        this.positions = positions;
-        this.addresses = addresses;
-      });
   }
 
   private buildAddressArrayForStations(): string[] {
     let addresses = [];
     addresses.push(this.parcel.departure.road + ', ' + this.parcel.departure.city.name + ' ' + this.parcel.departure.country);
-    this.parcel.stations.forEach(station =>
-      addresses.push(station.location.road + ', ' + station.location.city.name + ' ' + station.location.country));
+    this.parcel.stations.forEach(station => addresses.push(station.location.road + ', ' + station.location.city.name + ' ' + station.location.country));
     addresses.push(this.parcel.destination.road + ', ' + this.parcel.destination.city.name + ' ' + this.parcel.destination.country);
     addresses = addresses.filter(address => address);
     return addresses;
   }
 
+  private loadParcel(): void {
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.parcelManagementService.getParcel(params.get('trackingNumber')))
+      .catch(error => {this.router.navigate(['']); return []; })
+      .subscribe(parcel => {
+        this.parcel = parcel;
+        this.loadPositions();
+      });
+  }
+
+  private updateShowAddStationButton(): void {
+    if (this.authorizationService.isAuthenticated()) {
+      Observable.zip(this.authorizationService.isAdmin(), this.authorizationService.isStaff()).subscribe(
+        ([isAdmin, isStaff]) => this.showAddStationButton = (isAdmin || isStaff));
+    }
+  }
+
+  private extractPositions(responses: GeocoderResult[]): google.maps.LatLng[] {
+    let positions = [];
+    responses.forEach((response: GeocoderResult) => {
+      if (response.geometry) {
+        positions.push(new google.maps.LatLng(response.geometry.location.lat(), response.geometry.location.lng()));
+      }
+    });
+    return positions;
+  }
 }

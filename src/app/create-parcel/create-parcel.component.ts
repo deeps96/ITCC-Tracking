@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Location, Parcel} from "../data-objects/parcel-management";
+import {Component, OnInit} from '@angular/core';
+import {Parcel} from "../data-objects/parcel-management";
 import {ParcelManagementService} from "../services/parcel-management.service";
 import {Router} from "@angular/router";
-import {DataManagementComponent} from "../data-management/data-management.component";
 import {DataManagementService} from "../services/data-management.service";
 
 @Component({
@@ -15,7 +14,9 @@ export class CreateParcelComponent implements OnInit {
   public parcelTypeNames: string[];
   public parcel: Parcel;
 
-  constructor(private router: Router, private parcelManagementService: ParcelManagementService, private dataManagementService: DataManagementService) {}
+  constructor(private router: Router,
+              private parcelManagementService: ParcelManagementService,
+              private dataManagementService: DataManagementService) {}
 
   ngOnInit() {
     this.parcel = new Parcel();
