@@ -24,6 +24,11 @@ export class AuthGuard implements CanActivate {
     if (this.isAnonymUser()) {
       return this.canAnonymActivate(route);
     }
+    return this.checkPrivileges(route);
+  }
+
+    //actions
+  private checkPrivileges(route: string): Observable<boolean> {
     return Observable.zip(
       this.authenticationService.isAdmin(),
       this.authenticationService.isStaff(),
@@ -39,7 +44,6 @@ export class AuthGuard implements CanActivate {
     );
   }
 
-  //actions
   private static showForbiddenToast(url: string): void {
     Materialize.toast('You are not allowed to access the page ' + url, 3000, '');
   }
