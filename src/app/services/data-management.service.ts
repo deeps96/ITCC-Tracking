@@ -13,7 +13,8 @@ export class DataManagementService {
   private routerConfig: RouterConfig = ROUTER_CONFIG;
 
 
-  constructor(private http: Http, private authorizationService: AuthorizationService) {
+  constructor(private http: Http,
+              private authorizationService: AuthorizationService) {
     this.helperMethods = new HelperMethods(authorizationService);
   }
 

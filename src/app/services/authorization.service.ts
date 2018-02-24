@@ -20,7 +20,9 @@ export class AuthorizationService {
   private helperMethods: HelperMethods;
   private routerConfig: RouterConfig = ROUTER_CONFIG;
 
-  constructor(private router: Router, private http: Http, private cookieService: CookieService) {
+  constructor(private router: Router,
+              private http: Http,
+              private cookieService: CookieService) {
     this.helperMethods = new HelperMethods(this);
   }
 

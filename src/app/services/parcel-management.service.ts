@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import {Location, Parcel, Station} from "../data-objects/parcel-management";
+import {Parcel, Station} from "../data-objects/parcel-management";
 import {HelperMethods} from "../helper-methods";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Rx';
 import {RouterConfig} from "../data-objects/config";
 import {ROUTER_CONFIG} from "../../assets/config";
 import {AuthorizationService} from "./authorization.service";
-import {StaffMember} from "../data-objects/authorization";
 
 
 @Injectable()
@@ -17,7 +16,8 @@ export class ParcelManagementService {
   private helperMethods: HelperMethods;
   private routerConfig: RouterConfig = ROUTER_CONFIG;
 
-  constructor(private http: Http, private authorizationService: AuthorizationService) {
+  constructor(private http: Http,
+              private authorizationService: AuthorizationService) {
     this.helperMethods = new HelperMethods(authorizationService);
   }
 
@@ -33,7 +33,7 @@ export class ParcelManagementService {
   }
 
   public getParcel(trackingNumber: string): Observable<Parcel> {
-    const params = {trackingNumber: trackingNumber}
+    const params = {trackingNumber: trackingNumber};
     return this.http.get(this.routerConfig.serverAddress + '/getParcel', {params: params})
                     .map(HelperMethods.extractData)
                     .catch(event => this.helperMethods.handleError(event))
