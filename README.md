@@ -5,3 +5,6 @@ SonarLint is used as Lint checker.
 
 ## IDE
 I used IntelliJ to develop - if you want to compile the project you need to install the Lombok plugin first.
+
+## Build
+Run maven install to build the jar.
