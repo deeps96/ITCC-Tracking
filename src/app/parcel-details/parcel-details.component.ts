@@ -208,8 +208,8 @@ export class ParcelDetailsComponent implements OnInit {
     let addresses = this.buildAddressArrayForStations();
     let geoObservables = this.prepareAddressTranslation(addresses);
     Observable.forkJoin(geoObservables).subscribe(responses => {
-        this.positions = this.extractPositions(responses);;
-        this.addresses = addresses;
+      this.positions = this.extractPositions(responses);
+      this.addresses = addresses;
       });
   }
 
