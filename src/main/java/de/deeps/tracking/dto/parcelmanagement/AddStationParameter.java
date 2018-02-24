@@ -1,6 +1,5 @@
 package de.deeps.tracking.dto.parcelmanagement;
 
-import de.deeps.tracking.dto.parcelmanagement.Station;
 import de.deeps.tracking.dto.authorization.AuthorizationParameter;
 import lombok.Getter;
 import lombok.Setter;

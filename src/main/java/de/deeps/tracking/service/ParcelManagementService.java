@@ -32,12 +32,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ParcelManagementService {
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
+    @Getter(AccessLevel.PRIVATE) private static final String DEFAULT_ACTION = "Contract information received from " +
+            "#DeparturePerson#", DEFAULT_TRANSPORT = "None", DEFAULT_NOTE = "";
 
     private ActionDescriptionRepository actionDescriptionRepository;
     private ParcelManagement parcelManagement;
     private ParcelRepository parcelRepository;
     private ParcelTypeRepository parcelTypeRepository;
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
     private String parcelTypeIDForName;
     private TransportationModeRepository transportationModeRepository;
 
@@ -60,6 +62,7 @@ public class ParcelManagementService {
                     departurePersonDetails, destinationPersonDetails);
             completeParcelInformation(parcelEntry, parcelTypeName);
             getParcelRepository().save(parcelEntry);
+            addDefaultStationToParcel(parcelEntry);
             return parcelEntry.getTrackingNumber();
         } catch (NoSuchElementException e) {
             log.error(e.getMessage());
@@ -89,6 +92,12 @@ public class ParcelManagementService {
         ParcelType parcelType = getParcelTypeRepository().findByName(parcelTypeName);
         if (parcelType == null) { throw new NoSuchElementException("Parcel type does not exists!"); }
         getParcelManagement().completeParcelInformation(parcelEntry, parcelType, getParcelRepository().count());
+    }
+
+    private void addDefaultStationToParcel(ParcelEntry parcel) {
+        Station station = new Station(parcel.getDeparture(), getDEFAULT_ACTION(), getDEFAULT_NOTE(),
+                getDEFAULT_TRANSPORT(), System.currentTimeMillis());
+        addStationToParcel(parcel.getTrackingNumber(), station);
     }
 
     //conversion
