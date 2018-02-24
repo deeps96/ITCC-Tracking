@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
-public class AbstractFixedData {
+@Setter class AbstractFixedData {
 
     private boolean removed;
 }

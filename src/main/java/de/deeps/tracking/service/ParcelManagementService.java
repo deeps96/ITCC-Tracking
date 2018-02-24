@@ -73,9 +73,7 @@ public class ParcelManagementService {
     public boolean addStationToParcel(String trackingNumber, Station station) {
         DBStation dbStation = convertStationToDBStation(station);
         ParcelEntry parcel = getParcelRepository().findByTrackingNumber(trackingNumber);
-        if (parcel == null || dbStation == null) {
-            return false;
-        }
+        if (parcel == null || dbStation == null) { return false; }
         parcel.getStations().add(dbStation);
         getParcelRepository().save(parcel);
         return true;
@@ -117,9 +115,7 @@ public class ParcelManagementService {
         if (entry == null) { return null; }
         List<Station> stations = convertDBStationsToStations(entry.getStations());
         ParcelType parcelType = getParcelTypeRepository().findOne(entry.getParcelTypeID());
-        if (parcelType == null) {
-            return null;
-        }
+        if (parcelType == null) { return null; }
         return new Parcel(stations, entry.getDeparture(), entry.getDestination(), entry.getHandOverTimestamp(),
                 entry.getTrackingNumber(), parcelType.getName(), entry.getDeparturePersonDetails(), entry.getDestinationPersonDetails());
     }

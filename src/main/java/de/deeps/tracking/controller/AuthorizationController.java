@@ -23,8 +23,11 @@ public class AuthorizationController extends GenericController {
         super(authorizationService);
     }
 
+    @SuppressWarnings("EmptyMethod")
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public void ping(){}
+    public void ping() {
+        //This method is empty, because its only used to check, whether the backend is running or not
+    }
 
     @RequestMapping(value = "/authorize", method = RequestMethod.GET, produces = "application/json")
     public AuthorizationResponse authorize(@RequestParam(value="email") String email, @RequestParam(value="password")
@@ -32,7 +35,7 @@ public class AuthorizationController extends GenericController {
         AuthorizationResponse response = new AuthorizationResponse();
         User user = getAuthorizationService().getAuthorizedUser(email, password);
         response.setAuthorized(user != null);
-        if (response.isAuthorized()) {
+        if (user != null) {
             response.setAuthorizationToken(getAuthorizationService().generateAuthenticationToken(user.getId()));
         }
         return response;

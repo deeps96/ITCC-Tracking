@@ -70,12 +70,10 @@ public class FixedDataService {
         getActionDescriptionRepository().save(actionDescription);
     }
 
-    public void addParcelType(String key, String type) throws IOException, IllegalArgumentException {
+    public void addParcelType(String key, String type) throws IOException {
         ParcelType parcelType = getParcelTypeRepository().findByName(type);
         if (parcelType != null) {
-            if (!parcelType.isRemoved()) {
-                throw new IOException("Parcel type is already existing!");
-            }
+            if (!parcelType.isRemoved()) { throw new IOException("Parcel type is already existing!"); }
             parcelType.setRemoved(false);
         } else if (getParcelTypeRepository().findByKey(key) != null) {
             throw new IOException("Key is already used for another type!");

@@ -19,17 +19,17 @@ public abstract class GenericController {
         setAuthorizationService(authorizationService);
     }
 
-    protected void checkPrivilege(AuthorizationParameter parameter, String... privileges) throws IOException {
+    void checkPrivilege(AuthorizationParameter parameter, String... privileges) throws IOException {
         checkPrivilege(parameter.getAuthorizationToken(), privileges);
     }
 
-    protected void checkPrivilege(String authorizationToken, String... privileges) throws IOException {
+    void checkPrivilege(String authorizationToken, String... privileges) throws IOException {
         if (!getAuthorizationService().hasPrivileges(authorizationToken, Arrays.asList(privileges))) {
             throw new IOException("Not enough privileges!");
         }
     }
 
-    protected void validateInputNotBlank(String... inputs) throws IOException {
+    void validateInputNotBlank(String... inputs) throws IOException {
         for (String input : inputs) {
             if (input == null || input.replace(" ", "").isEmpty()){
                 throw new IOException("A parameter is missing!");
@@ -37,7 +37,7 @@ public abstract class GenericController {
         }
     }
 
-    protected void validateLocation(Location location) throws IOException {
+    void validateLocation(Location location) throws IOException {
         validateInputNotBlank(location.getCountry(), location.getRoad(), location.getCity().getZipCode(), location
                 .getCity().getName());
     }

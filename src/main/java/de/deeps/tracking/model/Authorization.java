@@ -1,7 +1,6 @@
 package de.deeps.tracking.model;
 
 import com.google.common.hash.Hashing;
-import de.deeps.tracking.model.dbobjects.User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;

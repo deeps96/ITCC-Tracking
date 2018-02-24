@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.IllegalFormatException;
-
 @Document(collection = "parcel-types")
 @Getter
 @Setter

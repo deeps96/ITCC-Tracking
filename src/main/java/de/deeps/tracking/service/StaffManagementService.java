@@ -34,9 +34,7 @@ public class StaffManagementService extends AbstractUserService{
 
     public void addStaffMember(String forename, String lastname, String department, String email, String password) throws IOException {
         Role role = getRoleRepository().findByName(getSTAFF_ROLE());
-        if (role == null) {
-            throw new IOException("Role unkown");
-        }
+        if (role == null) { throw new IOException("Role unknown"); }
         User newStaff = new User(department, email, password, forename, lastname);
         newStaff.setHashedPassword(Authorization.hashPassword(password));
         newStaff.setRoleID(role.getId());
@@ -44,9 +42,7 @@ public class StaffManagementService extends AbstractUserService{
     }
 
     public void removeStaffMember(String staffID) throws IOException {
-        if (getUserRepository().findOne(staffID) == null) {
-            throw new IOException("Staff does not exists");
-        }
+        if (getUserRepository().findOne(staffID) == null) { throw new IOException("Staff does not exists"); }
         getUserRepository().delete(staffID);
     }
 
