@@ -61,6 +61,7 @@ public class FixedDataController extends GenericController {
     public void addActionDescription(@RequestBody AddActionDescriptionParameter parameter) throws
             IOException {
         checkPrivilege(parameter, "canAddActionDescription");
+        validateInputNotBlank(parameter.getActionDescription());
         getFixedDataService().addActionDescription(parameter.getActionDescription());
     }
 
@@ -68,6 +69,7 @@ public class FixedDataController extends GenericController {
     public void addParcelType(@RequestBody AddParcelTypeParameter parameter) throws
             IOException {
         checkPrivilege(parameter, "canAddParcelType");
+        validateInputNotBlank(parameter.getType(), parameter.getKey());
         getFixedDataService().addParcelType(parameter.getKey(), parameter.getType());
     }
 
@@ -75,6 +77,7 @@ public class FixedDataController extends GenericController {
     public void removeTransportationMode(@RequestParam(value="authorizationToken") String authorizationToken,
                                       @RequestParam(value="mode") String mode) throws IOException {
         checkPrivilege(authorizationToken, "canRemoveTransportationMode");
+        validateInputNotBlank(mode);
         getFixedDataService().removeTransportationMode(mode);
     }
 
@@ -82,6 +85,7 @@ public class FixedDataController extends GenericController {
     public void removeActionDescription(@RequestParam(value="authorizationToken") String authorizationToken,
                                       @RequestParam(value="action") String action) throws IOException {
         checkPrivilege(authorizationToken, "canRemoveActionDescription");
+        validateInputNotBlank(action);
         getFixedDataService().removeActionDescription(action);
     }
 
@@ -89,6 +93,7 @@ public class FixedDataController extends GenericController {
     public void removeParcelType(@RequestParam(value="authorizationToken") String authorizationToken,
                                         @RequestParam(value="type") String type) throws IOException {
         checkPrivilege(authorizationToken, "canRemoveParcelType");
+        validateInputNotBlank(type);
         getFixedDataService().removeParcelType(type);
     }
 

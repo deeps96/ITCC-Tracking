@@ -70,7 +70,7 @@ public class FixedDataService {
         getActionDescriptionRepository().save(actionDescription);
     }
 
-    public void addParcelType(String key, String type) throws IOException {
+    public void addParcelType(String key, String type) throws IOException, IllegalArgumentException {
         ParcelType parcelType = getParcelTypeRepository().findByName(type);
         if (parcelType != null) {
             if (!parcelType.isRemoved()) {

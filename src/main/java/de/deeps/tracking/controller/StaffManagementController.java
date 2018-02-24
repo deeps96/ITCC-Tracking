@@ -31,6 +31,7 @@ public class StaffManagementController extends GenericController {
     @RequestMapping(value = "/addStaff", method = RequestMethod.POST)
     public void addStaff(@RequestBody AddStaffParameter parameter) throws IOException {
         checkPrivilege(parameter, "canAddStaff");
+        validateStaffMember(parameter.getStaffMember());
         StaffMember member = parameter.getStaffMember();
         getStaffManagementService().addStaffMember(member.getForeName(), member.getLastName(), member.getDepartment(),
                 member.getEmail(), member.getPassword());
@@ -51,5 +52,11 @@ public class StaffManagementController extends GenericController {
                 new StaffMember(user.getForename(), user.getLastname(), user.getEmail(), user.getId(), user.getDepartment())
         ).collect(Collectors.toList());
         return new ListStaffResponse(staffMembers);
+    }
+
+    //validation
+    private void validateStaffMember(StaffMember staffMember) throws IOException{
+        validateInputNotBlank(staffMember.getDepartment(), staffMember.getEmail(), staffMember.getForeName(),
+                staffMember.getLastName(), staffMember.getPassword());
     }
 }
