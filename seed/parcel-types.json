@@ -1,0 +1,6 @@
+{"_id":{"$oid":"5a843195bd0c260fc8e791b5"},"key":"00","name":"Basic parcel","removed":false}
+{"_id":{"$oid":"5a89b935960b1a30c023898d"},"key":"01","name":"Package","removed":false}
+{"_id":{"$oid":"5a89b940960b1a30c023898e"},"key":"02","name":"Sports equipment & special baggage","removed":false}
+{"_id":{"$oid":"5a89b94a960b1a30c023898f"},"key":"03","name":"Tires and rims","removed":false}
+{"_id":{"$oid":"5a89b954960b1a30c0238990"},"key":"04","name":"Suitcases and luggage","removed":false}
+{"_id":{"$oid":"5a89b95d960b1a30c0238991"},"key":"05","name":"Bikes","removed":false}

@@ -15,10 +15,13 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
   config.vm.box_version = "1.1.0"
   config.vm.network :forwarded_port, guest: 27017, host: 27017
+  config.vm.network :forwarded_port, guest: 4200, host: 4200
+  config.vm.network :forwarded_port, guest: 2018, host: 2018
   config.vm.provision :shell, path: "install-mongo-db.sh"
-  config.vm.provision :shell, path: "install-node.sh"
   config.vm.provision :shell, path: "install-java.sh"
+  config.vm.provision :shell, path: "install-nginx.sh"
   config.vm.provision :shell, path: "load-seed-into-mongo-db.sh"
+  config.vm.provision :shell, path: "start-backend.sh", run: 'always'
 
 
 

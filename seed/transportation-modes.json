@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5a86fa4a5bf3f40328db8511"},"mode":"None","removed":false}
+{"_id":{"$oid":"5a86fa725bf3f40328db8514"},"mode":"Plane","removed":false}
+{"_id":{"$oid":"5a86fa765bf3f40328db8515"},"mode":"Transporter","removed":false}
+{"_id":{"$oid":"5a86fa7b5bf3f40328db8516"},"mode":"Ferry","removed":false}
+{"_id":{"$oid":"5a86fa7e5bf3f40328db8517"},"mode":"Train","removed":false}

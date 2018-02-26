@@ -1,0 +1,7 @@
+{"_id":{"$oid":"5a86fae95bf3f40328db851b"},"action":"Contract information received from #DeparturePerson#","removed":false}
+{"_id":{"$oid":"5a86fb055bf3f40328db851c"},"action":"Parcel got sorted in #Location#","removed":false}
+{"_id":{"$oid":"5a86fb145bf3f40328db851d"},"action":"Parcel arrived internal warehouse at #Location#","removed":false}
+{"_id":{"$oid":"5a86fb1f5bf3f40328db851e"},"action":"Parcel is on transit to #Location# with #Transport#","removed":false}
+{"_id":{"$oid":"5a86fb3b5bf3f40328db851f"},"action":"Parcel loaded into #Transportation#","removed":false}
+{"_id":{"$oid":"5a86fb465bf3f40328db8520"},"action":"Parcel is about to getting delivered to #DestinationPerson#","removed":false}
+{"_id":{"$oid":"5a86fb525bf3f40328db8521"},"action":"Parcel got delivered and was taken from #NoteOrPerson#","removed":false}

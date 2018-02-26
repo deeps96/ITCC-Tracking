@@ -18,3 +18,6 @@ To stop the virtual machine type
 
 ## Ports
 MongoDB is running on port 27017 in the virtual machine and gets forwared to the same port on the host.
+The frontend is running on port 4200 in the virtual machine and gets forwared to the same port on the host.
+You can access the frontend from the host under http://localhost:4200
+The backend is running on port 2018 in the virtual machine and gets forwared to the same port on the host.

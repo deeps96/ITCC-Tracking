@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5a86eda55bf3f40328db8505"},"department":"IT Berlin","email":"admin@itcc-tracking.com","forname":"Admin","hashedPassword":"998ed4d621742d0c2d85ed84173db569afa194d4597686cae947324aa58ab4bb","lastName":"Admin","roleID":{"$oid":"5a86f6225bf3f40328db850b"}}

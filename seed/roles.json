@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5a86f6135bf3f40328db8509"},"name":"Staff","privileges":["canAddStation"]}
+{"_id":{"$oid":"5a86f6225bf3f40328db850b"},"name":"Admin","privileges":["canAddStation","canAddStaff","canRemoveStaff","canListStaff","canAddTransportationMode","canAddParcelType","canAddActionDescription","canRemoveTransportationMode","canRemoveActionDescription","canRemoveParcelType"]}
