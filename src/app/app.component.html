@@ -1,9 +1,9 @@
 <ng-container *ngIf="!showLoading && backendRunning">
   <nav class="blue-grey z-depth-0">
     <div class="nav-wrapper">
-      <a (click)="goBack()" class="brand-logo center"><i class="material-icons">location_on</i> Shipment tracking</a>
+      <a [routerLink]="['']" class="brand-logo center"><i class="material-icons">location_on</i> Shipment tracking</a>
       <ul class="left">
-        <a *ngIf="showHomeButton" [routerLink]="['']" class="white-text" data-delay="50">
+        <a *ngIf="showBackButton" (click)="goBack()" class="white-text" data-delay="50">
           <i class="material-icons medium">arrow_back</i>
         </a>
       </ul>

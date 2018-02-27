@@ -20,7 +20,7 @@ export class AppComponent {
   public showLogoutButton: boolean;
   public showAdminButtons: boolean;
   public showStaffButtons: boolean;
-  public showHomeButton: boolean;
+  public showBackButton: boolean;
 
   constructor(private router: Router,
               private authenticationService: AuthorizationService,
@@ -67,7 +67,7 @@ export class AppComponent {
   }
 
   private updateButtonVisibilities(event: NavigationStart) {
-    this.showHomeButton = !AppComponent.isHomePage(event);
+    this.showBackButton = !AppComponent.isHomePage(event);
     this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
     this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
     if (this.isLoggedIn()) {

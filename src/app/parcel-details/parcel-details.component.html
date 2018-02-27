@@ -56,7 +56,9 @@
             <custom-marker *ngFor="let address of addresses; let iAddress = index"
                            [position]="address"
                            (initialized$)="onMarkerInit($event);">
-              <div class="counterMarker" [ngClass]="{'pulse': iAddress == addresses.length - 2, 'disabled' : iAddress > 0 && iAddress < addresses.length - 2}">
+              <div class="counterMarker" [ngClass]="{
+              'pulse': iAddress == addresses.length - 2,
+              'disabled' : iAddress > 0 && iAddress < addresses.length - 2}">
                 <ng-container *ngIf="iAddress == 0"><i class="material-icons">receipt</i></ng-container>
                 <ng-container *ngIf="iAddress > 0 && iAddress < addresses.length - 1">{{iAddress}}</ng-container>
                 <ng-container *ngIf="iAddress == addresses.length - 1"><i class="material-icons">location_searching</i></ng-container>
