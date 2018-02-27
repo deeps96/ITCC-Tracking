@@ -7,3 +7,5 @@ For more details check out this link: https://www.it-talents.de/foerderung/code-
 This repository uses three branches for vagrant, frontend and backend in order to avoid having multiple repos.
 The vagrant branch contains all required files to build the VM with the front end and backend already deployed.
 Check out the frontend and backend branches to deploy the app yourself.
+
+Refer to https://github.com/deeps96/ITCC-Tracking/blob/master/Documentation.pdf to get more information.
