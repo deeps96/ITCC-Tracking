@@ -2,7 +2,7 @@
   background-size: cover;
   background: url('../../assets/images/background-1.png') no-repeat center center;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64px);
   display: table-cell;
   vertical-align: middle;
 }

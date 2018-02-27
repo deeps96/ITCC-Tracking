@@ -154,33 +154,43 @@
                 <label for="transportSelect">Transportation mode</label>
               </div>
             </div>
-            <div class="row no-margin">
-              <div class="input-field col s12">
-                <input id="road" type="text" class="validate" name="road" [(ngModel)]="newStation.location.road" required>
-                <label for="road">Road</label>
-              </div>
-            </div>
-            <div class="row no-margin">
-              <div class="input-field col s9">
-                <input id="cityName" type="text" class="validate" name="cityName" [(ngModel)]="newStation.location.city.name" required>
-                <label for="cityName">City</label>
-              </div>
-              <div class="input-field col s3">
-                <input id="zipCode" type="text" class="validate" name="zipyCode" [(ngModel)]="newStation.location.city.zipCode" required>
-                <label for="zipCode">ZIP</label>
-              </div>
-            </div>
-            <div class="row no-margin">
-              <div class="input-field col s12">
-                <input id="country" type="text" class="validate" name="country" [(ngModel)]="newStation.location.country" required>
-                <label for="country">Country</label>
-              </div>
-            </div>
-            <div class="row no-margin">
-              <div class="col s12">
-                <button class="btn waves-effect waves-light right" type="submit" name="action">Add station
-                  <i class="material-icons right">add_to_photos</i>
-                </button>
+            <div class="row">
+              <div class="col s8 offset-s2">
+                <div class="row no-margin">
+                  <div class="input-field col s12">
+                    <input id="road" type="text" class="validate" name="road" [(ngModel)]="newStation.location.road" required>
+                    <label for="road">Streetname with number</label>
+                  </div>
+                </div>
+                <div class="row no-margin">
+                  <div class="input-field col s9">
+                    <input id="cityName" type="text" class="validate" name="cityName" [(ngModel)]="newStation.location.city.name" required>
+                    <label for="cityName">City</label>
+                  </div>
+                  <div class="input-field col s3">
+                    <input id="zipCode" type="text" class="validate" name="zipyCode" [(ngModel)]="newStation.location.city.zipCode" [textMask]="{mask: zipMask}" required>
+                    <label for="zipCode">ZIP</label>
+                  </div>
+                </div>
+                <div class="row no-margin">
+                  <div class="input-field col s12">
+                    <input id="country" type="text" class="validate" name="country" [(ngModel)]="newStation.location.country" required>
+                    <label for="country">Country</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="notes" name="notes" [(ngModel)]="newStation.notes" class="materialize-textarea"></textarea>
+                    <label for="notes">Notes</label>
+                  </div>
+                </div>
+                <div class="row no-margin">
+                  <div class="col s12">
+                    <button class="btn waves-effect waves-light right" type="submit" name="action">Add station
+                      <i class="material-icons left">add</i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>

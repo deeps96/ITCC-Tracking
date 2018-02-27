@@ -24,6 +24,7 @@ import { ParcelTypeComponent } from './parcel-type/parcel-type.component';
 import { ActionDescriptionComponent } from './action-description/action-description.component';
 import { TransportationModeComponent } from './transportation-mode/transportation-mode.component';
 import { AddStationComponent } from './add-station/add-station.component';
+import {TextMaskModule} from "angular2-text-mask";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AddStationComponent } from './add-station/add-station.component';
     MaterializeModule,
     AppRoutesModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCQLhnDxhB2Gb7CRWLlZvWcYdEqK0GqseI'}),
-    VerticalTimelineModule
+    VerticalTimelineModule,
+    TextMaskModule
   ],
   providers: [
     AuthorizationService,

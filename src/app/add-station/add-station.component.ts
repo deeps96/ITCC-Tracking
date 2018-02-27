@@ -17,6 +17,8 @@ export class AddStationComponent implements OnInit {
   public transportationModes: string[];
   public actionDescriptions: string[];
 
+  public zipMask = [/\d/, /\d/, /\d/, /\d/, /\d/];
+
   constructor(private route: ActivatedRoute,
               private parcelManagementService: ParcelManagementService,
               private dataManagementService: DataManagementService) {}

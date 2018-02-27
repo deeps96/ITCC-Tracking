@@ -16,7 +16,7 @@ export class HomeComponent {
   constructor(private router: Router) { }
 
   public onSubmit(): void {
-    this.router.navigate(['track', this.search.nativeElement.value]);
+    this.router.navigate(['track', this.search.nativeElement.value.replace(/\D+/g, '')]);
   }
 
   public showCreateNewSection(): void {
@@ -28,4 +28,13 @@ export class HomeComponent {
     this.createNewSection.nativeElement.style.display = 'none';
   }
 
+  public validateSearch(searchValue: string) {
+    let mask = [/\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, '-',
+      /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-'];
+    for (let iID = 17; iID < searchValue.length; iID++) {
+      mask.push(/\d/);
+    }
+    mask.push(/\t/);
+    return mask;
+  }
 }

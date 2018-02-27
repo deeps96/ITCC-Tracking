@@ -13,6 +13,8 @@ export class CreateParcelComponent implements OnInit {
 
   public parcelTypeNames: string[];
   public parcel: Parcel;
+  public zipMask = [/\d/, /\d/, /\d/, /\d/, /\d/];
+
 
   constructor(private router: Router,
               private parcelManagementService: ParcelManagementService,

@@ -37,7 +37,7 @@
             <div class="row no-margin">
               <div class="input-field col s12">
                 <input id="departureRoad" type="text" class="validate" name="departureRoad" [(ngModel)]="parcel.departure.road" required>
-                <label for="departureRoad">Road</label>
+                <label for="departureRoad">Street name with number</label>
               </div>
             </div>
             <div class="row no-margin">
@@ -46,7 +46,7 @@
                 <label for="departureCityName">City</label>
               </div>
               <div class="input-field col s3">
-                <input id="departureZipCode" type="text" class="validate" name="departureZipCode" [(ngModel)]="parcel.departure.city.zipCode" required>
+                <input id="departureZipCode" type="text" class="validate" name="departureZipCode" [(ngModel)]="parcel.departure.city.zipCode" [textMask]="{mask: zipMask}" required>
                 <label for="departureZipCode">ZIP</label>
               </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="row no-margin">
               <div class="input-field col s12">
                 <input id="destinationRoad" type="text" class="validate" name="destinationRoad" [(ngModel)]="parcel.destination.road" required>
-                <label for="destinationRoad">Road</label>
+                <label for="destinationRoad">Street name with number</label>
               </div>
             </div>
             <div class="row no-margin">
@@ -84,7 +84,7 @@
                 <label for="destinationCityName">City</label>
               </div>
               <div class="input-field col s3">
-                <input id="destinationZipCode" type="text" class="validate" name="destinationZipCode" [(ngModel)]="parcel.destination.city.zipCode" required>
+                <input id="destinationZipCode" type="text" class="validate" name="destinationZipCode" [(ngModel)]="parcel.destination.city.zipCode" [textMask]="{mask: zipMask}" required>
                 <label for="destinationZipCode">ZIP</label>
               </div>
             </div>

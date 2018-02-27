@@ -168,6 +168,7 @@ export class ParcelDetailsComponent implements OnInit {
 
   };
   public parcel: Parcel;
+  public reversedStations: Station[];
   public positions: any[];
   public showAddStationButton: boolean = false;
 
@@ -235,6 +236,7 @@ export class ParcelDetailsComponent implements OnInit {
       .catch(error => {this.router.navigate(['']); return []; })
       .subscribe(parcel => {
         this.parcel = parcel;
+        this.reversedStations = parcel.stations.reverse();
         this.loadPositions();
       });
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Location} from '@angular/common'
 import {NavigationStart, Router} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {AuthorizationService} from "./services/authorization.service";
@@ -17,15 +18,21 @@ export class AppComponent {
   public backendRunning: boolean = true;
   public showLoginButton: boolean;
   public showLogoutButton: boolean;
-  public showNav: boolean;
   public showAdminButtons: boolean;
   public showStaffButtons: boolean;
+  public showHomeButton: boolean;
 
-  constructor(private router: Router, private authenticationService: AuthorizationService) {
+  constructor(private router: Router,
+              private authenticationService: AuthorizationService,
+              private location: Location) {
     router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => this.updateButtonVisibilities(event));
     this.showPreloader();
+  }
+
+  public goBack(): void {
+    this.location.back();
   }
 
   //actions
@@ -35,6 +42,10 @@ export class AppComponent {
 
   private static isLoginPage(event: NavigationStart): boolean {
     return event.url.startsWith('/login');
+  }
+
+  private static isHomePage(event: NavigationStart) {
+    return event.url == '/';
   }
 
   private isLoggedIn(): boolean {
@@ -56,9 +67,9 @@ export class AppComponent {
   }
 
   private updateButtonVisibilities(event: NavigationStart) {
+    this.showHomeButton = !AppComponent.isHomePage(event);
     this.showLoginButton = !AppComponent.isLoginPage(event) && !this.isLoggedIn();
     this.showLogoutButton = !AppComponent.isLoginPage(event) && this.isLoggedIn();
-    this.showNav = !AppComponent.isParcelDetailPage(event);
     if (this.isLoggedIn()) {
       this.authenticationService.isAdmin().subscribe(isAdmin => this.showAdminButtons = isAdmin);
       this.authenticationService.isStaff().subscribe(isStaff => this.showStaffButtons = isStaff);
@@ -74,4 +85,6 @@ export class AppComponent {
         return [];
       }).subscribe(response => this.showLoading = false);
   }
+
+
 }

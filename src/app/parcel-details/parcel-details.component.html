@@ -1,12 +1,9 @@
-<div id="background" class="blue-grey lighten-5" *ngIf="parcel">
+<div id="background" class="white" *ngIf="parcel">
   <div class="row no-margin">
     <div class="col s5">
       <div class="row">
         <div class="col s12">
           <div class="card-panel blue-grey z-depth-1 no-margin">
-            <a [routerLink]="['']" class="btn blue-grey lighten-4 blue-grey-text" data-delay="50">
-              <i class="material-icons medium left blue-grey-text">chevron_left</i>Back
-            </a>
             <span id="trackingNumber" class="white-text">Shipment: {{parcel.trackingNumber}}</span>
           </div>
         </div>
@@ -16,7 +13,7 @@
           <div class="card-panel z-depth-1 no-margin center" [ngClass]=
             "{'green': parcel.stations[0].actionDescription == 'Parcel got delivered and was taken from #NoteOrPerson#',
                 'amber': parcel.stations[0].actionDescription != 'Parcel got delivered and was taken from #NoteOrPerson#'}">
-            <span id="progress" class="white-text">
+            <span id="progress" class="white-text truncate">
               {{parseActionDescription(parcel.stations[0])}}
             </span>
           </div>
@@ -25,6 +22,11 @@
       <div class="row">
         <div class="col s12">
           <div id="timelineCard" class="card-panel blue-grey z-depth-0 no-margin">
+            <div class="row">
+              <div class="col s12 center">
+                <h5 class="white-text">History</h5>
+              </div>
+            </div>
             <div class="row" *ngIf="showAddStationButton">
               <div class="col s12 center">
                 <a [routerLink]="['/parcelManagement', parcel.trackingNumber]" class="btn">Add a station</a>
@@ -33,7 +35,7 @@
             <div class="row">
               <div class="col s12">
                 <vertical-timeline style="overflow-y: scroll;">
-                  <vertical-timeline-card *ngFor="let station of parcel.stations.reverse()" [dateValue]="station.timestamp">
+                  <vertical-timeline-card *ngFor="let station of reversedStations" [dateValue]="station.timestamp">
                     <div class="row">
                       <div class="col s12">
                         <h2>{{parseActionDescription(station)}}</h2>
@@ -72,7 +74,7 @@
       <div class="row">
         <div class="col s12">
           <div id="shipmentDetails" class="card-panel blue-grey z-depth-0 no-margin">
-            <h5 class="white-text">Shipment details</h5>
+            <h5 class="white-text center-align">Shipment details</h5>
             <div class="row">
               <div class="col s12">
                 <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">

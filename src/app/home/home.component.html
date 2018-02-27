@@ -1,31 +1,28 @@
 <div class="parallax-container">
   <div materialize="parallax" class="parallax"><img src="../../assets/images/background-1.png"></div>
 </div>
-<section id="bodySection" class="blue-grey lighten-5">
+<section id="bodySection" class="white">
   <section id="searchSection">
     <div id="searchContainer" class="container">
       <form (ngSubmit)="onSubmit()" class="white" #searchForm>
-        <div class="input-field">
-          <input #search id="search" type="search" placeholder="Enter your tracking number" (focus)="hideCreateNewSection();" required>
-          <label id="searchIcon" class="label-icon" for="search">
-            <i class="material-icons">search</i>
-          </label>
+        <div class="row">
+          <div id="searchRow" class="col s12 input-field">
+            <i class="material-icons prefix">search</i>
+            <input #search id="search" type="search" (focus)="hideCreateNewSection();" class="validate" [textMask]="{mask: validateSearch, guide: true, placeholderChar: '\u2000'}">
+            <label for="search">Enter your tracking number</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <a class="waves-effect waves-light btn-large blue-grey"><i class="material-icons left">location_searching</i>Track</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center" style="font-size: 1.4rem;">
+            Want to send something? <br /><a style="cursor: pointer;" (click)="showCreateNewSection();">Create a new label!</a>
+          </div>
         </div>
       </form>
-    </div>
-  </section>
-  <div class="container">
-    <div class="divider"></div>
-  </div>
-  <section id="chooseNewSection">
-    <div class="container center">
-      <div class="row">
-        <div class="col s12">
-          <a class="btn btn-floating btn-large blue-grey pulse" (click)="showCreateNewSection();">
-            <i class="material-icons blue-grey-text text-lighten-5">fiber_new</i>
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 </section>
