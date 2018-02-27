@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
 public class FixedDataController extends GenericController {
 
