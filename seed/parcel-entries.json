@@ -1,0 +1,116 @@
+{
+	"_class" : "de.deeps.tracking.model.dbobjects.ParcelEntry",
+	"_id" : ObjectId("5a9492eb175a582368a34b63"),
+	"departure" : {
+		"city" : {
+			"name" : "Potsdam",
+			"zipCode" : "14482"
+		},
+		"country" : "Deutschland",
+		"road" : "Stahnsdorfer Str."
+	},
+	"departurePersonDetails" : "Leonardo Hübscher",
+	"destination" : {
+		"city" : {
+			"name" : "Bielefeld",
+			"zipCode" : "33611"
+		},
+		"country" : "Deutschland",
+		"road" : "Johanneswerkstraße 4"
+	},
+	"destinationPersonDetails" : "IT-Talents GmbH",
+	"handOverTimestamp" : NumberLong("1519686379772"),
+	"parcelTypeID" : "5a89b935960b1a30c023898d",
+	"stations" : [
+		{
+			"location" : {
+				"city" : {
+					"name" : "Potsdam",
+					"zipCode" : "14482"
+				},
+				"country" : "Deutschland",
+				"road" : "Stahnsdorfer Str."
+			},
+			"timestamp" : NumberLong("1519686379974"),
+			"stationId" : ObjectId("5a9492eb175a582368a34b64"),
+			"actionDescriptionID" : "5a86fae95bf3f40328db851b",
+			"transportationModeID" : "5a86fa4a5bf3f40328db8511",
+			"notes" : ""
+		},
+		{
+			"location" : {
+				"city" : {
+					"name" : "Potsdam",
+					"zipCode" : "14482"
+				},
+				"country" : "Germany",
+				"road" : "Prof.-Dr.-Helmert-Straße 2-3"
+			},
+			"timestamp" : NumberLong("1519690475630"),
+			"stationId" : ObjectId("5a94a2eb175a582368a34b66"),
+			"actionDescriptionID" : "5a86fb055bf3f40328db851c",
+			"transportationModeID" : "5a86fa4a5bf3f40328db8511"
+		},
+		{
+			"location" : {
+				"city" : {
+					"name" : "Hamburg",
+					"zipCode" : "22419"
+				},
+				"country" : "Germany",
+				"road" : "Essener Straße 89"
+			},
+			"timestamp" : NumberLong("1519736921703"),
+			"stationId" : ObjectId("5a955859ca56c60437c46d70"),
+			"actionDescriptionID" : "5a86fb1f5bf3f40328db851e",
+			"transportationModeID" : "5a86fa7e5bf3f40328db8517",
+			"notes" : "Train RE-ABC"
+		},
+		{
+			"location" : {
+				"city" : {
+					"name" : "Hamburg",
+					"zipCode" : "22419"
+				},
+				"country" : "Germany",
+				"road" : "Essener Straße 89"
+			},
+			"timestamp" : NumberLong("1519737059801"),
+			"stationId" : ObjectId("5a9558e3ca56c60437c46d71"),
+			"actionDescriptionID" : "5a86fb145bf3f40328db851d",
+			"transportationModeID" : "5a86fa4a5bf3f40328db8511",
+			"notes" : ""
+		},
+		{
+			"location" : {
+				"city" : {
+					"name" : "Hamburg",
+					"zipCode" : "22419"
+				},
+				"country" : "Germany",
+				"road" : "Essener Straße 89"
+			},
+			"timestamp" : NumberLong("1519737157526"),
+			"stationId" : ObjectId("5a955945ca56c60437c46d72"),
+			"actionDescriptionID" : "5a86fb465bf3f40328db8520",
+			"transportationModeID" : "5a86fa765bf3f40328db8515",
+			"notes" : "ETA: 28.02"
+		},
+		{
+			"location" : {
+				"city" : {
+					"name" : "Bielefeld",
+					"zipCode" : "33611"
+				},
+				"country" : "Germany",
+				"road" : "Schildescher Str. 96"
+			},
+			"timestamp" : NumberLong("1519737244060"),
+			"stationId" : ObjectId("5a95599cca56c60437c46d73"),
+			"actionDescriptionID" : "5a86fb525bf3f40328db8521",
+			"transportationModeID" : "5a86fa765bf3f40328db8515",
+			"notes" : "Neighbor: Döner & Pizza Haus - Bielefeld - Fast Food - Bielefeld"
+		}
+	],
+	"trackingNumber" : "01144823361127021815"
+}
