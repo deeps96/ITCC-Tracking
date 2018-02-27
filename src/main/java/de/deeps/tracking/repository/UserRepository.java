@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
+    User findByEmail(String email);
     User findByEmailAndHashedPassword(String email, String hashedPassword);
     List<User> findByRoleID(String roleID);
 }

@@ -33,6 +33,9 @@ public class StaffManagementService extends AbstractUserService{
     }
 
     public void addStaffMember(String forename, String lastname, String department, String email, String password) throws IOException {
+        if (getUserRepository().findByEmail(email) != null) {
+            throw new IOException(email + " is already in use!");
+        }
         Role role = getRoleRepository().findByName(getSTAFF_ROLE());
         if (role == null) { throw new IOException("Role unknown"); }
         User newStaff = new User(department, email, password, forename, lastname);
